@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2023/12/30 21:16:45 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/01/05 22:37:40 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,15 @@ CFLAGS = -Wall -Wextra -Werror -MMD -MP
 
 SRCS_DIR = srcs
 SRCS = $(SRCS_DIR)/main.c\
-
+		$(SRCS_DIR)/determine_intersection_of_ray_and_object.c
 # TEST_DIR := test
 # SRCS = $(TEST_DIR)/test.c\
 
 OBJS_DIR := objs
 OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
 
-INCLUDES_DIR := includes
-INCLUDES := -I$(INCLUDES_DIR)
+# INCLUDES_DIR := includes
+# INCLUDES := -I$(INCLUDES_DIR)
 
 DEPS =	$(OBJS:.o=.d)
 
