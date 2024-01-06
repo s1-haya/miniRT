@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/05 23:05:38 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:16:04 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,41 @@ void my_mlx_pixel_put(t_data *img_data, int x, int y, int color)
 	*(unsigned int *)target_pixel = color;
 }
 
+static long	get_value_in_range(long v, long v_min, long v_max)
+{
+	if (v < v_min)
+		return (v_min);
+	else  if (v_max < v)
+		return (v_max);
+	return (v);
+}
+
+//　スクリーン（二次元）座標から三次元座標に変換
+long	convert_to_three_dimensional_coordinates(long value, long t_min, long t_max)
+{
+	return (t_min + (t_max - t_min) * value / (t_max - t_min));
+}
+
 void	draw_determine_intersection_of_ray_and_object(t_data *img_data)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	long	lx;
+	long	ly;
 
 	x = 0;
 	while (x < WINDOW_MAX_X)
 	{
+		//　スクリーン（二次元）座標から三次元座標に変換
+		lx = convert_to_three_dimensional_coordinates(get_value_in_range(x, WINDOW_ORIGIN_X, WINDOW_MAX_X - 1), -1.0, 1.0);
 		y = 0;
 		while (y < WINDOW_MAX_Y)
 		{
-			if (determine_intersection_ray_and_object)
+			ly = convert_to_three_dimensional_coordinates(get_value_in_range(y, WINDOW_ORIGIN_Y, WINDOW_MAX_Y - 1), 1.0, -1.0);
+			//視点ベクトル方向　スクリーン上の位置ベクトル - 視点の位置ベクトル
+			//交差判定　スクリーン上の位置ベクトル - 球の中心位置ベクトル
+			//交点計算のため二次方程式𝐴𝑡2+𝐵𝑡+𝐶=0
+			if (determine_intersection_ray_and_object(lx, ly))
 				my_mlx_pixel_put(img_data, x, y, 0x00FF0000);
 			else
 				my_mlx_pixel_put(img_data, x, y, 0x0000FF00);

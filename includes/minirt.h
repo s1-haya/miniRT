@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/05 23:02:10 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:39:14 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,23 @@ typedef enum e_object
 	PLANE,
 	SPHERE, 
 	SYLINDER
-}	t_object
+}	t_object;
+
+typedef struct s_range
+{
+	int	value;
+	int	min;
+	int	max;
+}	t_range;
+
+
+typedef struct s_three_d_map
+{
+	t_range	x;
+	t_range	y;
+	t_range	z;
+}	t_three_d_map;
+
 
 typedef struct s_data
 {
