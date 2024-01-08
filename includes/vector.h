@@ -1,50 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/08 15:44:21 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/01/07 15:18:06 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/01/08 15:44:41 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef VECTOR_H
+# define VECTOR_H
 
 #include <stdio.h>
 
-typedef enum e_object
+typedef struct s_vector
 {
-	PLANE,
-	SPHERE, 
-	SYLINDER
-}	t_object;
+	double	x;
+	double	y;
+	double	z;
+}	t_vector;
 
-typedef struct s_range
-{
-	int	value;
-	int	min;
-	int	max;
-}	t_range;
-
-
-typedef struct s_three_d_map
-{
-	t_range	x;
-	t_range	y;
-	t_range	z;
-}	t_three_d_map;
-
-
-typedef struct s_data
-{
-	void *img;
-	char *address;
-	int bits_per_pixel;
-	int size_line;
-	int endian;
-} t_data;
+t_vector	new_vector(double x, double y, double z);
+t_vector	add_vectors(t_vector v1, t_vector v2);
+t_vector	subtract_vectors(t_vector v1, t_vector v2);
+double		dot_product(t_vector v1, t_vector v2);
+t_vector	cross_product(t_vector v1, t_vector v2);
+double		vector_length(t_vector v);
 
 #endif
