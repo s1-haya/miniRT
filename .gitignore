@@ -1,3 +1,5 @@
 .history
 miniRT
-objs/*
+a.out
+objs/*.d
+objs/*.o
