@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/08 15:48:10 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:09:33 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,54 +23,62 @@
 #define WINDOW_MAX_Y 512
 #define MLX_TITLE "MINIRT"
 
-bool	determine_intersection_ray_and_object(double lx, double ly);
+double determine_intersection_ray_and_object(int x, int y, double lx, double ly, t_vector_data *vector, t_data *img_data);
+void cast_a_shadow(double t, t_data *img_data, int x, int y);
 
 void my_mlx_pixel_put(t_data *img_data, int x, int y, int color)
 {
-	char	*target_pixel;
-	int		cie;
+	char *target_pixel;
+	int cie;
 
-	cie =  (y * img_data->size_line + x * (img_data->bits_per_pixel / 8));
+	cie = (y * img_data->size_line + x * (img_data->bits_per_pixel / 8));
 	target_pixel = img_data->address + cie;
 	*(unsigned int *)target_pixel = color;
 }
 
-static double	get_value_in_range(double v, double v_min, double v_max)
+double get_value_in_range(double v, double v_min, double v_max)
 {
 	if (v < v_min)
 		return (v_min);
-	else  if (v_max < v)
+	else if (v_max < v)
 		return (v_max);
 	return (v);
 }
 
-//　スクリーン（二次元）座標から三次元座標に変換
-double	convert_to_three_dimensional_coordinates(double value, double t_min, double t_max)
+// 　スクリーン（二次元）座標から三次元座標に変換
+double convert_to_three_dimensional_coordinates(double value, double t_min, double t_max)
 {
 	return (t_min + (t_max - t_min) * value);
 }
 
 #include <stdio.h>
-void	draw_determine_intersection_of_ray_and_object(t_data *img_data)
+void draw_determine_intersection_of_ray_and_object(t_data *img_data)
 {
-	int		x;
-	int		y;
-	double	lx;
-	double	ly;
+	int x;
+	int y;
+	double lx;
+	double ly;
+	t_vector_data *vector_data;
 
 	x = 0;
+	vector_data = malloc(sizeof(t_vector_data));
+	if (vector_data == NULL)
+		return;
+	img_data->vector = vector_data;
 	while (x < WINDOW_MAX_X)
 	{
-		//　スクリーン（二次元）座標から三次元座標に変換
+		// 　スクリーン（二次元）座標から三次元座標に変換
 		lx = convert_to_three_dimensional_coordinates(get_value_in_range(x, WINDOW_ORIGIN_X, WINDOW_MAX_X - 1) / WINDOW_MAX_X - WINDOW_ORIGIN_X, -1.0, 1.0);
 		y = 0;
 		while (y < WINDOW_MAX_Y)
 		{
 			ly = convert_to_three_dimensional_coordinates(get_value_in_range(y, WINDOW_ORIGIN_Y, WINDOW_MAX_Y - 1) / WINDOW_MAX_Y - WINDOW_ORIGIN_Y, 1.0, -1.0);
-			if (determine_intersection_ray_and_object(lx, ly))
-				my_mlx_pixel_put(img_data, x, y, 0x00FF0000);
-			else
-				my_mlx_pixel_put(img_data, x, y, 0x000000FF);
+			// if (determine_intersection_ray_and_object(lx, ly, img_data->vector) >= 0)
+			// 	my_mlx_pixel_put(img_data, x, y, 0x00FF0000);
+			// else
+			// 	my_mlx_pixel_put(img_data, x, y, 0x000000FF);
+			// determine_intersection_ray_and_object(x, y, lx, ly, img_data->vector, img_data);
+			cast_a_shadow(determine_intersection_ray_and_object(x, y, lx, ly, img_data->vector, img_data), img_data, x, y);
 			y++;
 		}
 		x++;
@@ -84,7 +92,7 @@ void	draw_determine_intersection_of_ray_and_object(t_data *img_data)
 //         y = 0;
 //         while (y < WINDOW_MAX_Y) {
 //             // y 座標を0.0から1.0に正規化してグラデーションを作成
-//             float fy = (float)y / (float)(WINDOW_MAX_Y - 1); // y 座標を0.0から1.0に正規化
+//             double fy = (double)y / (double)(WINDOW_MAX_Y - 1); // y 座標を0.0から1.0に正規化
 //             int gray = (int)(255 * fy); // グレースケールの色を作成
 //             int color = (gray << 16) | (gray << 8) | gray; // RGBを組み合わせて24ビットの色を作成
 //             my_mlx_pixel_put(img_data, x, y, color); // ピクセルに色を設定
@@ -93,7 +101,6 @@ void	draw_determine_intersection_of_ray_and_object(t_data *img_data)
 //         x++;
 //     }
 // }
-
 
 int main(void)
 {
@@ -111,7 +118,7 @@ int main(void)
 	if (mlx_image_data.img == NULL)
 		return (FAILURE);
 	mlx_image_data.address = mlx_get_data_addr(mlx_image_data.img, &mlx_image_data.bits_per_pixel, &mlx_image_data.size_line,
-								 &mlx_image_data.endian);
+											   &mlx_image_data.endian);
 	// my_mlx_pixel_put(&mlx_image_data, 5, 5, 0x00FF0000);
 	draw_determine_intersection_of_ray_and_object(&mlx_image_data);
 	// draw_gradient(&mlx_image_data);
