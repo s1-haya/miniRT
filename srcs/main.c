@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/11 10:09:33 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/18 01:28:42 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "minirt.h"
+#include "shape.h"
+#include "color.h"
 
+#define SIZE 1
 #define SUCCESS 0
 #define FAILURE 1
 #define WINDOW_ORIGIN_X 0
@@ -23,8 +26,8 @@
 #define WINDOW_MAX_Y 512
 #define MLX_TITLE "MINIRT"
 
-double determine_intersection_ray_and_object(int x, int y, double lx, double ly, t_vector_data *vector, t_data *img_data);
-void cast_a_shadow(double t, t_data *img_data, int x, int y);
+double determine_intersection_ray_and_object(t_shape *shape, t_ray ray);
+void cast_a_shadow(double t, t_shape *shape, int x, int y, t_data *img_data);
 
 void my_mlx_pixel_put(t_data *img_data, int x, int y, int color)
 {
@@ -56,15 +59,24 @@ void draw_determine_intersection_of_ray_and_object(t_data *img_data)
 {
 	int x;
 	int y;
+	int z;
 	double lx;
 	double ly;
-	t_vector_data *vector_data;
+	double t;
+	t_ray			ray;
+	t_shape			*nearest_shape;
+	t_shape			**shape;
 
 	x = 0;
-	vector_data = malloc(sizeof(t_vector_data));
-	if (vector_data == NULL)
+	shape = (t_shape **)malloc(sizeof(t_shape *) * SIZE);
+	if (shape == NULL)
 		return;
-	img_data->vector = vector_data;
+	// shape[0] = new_shape(new_sphere(new_vector(3, 0, 25), 1), SPHERE);
+	// shape[1] = new_shape(new_sphere(new_vector(2, 0, 20), 1), SPHERE);
+	// shape[2] = new_shape(new_sphere(new_vector(1, 0, 15), 1), SPHERE);
+	// shape[3] = new_shape(new_sphere(new_vector(0, 0, 10), 1), SPHERE);
+	shape[0] = new_shape(new_sphere(new_vector(-1, 0, 5), 1), SPHERE);
+	nearest_shape = shape[0];
 	while (x < WINDOW_MAX_X)
 	{
 		// 　スクリーン（二次元）座標から三次元座標に変換
@@ -72,13 +84,18 @@ void draw_determine_intersection_of_ray_and_object(t_data *img_data)
 		y = 0;
 		while (y < WINDOW_MAX_Y)
 		{
+			z = 0;
 			ly = convert_to_three_dimensional_coordinates(get_value_in_range(y, WINDOW_ORIGIN_Y, WINDOW_MAX_Y - 1) / WINDOW_MAX_Y - WINDOW_ORIGIN_Y, 1.0, -1.0);
-			// if (determine_intersection_ray_and_object(lx, ly, img_data->vector) >= 0)
-			// 	my_mlx_pixel_put(img_data, x, y, 0x00FF0000);
-			// else
-			// 	my_mlx_pixel_put(img_data, x, y, 0x000000FF);
-			// determine_intersection_ray_and_object(x, y, lx, ly, img_data->vector, img_data);
-			cast_a_shadow(determine_intersection_ray_and_object(x, y, lx, ly, img_data->vector, img_data), img_data, x, y);
+			ray = new_ray(VIEWPOINT, new_vector(lx, ly, 0.0));
+			while (z < SIZE)
+			{
+				t = determine_intersection_ray_and_object(shape[z], ray);
+				shape[z]->intersection = new_intersection(ray, t);
+				if (nearest_shape->intersection->distance > shape[z]->intersection->distance)
+					nearest_shape = shape[z];
+				z++;
+			}
+			cast_a_shadow(t, nearest_shape, x, y, img_data);
 			y++;
 		}
 		x++;

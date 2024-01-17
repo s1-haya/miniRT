@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/17 14:51:40 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/18 00:56:28 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include "vector.h"
 
-#define VIEWPOINT new_vector(0, 0, -5);
+#define VIEWPOINT new_vector(0, 0, -5)
 #define ORIGIN_OF_THE_SPHERE new_vector(0, 0, 5)
 #define LIGHT_SOURCE new_vector(-5, 5, -5)
 #define RADIUS 1.0

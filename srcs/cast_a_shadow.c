@@ -6,19 +6,31 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/16 23:30:30 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/18 00:54:37 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <stdlib.h>
 #include "minirt.h"
+#include "shape.h"
 #include "vector.h"
+#include "color.h"
 
 double get_value_in_range(double v, double v_min, double v_max);
 void my_mlx_pixel_put(t_data *img_data, int x, int y, int color);
 
 void print_vector(t_vector vector, char *name);
+
+double	get_ambient_right(double reflection_coefficient, double intensity)
+{
+	return (reflection_coefficient * intensity);
+}
+
+double	get_diffuse_reflection(double coefficient, double intensity_of_light_source, t_vector normal, t_vector incident)
+{
+	return (coefficient * intensity_of_light_source * get_value_in_range(dot_product(normal, incident), 0.0, 1.0));
+}
 
 double get_specular_reflection(t_vector normal, t_vector incident, t_vector viewpoint)
 {
@@ -36,38 +48,34 @@ double get_specular_reflection(t_vector normal, t_vector incident, t_vector view
 	return (SPECULAR_REFLECTION_COEFFICIENT * LIGHT_INTENSITY_OF_LIGHT_SOURCE * pow(get_value_in_range(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR));
 }
 
-void cast_a_shadow(double t, t_data *img_data, int x, int y)
+void cast_a_shadow(double t, t_shape *shape, int x, int y, t_data *img_data)
 {
-	t_vector scalar_line_of_sight;
-	// 交点の位置
-	t_vector point_of_intersection;
 	// 入射ベクトル
-	t_vector incident_vector;
+	t_vector	incident_vector;
 	// 法線ベクトル
-	t_vector normal_vector;
+	t_vector	normal_vector;
 	// 入射ベクトルと法線ベクトルの内積（0, 1制限）
-	double	ambient_right;
-	double	diffuse_reflection;
-	double	specular_reflection;
-	double	radiance;
+	t_color		diffuse_reflection;
+	t_color		specular_reflection;
+	t_color		color;
+	t_color		ambient_right;
 
+	color = new_color(0, 0, 0);
 	if (t > 0)
 	{
-		// print_vector(img_data->vector->line_of_sight_vector, "t");
-		scalar_line_of_sight = scalar_multiply(img_data->vector->line_of_sight_vector, t);
-		// print_vector(scalar_line_of_sight, "t");
-		point_of_intersection = add_vectors(img_data->vector->viewpoint, scalar_line_of_sight);
-		incident_vector = subtract_vectors(LIGHT_SOURCE, point_of_intersection);
+		incident_vector = subtract_vectors(LIGHT_SOURCE, shape->intersection->point);
 		normalize_vector(&incident_vector);
-		normal_vector = subtract_vectors(point_of_intersection, img_data->vector->origin_of_the_sphere);
+		normal_vector = subtract_vectors(shape->intersection->point, shape->sphere->origin);
 		normalize_vector(&normal_vector);
-		ambient_right = AMBIENT_LIGNT_REFLECTION_COEFFICIENT * AMBIENT_LIGHT_INTENSITY;
-		diffuse_reflection = DIFFUSE_REFLECTION_COEFFICIENT * LIGHT_INTENSITY_OF_LIGHT_SOURCE * get_value_in_range(dot_product(normal_vector, incident_vector), 0.0, 1.0);
-		specular_reflection = get_specular_reflection(normal_vector, incident_vector, img_data->vector->viewpoint);
-		radiance = get_value_in_range(ambient_right + diffuse_reflection + specular_reflection, 0.0, 1.0);
-		int gray = (int)(255 * radiance);
-		int color = (gray << 16) | (gray << 8) | gray;
-		my_mlx_pixel_put(img_data, x, y, color);
+		ambient_right = new_color(get_ambient_right(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, AMBIENT_LIGHT_INTENSITY), get_ambient_right(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, AMBIENT_LIGHT_INTENSITY), get_ambient_right(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, AMBIENT_LIGHT_INTENSITY));
+		add_color(&color, ambient_right);
+		diffuse_reflection = new_color(get_diffuse_reflection(DIFFUSE_REFLECTION_COEFFICIENT, LIGHT_INTENSITY_OF_LIGHT_SOURCE, normal_vector, incident_vector), get_diffuse_reflection(0.0, LIGHT_INTENSITY_OF_LIGHT_SOURCE, normal_vector, incident_vector), get_diffuse_reflection(0.0, LIGHT_INTENSITY_OF_LIGHT_SOURCE, normal_vector, incident_vector));
+		add_color(&color, diffuse_reflection);
+		specular_reflection = new_color(get_specular_reflection(normal_vector, incident_vector, VIEWPOINT), get_specular_reflection(normal_vector, incident_vector, VIEWPOINT), get_specular_reflection(normal_vector, incident_vector, VIEWPOINT));
+		add_color(&color, specular_reflection);
+		get_radiance_to_color(&color, 0.0, 1.0);
+		color.color = ((int)color.red << 16) | ((int)color.green << 8) | (int)color.blue;
+		my_mlx_pixel_put(img_data, x, y, color.color);
 	}
 	else
 		my_mlx_pixel_put(img_data, x, y, 0x000000FF);
@@ -79,13 +87,13 @@ void cast_a_shadow(double t, t_data *img_data, int x, int y)
 	// 	print_vector(img_data->img_data->vector->line_of_sight_vector, "line_of_sight_vector");
 	// 	scalar_multiply(&img_data->img_data->vector->line_of_sight_vector, t);
 	// 	print_vector(img_data->img_data->vector->line_of_sight_vector, "line_of_sight_vector");
-	// 	point_of_intersection = add_vectors(img_data->img_data->vector->intersection_vector, img_data->img_data->vector->line_of_sight_vector);
-	// 	print_vector(point_of_intersection, "point_of_intersection");
-	// 	incident_vector = subtract_vectors(LIGHT_SOURCE, point_of_intersection);
+	// 	shape->intersection->point = add_vectors(img_data->img_data->vector->intersection_vector, img_data->img_data->vector->line_of_sight_vector);
+	// 	print_vector(shape->intersection->point, "shape->intersection->point");
+	// 	incident_vector = subtract_vectors(LIGHT_SOURCE, shape->intersection->point);
 	// 	print_vector(incident_vector, "incident_vector");
 	// 	normalize_vector(&incident_vector);
 	// 	print_vector(incident_vector, "incident_vector");
-	// 	normal_vector = subtract_vectors(point_of_intersection, img_data->img_data->vector->origin_of_the_sphere);
+	// 	normal_vector = subtract_vectors(shape->intersection->point, img_data->img_data->vector->origin_of_the_sphere);
 	// 	print_vector(normal_vector, "normal_vector");
 	// 	normalize_vector(&normal_vector);
 	// 	print_vector(normal_vector, "normal_vector");
