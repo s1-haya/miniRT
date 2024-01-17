@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:18:06 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/10 12:51:48 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:36:44 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ double dot_product(t_vector v1, t_vector v2);
 t_vector cross_product(t_vector v1, t_vector v2);
 double vector_length(t_vector v);
 void normalize_vector(t_vector *v);
-void scalar_multiply(t_vector *vector, double scalar);
+t_vector scalar_multiply(t_vector v, double scalar);
+t_vector get_inverse_vector(t_vector v);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:08:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/10 13:01:12 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:36:37 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,16 @@ void normalize_vector(t_vector *v)
 		v->z *= inv_length;
 	}
 }
+//ベクトルの逆
+t_vector get_inverse_vector(t_vector v)
+{
+	t_vector vector;
+
+	vector.x = -1 * (v.x);
+	vector.y = -1 * (v.y);
+	vector.z = -1 * (v.z);
+	return (vector);
+}
 
 // ベクトルの加算
 t_vector add_vectors(t_vector v1, t_vector v2)
@@ -103,18 +113,14 @@ t_vector cross_product(t_vector v1, t_vector v2)
 	return (vector);
 }
 
-void scalar_multiply(t_vector *vector, double scalar)
+t_vector scalar_multiply(t_vector v, double scalar)
 {
-	double x_scalared;
-	double y_scalared;
-	double z_scalared;
+	t_vector vector;
 
-	x_scalared = scalar * vector->x;
-	y_scalared = scalar * vector->y;
-	z_scalared = scalar * vector->z;
-	vector->x = x_scalared;
-	vector->y = y_scalared;
-	vector->z = z_scalared;
+	vector.x = scalar * v.x;
+	vector.y = scalar * v.y;
+	vector.z = scalar * v.z;
+	return (vector);
 }
 
 // #include <stdio.h>

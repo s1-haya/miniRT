@@ -6,13 +6,13 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/01/10 12:01:30 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/01/16 19:37:13 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -MMD -MP 
+CFLAGS = -Wall -Wextra -Werror -MMD -MP -g
 
 SRCS_DIR = srcs
 SRCS = $(SRCS_DIR)/main.c\

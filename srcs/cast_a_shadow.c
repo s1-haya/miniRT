@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/11 10:11:39 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/16 23:30:30 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,25 @@ void my_mlx_pixel_put(t_data *img_data, int x, int y, int color);
 
 void print_vector(t_vector vector, char *name);
 
+double get_specular_reflection(t_vector normal, t_vector incident, t_vector viewpoint)
+{
+	//入射角の正反射
+	t_vector a;
+	//視点ベクトルの反対
+	t_vector b;
+
+	if (!(dot_product(normal, incident) > 0))
+		return (0);
+	a = subtract_vectors(scalar_multiply(normal, 2 * dot_product(normal, incident)), get_inverse_vector(incident));
+	// normalize_vector(&a);
+	b = get_inverse_vector(viewpoint);
+	normalize_vector(&b);
+	return (SPECULAR_REFLECTION_COEFFICIENT * LIGHT_INTENSITY_OF_LIGHT_SOURCE * pow(get_value_in_range(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR));
+}
+
 void cast_a_shadow(double t, t_data *img_data, int x, int y)
 {
+	t_vector scalar_line_of_sight;
 	// 交点の位置
 	t_vector point_of_intersection;
 	// 入射ベクトル
@@ -29,19 +46,26 @@ void cast_a_shadow(double t, t_data *img_data, int x, int y)
 	// 法線ベクトル
 	t_vector normal_vector;
 	// 入射ベクトルと法線ベクトルの内積（0, 1制限）
-	double nldot;
+	double	ambient_right;
+	double	diffuse_reflection;
+	double	specular_reflection;
+	double	radiance;
 
 	if (t > 0)
 	{
-		scalar_multiply(&img_data->vector->line_of_sight_vector, t);
-		point_of_intersection = add_vectors(img_data->vector->intersection_vector, img_data->vector->line_of_sight_vector);
+		// print_vector(img_data->vector->line_of_sight_vector, "t");
+		scalar_line_of_sight = scalar_multiply(img_data->vector->line_of_sight_vector, t);
+		// print_vector(scalar_line_of_sight, "t");
+		point_of_intersection = add_vectors(img_data->vector->viewpoint, scalar_line_of_sight);
 		incident_vector = subtract_vectors(LIGHT_SOURCE, point_of_intersection);
 		normalize_vector(&incident_vector);
 		normal_vector = subtract_vectors(point_of_intersection, img_data->vector->origin_of_the_sphere);
 		normalize_vector(&normal_vector);
-		nldot = get_value_in_range(dot_product(normal_vector, incident_vector), 0.0, 1.0);
-		printf("nldot %f\n", nldot);
-		int gray = (int)(255 * nldot);
+		ambient_right = AMBIENT_LIGNT_REFLECTION_COEFFICIENT * AMBIENT_LIGHT_INTENSITY;
+		diffuse_reflection = DIFFUSE_REFLECTION_COEFFICIENT * LIGHT_INTENSITY_OF_LIGHT_SOURCE * get_value_in_range(dot_product(normal_vector, incident_vector), 0.0, 1.0);
+		specular_reflection = get_specular_reflection(normal_vector, incident_vector, img_data->vector->viewpoint);
+		radiance = get_value_in_range(ambient_right + diffuse_reflection + specular_reflection, 0.0, 1.0);
+		int gray = (int)(255 * radiance);
 		int color = (gray << 16) | (gray << 8) | gray;
 		my_mlx_pixel_put(img_data, x, y, color);
 	}

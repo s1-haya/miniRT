@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/11 10:07:00 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:51:40 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,23 @@
 #define LIGHT_SOURCE new_vector(-5, 5, -5)
 #define RADIUS 1.0
 
-typedef enum e_object
-{
-	PLANE,
-	SPHERE, 
-	SYLINDER
-}	t_object;
+// 環境光反射係数
+#define AMBIENT_LIGNT_REFLECTION_COEFFICIENT 0.01
+// 拡散反射係数
+// diffuse reflection coefficient
+#define DIFFUSE_REFLECTION_COEFFICIENT 0.69
+// 鏡面反射係数
+// specular reflection coefficient
+#define SPECULAR_REFLECTION_COEFFICIENT 0.3
+// 光沢度
+// Gloss factor
+#define GLOSS_FACTOR 8
+// 環境光の強度
+// ambient light intensity
+#define AMBIENT_LIGHT_INTENSITY 0.1
+// 光源の光の強度
+// light intensity of light source
+#define  LIGHT_INTENSITY_OF_LIGHT_SOURCE 1.0
 
 typedef struct s_range
 {

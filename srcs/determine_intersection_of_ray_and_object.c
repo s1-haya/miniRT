@@ -21,7 +21,7 @@ double dot_product(t_vector v1, t_vector v2);
 t_vector cross_product(t_vector v1, t_vector v2);
 double vector_length(t_vector v);
 void normalize_vector(t_vector *v);
-void scalar_multiply(t_vector *vector, double scalar);
+t_vector scalar_multiply(t_vector vector, double scalar);
 void my_mlx_pixel_put(t_data *img_data, int x, int y, int color);
 double get_value_in_range(double v, double v_min, double v_max);
 
