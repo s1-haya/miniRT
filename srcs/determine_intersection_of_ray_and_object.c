@@ -31,7 +31,15 @@ double	max(double n1, double n2)
 	return (n1);
 }
 
-double determine_intersection_ray_and_object(t_shape *shape, t_ray ray)
+double	determine_intersection_ray_and_plane(t_plane *plane, t_ray ray)
+{
+	// printf("numerator:   %f\n",-dot_product(ray.point, plane->normal));
+	// printf("denominator: %f\n",dot_product(ray.direction, plane->normal));
+	// printf("anser:       %f\n", (-dot_product(ray.point, plane->normal)) / (dot_product(ray.direction, plane->normal)));
+	return ((-dot_product(ray.point, plane->normal)) + dot_product(plane->point, plane->normal) / (dot_product(ray.direction, plane->normal)));
+}
+
+double	get_intersection_ray_and_object(t_shape *shape, t_ray ray)
 {
 	t_vector intersection_vector;
 	double a;
@@ -40,7 +48,9 @@ double determine_intersection_ray_and_object(t_shape *shape, t_ray ray)
 	double d;
 	double t;
 
-	intersection_vector = subtract_vectors(ray.viewpoint, shape->sphere->origin);
+	if (shape->object == PLANE)
+		return (determine_intersection_ray_and_plane(shape->plane, ray));
+	intersection_vector = subtract_vectors(ray.point, shape->sphere->origin);
 	a = pow(vector_length(ray.direction), 2.0);
 	b = 2 * dot_product(ray.direction, intersection_vector);
 	c = pow(vector_length(intersection_vector), 2.0) - pow(RADIUS, 2.0);
@@ -58,4 +68,38 @@ double determine_intersection_ray_and_object(t_shape *shape, t_ray ray)
 			t = t2;
 	}
 	return (t);
+	
+}
+
+t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit)
+{
+	size_t	z;
+	double	t;
+	t_shape	*nearest_shape;
+	t_intersection	*tmp;
+
+	z = 0;
+	nearest_shape = NULL;
+	while (z < SIZE)
+	{
+		t = get_intersection_ray_and_object(shape[z], ray);
+		tmp = new_intersection(ray, t);
+		if (tmp != NULL && light_source_distance > tmp->distance)
+		{
+			// printf("shape[%d]: distance %f\n", z, tmp->distance);
+			if (nearest_shape == NULL || nearest_shape->intersection->distance > tmp->distance)
+			{
+				shape[z]->intersection = tmp;
+				nearest_shape = shape[z];
+				if (exit)
+					return (nearest_shape);
+				// printf("shape[%d]: nearest_distance %f\n",z , nearest_shape->intersection->distance);
+			}
+			// printf("distance[%d]: %f\n",z, ->intersection->distance);
+		}
+		z++;
+	}
+	if (nearest_shape != NULL)
+		return (nearest_shape);
+	return (NULL);
 }

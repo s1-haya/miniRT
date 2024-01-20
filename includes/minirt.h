@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/18 00:56:28 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:38:33 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,23 @@
 
 #include <stdio.h>
 #include "vector.h"
+#include "light_source.h"
 
 #define VIEWPOINT new_vector(0, 0, -5)
 #define ORIGIN_OF_THE_SPHERE new_vector(0, 0, 5)
 #define LIGHT_SOURCE new_vector(-5, 5, -5)
 #define RADIUS 1.0
+#define SIZE 2
+#define LIGHT_SIZE 1
 
 // 環境光反射係数
-#define AMBIENT_LIGNT_REFLECTION_COEFFICIENT 0.01
+#define AMBIENT_LIGNT_REFLECTION_COEFFICIENT new_color(0.01,0.01,0.01)
 // 拡散反射係数
 // diffuse reflection coefficient
 #define DIFFUSE_REFLECTION_COEFFICIENT 0.69
 // 鏡面反射係数
 // specular reflection coefficient
-#define SPECULAR_REFLECTION_COEFFICIENT 0.3
+#define SPECULAR_REFLECTION_COEFFICIENT new_color(0.30,0.30,0.30)
 // 光沢度
 // Gloss factor
 #define GLOSS_FACTOR 8
@@ -57,7 +60,7 @@ typedef struct s_three_d_map
 
 typedef struct s_data
 {
-	t_vector_data	*vector;
+	t_light_source	*light_source;
 	void			*img;
 	char			*address;
 	int				bits_per_pixel;
