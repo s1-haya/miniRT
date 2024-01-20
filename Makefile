@@ -6,18 +6,25 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/01/07 15:38:32 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/01/19 16:57:37 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -MMD -MP 
+CFLAGS = -Wall -Wextra -Werror -MMD -MP -g
+DEBUG := -g -fsanitize=address -fno-omit-frame-pointer
 
 SRCS_DIR = srcs
 SRCS = $(SRCS_DIR)/main.c\
 		$(SRCS_DIR)/determine_intersection_of_ray_and_object.c\
-		$(SRCS_DIR)/vector.c
+		$(SRCS_DIR)/vector.c \
+		$(SRCS_DIR)/color.c \
+		$(SRCS_DIR)/shape.c \
+		$(SRCS_DIR)/ray.c \
+		$(SRCS_DIR)/light_source.c \
+		$(SRCS_DIR)/cast_a_shadow.c \
+		$(SRCS_DIR)/debug.c \
 # TEST_DIR := test
 # SRCS = $(TEST_DIR)/test.c\
 

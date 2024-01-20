@@ -6,16 +6,16 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:08:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/07 16:47:01 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:13:58 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include <math.h>
 
-t_vector	new_vector(double x, double y, double z)
+t_vector new_vector(double x, double y, double z)
 {
-	t_vector	vector;
+	t_vector vector;
 
 	vector.x = x;
 	vector.y = y;
@@ -23,16 +23,59 @@ t_vector	new_vector(double x, double y, double z)
 	return (vector);
 }
 
-double	vector_length(t_vector v)
+double vector_length(t_vector v)
 {
-	double	length;
+	double length;
 
 	length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 	return (length);
 }
 
+// void normalize_vector(t_vector *v)
+// {
+// 	double x_normalized;
+// 	double y_normalized;
+// 	double z_normalized;
+// 	double length;
+
+// 	length = vector_length(*v);
+// 	if (length == 0)
+// 		return;
+// 	x_normalized = v->x / length;
+// 	y_normalized = v->y / length;
+// 	z_normalized = v->z / length;
+// 	v->x = x_normalized;
+// 	v->y = y_normalized;
+// 	v->z = z_normalized;
+// }
+
+void normalize_vector(t_vector *v)
+{
+	double length = vector_length(*v);
+	if (length < 1e-8) { // ゼロに近い場合を考慮し、適切な閾値を設定
+		v->x = 0;
+		v->y = 0;
+		v->z = 0;
+	} else {
+		double inv_length = 1.0 / length;
+		v->x *= inv_length;
+		v->y *= inv_length;
+		v->z *= inv_length;
+	}
+}
+//ベクトルの逆
+t_vector get_inverse_vector(t_vector v)
+{
+	t_vector vector;
+
+	vector.x = -1 * (v.x);
+	vector.y = -1 * (v.y);
+	vector.z = -1 * (v.z);
+	return (vector);
+}
+
 // ベクトルの加算
-t_vector	add_vectors(t_vector v1, t_vector v2)
+t_vector add_vectors(t_vector v1, t_vector v2)
 {
 	t_vector vector;
 
@@ -43,9 +86,9 @@ t_vector	add_vectors(t_vector v1, t_vector v2)
 }
 
 // ベクトルの減算
-t_vector	subtract_vectors(t_vector v1, t_vector v2)
+t_vector subtract_vectors(t_vector v1, t_vector v2)
 {
-	t_vector	vector;
+	t_vector vector;
 
 	vector.x = v1.x - v2.x;
 	vector.y = v1.y - v2.y;
@@ -54,21 +97,37 @@ t_vector	subtract_vectors(t_vector v1, t_vector v2)
 }
 
 // ベクトルの内積
-double	dot_product(t_vector v1, t_vector v2)
+double dot_product(t_vector v1, t_vector v2)
 {
 	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }
 
 // ベクトルの外積
-t_vector	cross_product(t_vector v1, t_vector v2)
+t_vector cross_product(t_vector v1, t_vector v2)
 {
-	t_vector	vector;
+	t_vector vector;
 
 	vector.x = v1.y * v2.z - v1.z * v2.y;
 	vector.y = v1.z * v2.x - v1.x * v2.z;
 	vector.z = v1.x * v2.y - v1.y * v2.x;
 	return (vector);
 }
+
+t_vector scalar_multiply(t_vector v, double scalar)
+{
+	t_vector vector;
+
+	vector.x = scalar * v.x;
+	vector.y = scalar * v.y;
+	vector.z = scalar * v.z;
+	return (vector);
+}
+
+void printVector(t_vector vec, char *name)
+{
+    printf("%s: (%lf, %lf, %lf)\n",name, vec.x, vec.y, vec.z);
+}
+
 
 // #include <stdio.h>
 // int main() {
