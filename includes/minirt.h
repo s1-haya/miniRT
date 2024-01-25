@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/20 18:38:33 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:20:48 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #define ORIGIN_OF_THE_SPHERE new_vector(0, 0, 5)
 #define LIGHT_SOURCE new_vector(-5, 5, -5)
 #define RADIUS 1.0
-#define SIZE 2
+#define SIZE 6
 #define LIGHT_SIZE 1
 
 // 環境光反射係数

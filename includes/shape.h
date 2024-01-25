@@ -6,15 +6,16 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/19 23:00:20 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:04:31 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPE_H
 # define SHAPE_H
 
-#include "vector.h"
-#include "material.h"
+# include "vector.h"
+# include "ray.h"
+# include "material.h"
 
 typedef enum e_object
 {
@@ -22,20 +23,6 @@ typedef enum e_object
 	SPHERE, 
 	SYLINDER
 }	t_object;
-
-typedef struct s_ray
-{
-	t_vector point;
-	t_vector direction;
-	t_vector viewpoint;
-}	t_ray;
-
-typedef struct s_intersection
-{
-	double		distance;
-	t_vector	point;
-	t_vector	normal;
-}	t_intersection;
 
 typedef struct s_plane
 {

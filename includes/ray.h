@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light_source.c                                     :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 16:35:48 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/25 10:20:05 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/01/25 10:03:36 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/01/25 10:19:22 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "light_source.h"
+#ifndef RAY_H
+# define RAY_H
 
-t_light_source	new_light_source(t_vector point, t_color intensity)
+typedef struct s_ray
 {
-	t_light_source	light_source;
+	t_vector point;
+	t_vector direction;
+}	t_ray;
 
-	// light_source = malloc(sizeof(t_light_source));
-	// if (light_source == NULL)
-	// 	return (NULL);
-	light_source.light_ray.point = point;
-	light_source.intensity = intensity;
-	return (light_source);
-}
+typedef struct s_intersection
+{
+	double		distance;
+	t_vector	point;
+	t_vector	normal;
+}	t_intersection;
 
+#endif
