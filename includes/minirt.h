@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/31 18:01:01 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:49:49 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include "vector.h"
 #include "light_source.h"
 
+#define MLX_TITLE "MINIRT"
+#define WINDOW_ORIGIN_X 0
+#define WINDOW_ORIGIN_Y 0
 #define WINDOW_MAX_X 512
 #define WINDOW_MAX_Y 512
 #define VIEWPOINT new_vector(5, 10, -30)

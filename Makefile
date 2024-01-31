@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/01/31 18:12:10 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/01/31 18:48:57 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/color.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/ray.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/vector.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c
 
 # TEST_DIR := test
 # SRCS = $(TEST_DIR)/test.c\

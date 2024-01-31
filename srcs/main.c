@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/27 13:41:56 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:56:08 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@
 
 #define SUCCESS 0
 #define FAILURE 1
-#define WINDOW_ORIGIN_X 0
-#define WINDOW_ORIGIN_Y 0
-#define MLX_TITLE "MINIRT"
-
 
 t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit);
-void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_data *img_data);
+void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_mlx_data *img_data);
+t_mlx_data	*new_mlx_data();
 
-void my_mlx_pixel_put(t_data *img_data, int x, int y, int color)
+void my_mlx_pixel_put(t_mlx_data *img_data, int x, int y, int color)
 {
 	char *target_pixel;
 	int cie;
@@ -54,7 +51,7 @@ double convert_to_three_dimensional_coordinates(double value, double t_min, doub
 }
 
 #include <stdio.h>
-void draw_determine_intersection_of_ray_and_object(t_data *img_data)
+void draw_determine_intersection_of_ray_and_object(t_mlx_data *img_data)
 {
 	int x;
 	int y;
@@ -110,7 +107,7 @@ void draw_determine_intersection_of_ray_and_object(t_data *img_data)
 	}
 }
 
-// void draw_gradient(t_data *img_data) {
+// void draw_gradient(t_mlx_data *img_data) {
 //     int x, y;
 //     x = 0;
 //     while (x < WINDOW_MAX_X) {
@@ -127,27 +124,17 @@ void draw_determine_intersection_of_ray_and_object(t_data *img_data)
 //     }
 // }
 
+#include <libc.h>
 int main(void)
 {
-	void *mlx;
-	void *mlx_window;
-	t_data mlx_image_data;
+	t_mlx_data	*data;
 
-	mlx = mlx_init();
-	if (mlx == NULL)
+	data = new_mlx_data();
+	if (data == NULL)
 		return (FAILURE);
-	mlx_window = mlx_new_window(mlx, WINDOW_MAX_X, WINDOW_MAX_Y, MLX_TITLE);
-	if (mlx_window == NULL)
-		return (FAILURE);
-	mlx_image_data.img = mlx_new_image(mlx, WINDOW_MAX_X, WINDOW_MAX_Y);
-	if (mlx_image_data.img == NULL)
-		return (FAILURE);
-	mlx_image_data.address = mlx_get_data_addr(mlx_image_data.img, &mlx_image_data.bits_per_pixel, &mlx_image_data.size_line,
-											   &mlx_image_data.endian);
-	// my_mlx_pixel_put(&mlx_image_data, 5, 5, 0x00FF0000);
-	draw_determine_intersection_of_ray_and_object(&mlx_image_data);
-	// draw_gradient(&mlx_image_data);
-	mlx_put_image_to_window(mlx, mlx_window, mlx_image_data.img, WINDOW_ORIGIN_X, WINDOW_ORIGIN_Y);
-	mlx_loop(mlx);
+	draw_determine_intersection_of_ray_and_object(data);
+	mlx_put_image_to_window(data->mlx, data->window, data->img, WINDOW_ORIGIN_X, WINDOW_ORIGIN_Y);
+	mlx_loop(data->mlx);
+	system("leaks -q miniRT");
 	return (SUCCESS);
 }
