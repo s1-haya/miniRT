@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:49:12 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/19 18:35:19 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/27 07:59:33 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,14 @@
 // 光源と交点の距離の求め方
 // - 点光源の場合　光源の位置ベクトル - 交点の位置ベクトル
 // - 平行光源の場合　光源位置という概念がないため、無限遠方
+
+#include "shape.h"
+#include "light_source.h"
+#include "camera.h"
+
+typedef struct s_scene {
+	t_shape			 **shape;
+	t_light_source	**light_source;
+	t_camera		viewpoint;
+}	t_scene;
 

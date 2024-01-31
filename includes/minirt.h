@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/25 10:20:48 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:01:01 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 #include "vector.h"
 #include "light_source.h"
 
-#define VIEWPOINT new_vector(0, 0, -5)
-#define ORIGIN_OF_THE_SPHERE new_vector(0, 0, 5)
-#define LIGHT_SOURCE new_vector(-5, 5, -5)
-#define RADIUS 1.0
-#define SIZE 6
-#define LIGHT_SIZE 1
+#define WINDOW_MAX_X 512
+#define WINDOW_MAX_Y 512
+#define VIEWPOINT new_vector(5, 10, -30)
+#define LOOKATPOINT new_vector(0, 0, 2)
+#define DISTANCE 1.3
+#define SIZE 5
+#define LIGHT_SIZE 3
 
 // 環境光反射係数
 #define AMBIENT_LIGNT_REFLECTION_COEFFICIENT new_color(0.01,0.01,0.01)
@@ -58,14 +59,16 @@ typedef struct s_three_d_map
 }	t_three_d_map;
 
 
-typedef struct s_data
+typedef struct s_mlx_data
 {
 	t_light_source	*light_source;
+	void			*mlx;
+	void			*window;
 	void			*img;
 	char			*address;
 	int				bits_per_pixel;
 	int 			size_line;
 	int				endian;
-} t_data;
+} t_mlx_data;
 
 #endif

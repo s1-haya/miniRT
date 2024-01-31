@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/25 10:20:37 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:17:11 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,17 @@ void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_data
 			}
 			if (nearest_shape->object == PLANE)
 				normal_vector = nearest_shape->plane->normal;
-			else
+			else if (nearest_shape->object == SPHERE)
 				normal_vector = subtract_vectors(nearest_shape->intersection->point, nearest_shape->sphere->origin);
+			else
+			{
+				//double dot_product(t_vector v1, t_vector v2)
+				normal_vector = subtract_vectors(nearest_shape->intersection->point, nearest_shape->cylinder->origin);
+				// normal_vector.y = 0;
+				if (dot_product(nearest_shape->intersection->point, normal_vector) == 0)
+					normal_vector.y = 0; 
+				// normal_vector = subtract_vectors(nearest_shape->intersection->point, nearest_shape->cylinder->origin);
+			}
 			normalize_vector(&normal_vector);
 			ambient_right = get_ambient_right(nearest_shape->material->ambient, AMBIENT_LIGHT_INTENSITY);
 			add_color(&color, ambient_right);
