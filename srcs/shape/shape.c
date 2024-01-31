@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/19 16:30:06 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/26 08:49:01 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ t_sphere	*new_sphere(t_vector origin, double radius)
 	return (sphere);
 }
 
+t_cylinder	*new_cylinder(t_vector origin, double radius, double height)
+{
+	t_cylinder	*cylinder;
+
+	cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
+	if (cylinder == NULL)
+		return (NULL);
+	cylinder->origin = origin;
+	cylinder->radius = radius;
+	cylinder->height = height;
+	return (cylinder);
+}
+
 t_shape	*new_shape(void *shape, t_material *material, enum e_object object, int id)
 {
 	t_shape	*new_shape;
@@ -67,8 +80,8 @@ t_shape	*new_shape(void *shape, t_material *material, enum e_object object, int 
 		new_shape->plane = shape;
 	else if (object == SPHERE)
 		new_shape->sphere = shape;
-	else if (object == SYLINDER)
-		new_shape->sphere = shape;
+	else if (object == CYLINDER)
+		new_shape->cylinder = shape;
 	new_shape->intersection = NULL;
 	new_shape->material = material;
 	return (new_shape);

@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/01/19 16:57:37 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/01/31 18:12:10 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,31 @@ DEBUG := -g -fsanitize=address -fno-omit-frame-pointer
 
 SRCS_DIR = srcs
 SRCS = $(SRCS_DIR)/main.c\
-		$(SRCS_DIR)/determine_intersection_of_ray_and_object.c\
-		$(SRCS_DIR)/vector.c \
-		$(SRCS_DIR)/color.c \
-		$(SRCS_DIR)/shape.c \
-		$(SRCS_DIR)/ray.c \
-		$(SRCS_DIR)/light_source.c \
-		$(SRCS_DIR)/cast_a_shadow.c \
-		$(SRCS_DIR)/debug.c \
+
+CAMERA_DIR = camera
+SRCS += $(SRCS_DIR)/$(CAMERA_DIR)/camera.c\
+
+ERROR_DIR = error
+SRCS += $(SRCS_DIR)/$(ERROR_DIR)/error.c\
+
+LIGHT_DIR = light
+SRCS += $(SRCS_DIR)/$(LIGHT_DIR)/light_source.c\
+
+PARSE_DIR = parse
+SRCS += $(SRCS_DIR)/$(PARSE_DIR)/parse.c\
+
+SCENE_DIR = scene
+SRCS += $(SRCS_DIR)/$(SCENE_DIR)/cast_a_shadow.c\
+
+SHAPE_DIR = shape
+SRCS += $(SRCS_DIR)/$(SHAPE_DIR)/shape.c\
+
+UNTIL_DIR = until
+SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/color.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/ray.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/vector.c\
+
 # TEST_DIR := test
 # SRCS = $(TEST_DIR)/test.c\
 

@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light_source.h                                     :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 14:55:17 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/25 10:18:45 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/01/27 07:58:40 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/01/27 09:13:06 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIGHT_SOURCE_H
-# define LIGHT_SOURCE_H
+#ifndef CAMERA_H
+# define CAMERA_H
 
 # include "vector.h"
-# include "ray.h"
-# include "color.h"
 
-typedef struct s_light_source
+typedef struct s_camera
 {
+	t_vector	view_point;
+	t_vector	look_at;
 	double		distance;
-	t_ray		light_ray;
-	t_color		intensity;
-}	t_light_source;
-
-typedef struct s_point_light_source
-{
-	t_light_source	light_source;
-}	t_point_light_source;
-
-typedef struct s_direction_light_source
-{
-	t_light_source	light_source;
-}	t_direction_light_source;
-
-t_light_source	new_light_source(t_vector point, t_color intensity);
+	size_t		horizontal_viewing_angle;
+}	t_camera;
 
 #endif

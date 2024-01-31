@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/20 18:32:56 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/01/27 15:17:11 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_data
 			// print_vector(scalar_multiply(incident_vector, C_EPSILON), "start point");
 			// print_vector(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), "C_EP");
 			// shade_ray.direction = incident_vector;
-			incident_vector = subtract_vectors(img_data->light_source[i].point, nearest_shape->intersection->point);
+			incident_vector = subtract_vectors(img_data->light_source[i].light_ray.point, nearest_shape->intersection->point);
 			img_data->light_source[i].distance = vector_length(incident_vector);
 			normalize_vector(&incident_vector);
 			shade_ray = new_ray(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), incident_vector);
@@ -106,16 +106,25 @@ void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_data
 				i++;
 				continue;
 			}
-			// (void)shape;
-			// (void)shade_ray;
 			if (nearest_shape->object == PLANE)
 				normal_vector = nearest_shape->plane->normal;
-			else
+			else if (nearest_shape->object == SPHERE)
 				normal_vector = subtract_vectors(nearest_shape->intersection->point, nearest_shape->sphere->origin);
+			else
+			{
+				//double dot_product(t_vector v1, t_vector v2)
+				normal_vector = subtract_vectors(nearest_shape->intersection->point, nearest_shape->cylinder->origin);
+				// normal_vector.y = 0;
+				if (dot_product(nearest_shape->intersection->point, normal_vector) == 0)
+					normal_vector.y = 0; 
+				// normal_vector = subtract_vectors(nearest_shape->intersection->point, nearest_shape->cylinder->origin);
+			}
 			normalize_vector(&normal_vector);
 			ambient_right = get_ambient_right(nearest_shape->material->ambient, AMBIENT_LIGHT_INTENSITY);
 			add_color(&color, ambient_right);
-			diffuse_reflection = get_diffuse_reflection(nearest_shape->material->diffuse, img_data->light_source[i].intensity, normal_vector, incident_vector);
+			// print_vector(normal_vector, "normal_vector");
+			// print_vector(normal_vector, "normal_vector");
+			diffuse_reflection = get_diffuse_reflection(nearest_shape->material->diffuse, img_data->light_source[i].intensity, new_vector(2 * ((normal_vector.x + 1) / 2) - 1, 2 * ((normal_vector.y + 1) / 2) - 1, 2 * ((normal_vector.z + 1) / 2) - 1), incident_vector);
 			add_color(&color, diffuse_reflection);
 			specular_reflection = get_specular_reflection(nearest_shape->material->specular, img_data->light_source[i].intensity, normal_vector, incident_vector, VIEWPOINT);
 			add_color(&color, specular_reflection);
