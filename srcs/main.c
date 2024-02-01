@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/31 18:56:08 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:14:56 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,7 @@
 t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit);
 void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_mlx_data *img_data);
 t_mlx_data	*new_mlx_data();
-
-void my_mlx_pixel_put(t_mlx_data *img_data, int x, int y, int color)
-{
-	char *target_pixel;
-	int cie;
-
-	cie = (y * img_data->size_line + x * (img_data->bits_per_pixel / 8));
-	target_pixel = img_data->address + cie;
-	*(unsigned int *)target_pixel = color;
-}
-
-double get_value_in_range(double v, double v_min, double v_max)
-{
-	if (v < v_min)
-		return (v_min);
-	else if (v_max < v)
-		return (v_max);
-	return (v);
-}
+double get_value_in_range(double v, double v_min, double v_max);
 
 // 　スクリーン（二次元）座標から三次元座標に変換
 double convert_to_three_dimensional_coordinates(double value, double t_min, double t_max)
@@ -106,23 +88,6 @@ void draw_determine_intersection_of_ray_and_object(t_mlx_data *img_data)
 		x++;
 	}
 }
-
-// void draw_gradient(t_mlx_data *img_data) {
-//     int x, y;
-//     x = 0;
-//     while (x < WINDOW_MAX_X) {
-//         y = 0;
-//         while (y < WINDOW_MAX_Y) {
-//             // y 座標を0.0から1.0に正規化してグラデーションを作成
-//             double fy = (double)y / (double)(WINDOW_MAX_Y - 1); // y 座標を0.0から1.0に正規化
-//             int gray = (int)(255 * fy); // グレースケールの色を作成
-//             int color = (gray << 16) | (gray << 8) | gray; // RGBを組み合わせて24ビットの色を作成
-//             my_mlx_pixel_put(img_data, x, y, color); // ピクセルに色を設定
-//             y++;
-//         }
-//         x++;
-//     }
-// }
 
 #include <libc.h>
 int main(void)

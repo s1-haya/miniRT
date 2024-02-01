@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/01/31 18:48:57 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/01 18:33:14 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,18 +36,25 @@ SRCS += $(SRCS_DIR)/$(SCENE_DIR)/cast_a_shadow.c\
 SHAPE_DIR = shape
 SRCS += $(SRCS_DIR)/$(SHAPE_DIR)/shape.c\
 
+COLOR_DIR = color
+SRCS += $(SRCS_DIR)/$(COLOR_DIR)/color.c\
+		$(SRCS_DIR)/$(COLOR_DIR)/pixel_put.c
+
 UNTIL_DIR = until
-SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/color.c\
-		$(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
+SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/ray.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/vector.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/get_value_in_range.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c
 
-# TEST_DIR := test
-# SRCS = $(TEST_DIR)/test.c\
+TEST_SRCS_DIR := test
+TEST_SRCS := $(TEST_SRCS_DIR)/test.c\
 
 OBJS_DIR := objs
 OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
+
+TEST_OBJS_DIR := objs
+TEST_OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(filter-out $(SRCS_DIR)/main.c, $(SRCS))) $(patsubst $(TEST_SRCS_DIR)/%.c, $(TEST_OBJS_DIR)/%.o, $(TEST_SRCS))
 
 # INCLUDES_DIR := includes
 # INCLUDES := -I$(INCLUDES_DIR)
@@ -114,6 +121,15 @@ debug: CFLAGS += $(DEBUG)
 debug: re
 
 re: fclean all
+
+test: $(TEST_OBJS) $(MINILIBX)
+	@$(CC) $(CFLAGS) $(TEST_OBJS) $(LDFLAGS) -o test_miniRT
+	@./test_miniRT
+	@$(RM) -r $(TEST_OBJS_DIR) test_miniRT
+
+$(TEST_OBJS_DIR)/%.o: $(TEST_SRCS_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(INCLUDES) -I./Unity/src -c $< -o $@
 
 $(MINILIBX):
 	make -C $(MINILIBX_DIR)
