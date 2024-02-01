@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light_source.c                                     :+:      :+:    :+:   */
+/*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 16:35:48 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/27 13:33:17 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/02/01 20:03:27 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/02/01 20:24:37 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "light_source.h"
+#include "scene.h"
 
-t_light_source	new_light_source(t_vector point, t_color intensity)
+t_scene	new_scene(t_shape **shape,
+				t_light *light, 
+				t_camera camera,
+				t_mlx_data data)
 {
-	t_light_source	light_source;
+	t_scene	scene;
 
-	// light_source = malloc(sizeof(t_light_source));
-	// if (light_source == NULL)
-	// 	return (NULL);
-	light_source.light_ray.point = point;
-	light_source.intensity = intensity;
-	return (light_source);
+	scene.shape = shape;
+	scene.light = light;
+	scene.camera = camera;
+	scene.mlx = data;
+	return (scene);
 }

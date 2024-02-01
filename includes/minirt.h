@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/01 19:39:01 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:38:20 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 #include "vector.h"
-#include "light_source.h"
+#include "light.h"
 
 #define MLX_TITLE "MINIRT"
 #define WINDOW_ORIGIN_X 0
@@ -63,12 +63,11 @@ typedef struct s_three_d_map
 
 typedef	struct s_img
 {
-	t_light_source	*light_source;
-	void			*data;
-	char			*address;
-	int				bits_per_pixel;
-	int 			size_line;
-	int				endian;
+	void		*data;
+	char		*address;
+	int			bits_per_pixel;
+	int 		size_line;
+	int			endian;
 	
 }	t_img;
 

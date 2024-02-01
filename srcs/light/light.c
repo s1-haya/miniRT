@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.h                                           :+:      :+:    :+:   */
+/*   light.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/27 07:58:40 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/01 20:31:32 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/01/19 16:35:48 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/01/27 13:33:17 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAMERA_H
-# define CAMERA_H
+#include "light.h"
 
-# include <stdlib.h>
-# include "vector.h"
-
-typedef struct s_camera
+t_light	new_light(t_vector point, t_color intensity)
 {
-	t_vector	view_point;
-	t_vector	look_at_point;
-	double		distance;
-	size_t		horizontal_viewing_angle;
-}	t_camera;
+	t_light	light;
 
-#endif
+	// light = malloc(sizeof(t_light));
+	// if (light == NULL)
+	// 	return (NULL);
+	light.light_ray.point = point;
+	light.intensity = intensity;
+	return (light);
+}

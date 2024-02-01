@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/01 19:38:11 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:41:08 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "minirt.h"
+#include "scene.h"
 #include "shape.h"
 #include "vector.h"
 #include "color.h"
@@ -69,7 +70,7 @@ t_color get_specular_reflection(t_color coefficient, t_color intensity_of_light_
 	return (specular);
 }
 
-void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_img *img_data)
+void cast_a_shadow(t_scene *scene, t_shape *nearest_shape, int x, int y)
 {
 	// 入射ベクトル
 	t_vector	incident_vector;
@@ -96,12 +97,12 @@ void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_img 
 			// print_vector(scalar_multiply(incident_vector, C_EPSILON), "start point");
 			// print_vector(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), "C_EP");
 			// shade_ray.direction = incident_vector;
-			incident_vector = subtract_vectors(img_data->light_source[i].light_ray.point, nearest_shape->intersection->point);
-			img_data->light_source[i].distance = vector_length(incident_vector);
+			incident_vector = subtract_vectors(scene->light[i].light_ray.point, nearest_shape->intersection->point);
+			scene->light[i].distance = vector_length(incident_vector);
 			normalize_vector(&incident_vector);
 			shade_ray = new_ray(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), incident_vector);
 			// shade_ray.direction = incident_vector;
-			if (determine_intersection_ray_and_object(shape, shade_ray, img_data->light_source[i].distance - C_EPSILON, true) != NULL)
+			if (determine_intersection_ray_and_object(scene->shape, shade_ray, scene->light[i].distance - C_EPSILON, true) != NULL)
 			{
 				i++;
 				continue;
@@ -124,16 +125,16 @@ void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_img 
 			add_color(&color, ambient_right);
 			// print_vector(normal_vector, "normal_vector");
 			// print_vector(normal_vector, "normal_vector");
-			diffuse_reflection = get_diffuse_reflection(nearest_shape->material->diffuse, img_data->light_source[i].intensity, new_vector(2 * ((normal_vector.x + 1) / 2) - 1, 2 * ((normal_vector.y + 1) / 2) - 1, 2 * ((normal_vector.z + 1) / 2) - 1), incident_vector);
+			diffuse_reflection = get_diffuse_reflection(nearest_shape->material->diffuse, scene->light[i].intensity, new_vector(2 * ((normal_vector.x + 1) / 2) - 1, 2 * ((normal_vector.y + 1) / 2) - 1, 2 * ((normal_vector.z + 1) / 2) - 1), incident_vector);
 			add_color(&color, diffuse_reflection);
-			specular_reflection = get_specular_reflection(nearest_shape->material->specular, img_data->light_source[i].intensity, normal_vector, incident_vector, VIEWPOINT);
+			specular_reflection = get_specular_reflection(nearest_shape->material->specular, scene->light[i].intensity, normal_vector, incident_vector, VIEWPOINT);
 			add_color(&color, specular_reflection);
 			i++;
 		}
 		get_radiance_to_color(&color, 0.0, 1.0);
 		color.color = ((int)color.red << 16) | ((int)color.green << 8) | (int)color.blue;
-		my_mlx_pixel_put(img_data, x, y, color.color);
+		my_mlx_pixel_put(&scene->mlx.img, x, y, color.color);
 	}
 	else
-		my_mlx_pixel_put(img_data, x, y, 0x000000FF);
+		my_mlx_pixel_put(&scene->mlx.img, x, y, 0x000000FF);
 }

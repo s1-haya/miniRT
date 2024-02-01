@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:49:12 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/27 07:59:33 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:24:22 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@
 // - 平行光源の場合　光源位置という概念がないため、無限遠方
 
 #include "shape.h"
-#include "light_source.h"
+#include "light.h"
 #include "camera.h"
+#include "minirt.h"
 
 typedef struct s_scene {
-	t_shape			 **shape;
-	t_light_source	**light_source;
-	t_camera		viewpoint;
+	t_shape		 **shape;
+	t_light		*light;
+	t_camera	camera;
+	t_mlx_data	mlx;
 }	t_scene;
-
