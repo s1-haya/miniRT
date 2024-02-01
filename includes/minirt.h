@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/31 18:49:49 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:39:01 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,22 @@ typedef struct s_three_d_map
 	t_range	z;
 }	t_three_d_map;
 
-
-typedef struct s_mlx_data
+typedef	struct s_img
 {
 	t_light_source	*light_source;
-	void			*mlx;
-	void			*window;
-	void			*img;
+	void			*data;
 	char			*address;
 	int				bits_per_pixel;
 	int 			size_line;
 	int				endian;
+	
+}	t_img;
+
+typedef struct s_mlx_data
+{
+	void			*data;
+	void			*window;
+	t_img			img;
 } t_mlx_data;
 
 #endif

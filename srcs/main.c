@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/01 18:14:56 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:40:59 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define FAILURE 1
 
 t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit);
-void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_mlx_data *img_data);
+void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_img *img_data);
 t_mlx_data	*new_mlx_data();
 double get_value_in_range(double v, double v_min, double v_max);
 
@@ -33,7 +33,7 @@ double convert_to_three_dimensional_coordinates(double value, double t_min, doub
 }
 
 #include <stdio.h>
-void draw_determine_intersection_of_ray_and_object(t_mlx_data *img_data)
+void draw_determine_intersection_of_ray_and_object(t_img *img_data)
 {
 	int x;
 	int y;
@@ -92,14 +92,18 @@ void draw_determine_intersection_of_ray_and_object(t_mlx_data *img_data)
 #include <libc.h>
 int main(void)
 {
-	t_mlx_data	*data;
+	t_mlx_data	*mlx;
 
-	data = new_mlx_data();
-	if (data == NULL)
+	// 1 is_valid
+	// 2 init(parse)
+	// 3 draw
+	// 4 hook, loop
+	mlx = new_mlx_data();
+	if (mlx == NULL)
 		return (FAILURE);
-	draw_determine_intersection_of_ray_and_object(data);
-	mlx_put_image_to_window(data->mlx, data->window, data->img, WINDOW_ORIGIN_X, WINDOW_ORIGIN_Y);
-	mlx_loop(data->mlx);
+	draw_determine_intersection_of_ray_and_object((&mlx->img));
+	mlx_put_image_to_window(mlx->data, mlx->window, mlx->img.data, WINDOW_ORIGIN_X, WINDOW_ORIGIN_Y);
+	mlx_loop(mlx->data);
 	system("leaks -q miniRT");
 	return (SUCCESS);
 }

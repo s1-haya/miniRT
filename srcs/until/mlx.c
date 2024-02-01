@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:29:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/31 18:58:39 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:37:09 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,43 @@
 #include "mlx.h"
 #include "minirt.h"
 
-void	delete_mlx_data(t_mlx_data *data)
+void	delete_mlx_data(t_mlx_data *mlx)
 {
-	free(data->mlx);
-	free(data->window);
-	free(data->img);
-	free(data);
+	free(mlx->data);
+	free(mlx->window);
+	free(mlx->img.data);
+	free(mlx);
 }
 
 t_mlx_data	*new_mlx_data()
 {
-	t_mlx_data	*data;
+	t_mlx_data	*mlx;
 
-	data = malloc(sizeof(t_mlx_data));
-	if (data == NULL)
+	mlx = malloc(sizeof(t_mlx_data));
+	if (mlx == NULL)
 		return (NULL);
-	data->mlx = mlx_init();
-	if (data->mlx == NULL)
+	mlx->data = mlx_init();
+	if (mlx->data == NULL)
 	{
-		free(data);
+		free(mlx);
 		return (NULL);
 	}
-	data->window = mlx_new_window(data->mlx, WINDOW_MAX_X, WINDOW_MAX_Y, MLX_TITLE);
-	if (data->window == NULL)
+	mlx->window = mlx_new_window(mlx->data, WINDOW_MAX_X, WINDOW_MAX_Y, MLX_TITLE);
+	if (mlx->window == NULL)
 	{
-		free(data->mlx);
-		free(data);
+		free(mlx->data);
+		free(mlx);
 		return (NULL);
 	}
-	data->img = mlx_new_image(data->mlx, WINDOW_MAX_X, WINDOW_MAX_Y);
-	if (data->img == NULL)
+	mlx->img.data = mlx_new_image(mlx->data, WINDOW_MAX_X, WINDOW_MAX_Y);
+	if (mlx->img.data == NULL)
 	{
-		free(data->window);
-		free(data->mlx);
-		free(data);
+		free(mlx->data);
+		free(mlx->window);
+		free(mlx);
 		return (NULL);
 	}
-	data->address = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->size_line,
-											   &data->endian);
-	return (data);
+	mlx->img.address = mlx_get_data_addr(mlx->img.data, &mlx->img.bits_per_pixel, &mlx->img.size_line,
+											   &mlx->img.endian);
+	return (mlx);
 }

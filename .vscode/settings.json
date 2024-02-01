@@ -3,6 +3,9 @@
 		"cmath": "c",
 		"complex": "c",
 		"vector": "c",
-		"iosfwd": "c"
+		"iosfwd": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c"
 	}
 }

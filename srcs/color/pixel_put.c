@@ -6,13 +6,13 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:12:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/01 18:12:40 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:33:23 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void my_mlx_pixel_put(t_mlx_data *img_data, int x, int y, int color)
+void my_mlx_pixel_put(t_img *img_data, int x, int y, int color)
 {
 	char *target_pixel;
 	int cie;

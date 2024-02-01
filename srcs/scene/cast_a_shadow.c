@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/31 18:46:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:38:11 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #define C_EPSILON (1.0 / 512)
 
 double get_value_in_range(double v, double v_min, double v_max);
-void my_mlx_pixel_put(t_mlx_data *img_data, int x, int y, int color);
+void my_mlx_pixel_put(t_img *img_data, int x, int y, int color);
 t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit);
 
 void print_vector(t_vector vector, char *name);
@@ -69,7 +69,7 @@ t_color get_specular_reflection(t_color coefficient, t_color intensity_of_light_
 	return (specular);
 }
 
-void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_mlx_data *img_data)
+void cast_a_shadow(t_shape **shape, t_shape *nearest_shape, int x, int y, t_img *img_data)
 {
 	// 入射ベクトル
 	t_vector	incident_vector;
