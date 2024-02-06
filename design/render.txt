@@ -1,3 +1,6 @@
+物体との交点は必ず一つなので交点の構造体の中に物体を入れた方が読み手側からすると適切かな。
+
+
 シーン全体を描画（イベントの処理（赤いボタンを押すなど）で終了）
 void	render_scene(t_scene *scene)
 {
@@ -15,14 +18,14 @@ void draw_img_with_ray_tracing(t_scene *scene)
 	座標を取得
 	{
 		レイと物体の交点を決める（出力　一番視点との距離が近い物体）
-		t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit)
+		t_intersection	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit)
 		描画情報を取得（色をつけるなど）
 
 	}
 }
 
 レイと物体の交点を決める（出力　一番視点との距離が近い物体）
-t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit)
+t_intersection	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit)
 {
 	複数の物体
 	{
@@ -35,15 +38,15 @@ t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, doubl
 }
 
 描画情報を取得（色をつけるなど）
-void　put_color_to_img(t_scene *scene, t_shape *nearest_shape, int x, int y)
+void　set_color_for_img(t_scene *scene, t_intersection intersection, int x, int y)
 物体の交点がある場合
 	ある場合　
-		色の情報を取得する関数(t_shape **shape, t_shape *nearest_shape, t_light *light)
+		色の情報を取得する関数(t_shape **shape, t_intersection intersection, t_light *light)
 		void my_mlx_pixel_put(t_img *img_data, int x, int y, int color)
 	ない場合　スキップ
 
 int 色の情報を取得する関数
-int (t_shape **shape, t_shape *nearest_shape, t_light *light)
+int (t_shape **shape, t_intersection intersection, t_light *light)
 光源が複数ある場合(各光源ごとの入射角、法線ベクトルを取得)
 {
 	入射角、法線ベクトル作成
