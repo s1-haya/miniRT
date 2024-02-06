@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:09:01 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/01 19:27:44 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:25:39 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 typedef struct s_color
 {
-	int		color;
 	double	red;
 	double	green;
 	double	blue;
