@@ -1,13 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   is_target_file_extension.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/27 13:19:04 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/27 13:19:39 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/02/18 08:28:45 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/02/18 08:34:38 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// rtファイルを各構造体へ
+#include <stdbool.h>
+
+# define SUCCESS 0
+# define FAILURE 1
+
+bool	is_target_file_extension()
+{
+	
+}
+
+int main(void)
+{
+	return (SUCCESS);
+}

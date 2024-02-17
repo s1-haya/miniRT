@@ -140,7 +140,7 @@ t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, doubl
 		}
 		z++;
 	}
-	if (nearest_shape != NULL)
-		return (nearest_shape);
-	return (NULL);
+	return (nearest_shape);
+	// if (nearest_shape != NULL)
+	// return (NULL);
 }

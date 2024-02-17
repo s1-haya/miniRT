@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/27 15:14:21 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:09:15 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_cylinder
 
 typedef struct s_shape
 {
-	int				id;
+	//void *object;
 	enum e_object	object;
 	t_plane			*plane;
 	t_sphere		*sphere;

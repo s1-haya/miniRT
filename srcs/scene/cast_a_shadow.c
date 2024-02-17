@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/01 20:41:08 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:07:05 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void cast_a_shadow(t_scene *scene, t_shape *nearest_shape, int x, int y)
 				i++;
 				continue;
 			}
+			// get_radiance(shape *shape, t_intesection *intesection, t_light *light)
 			if (nearest_shape->object == PLANE)
 				normal_vector = nearest_shape->plane->normal;
 			else if (nearest_shape->object == SPHERE)
@@ -127,13 +128,13 @@ void cast_a_shadow(t_scene *scene, t_shape *nearest_shape, int x, int y)
 			// print_vector(normal_vector, "normal_vector");
 			diffuse_reflection = get_diffuse_reflection(nearest_shape->material->diffuse, scene->light[i].intensity, new_vector(2 * ((normal_vector.x + 1) / 2) - 1, 2 * ((normal_vector.y + 1) / 2) - 1, 2 * ((normal_vector.z + 1) / 2) - 1), incident_vector);
 			add_color(&color, diffuse_reflection);
-			specular_reflection = get_specular_reflection(nearest_shape->material->specular, scene->light[i].intensity, normal_vector, incident_vector, VIEWPOINT);
+			specular_reflection = get_specular_reflection(nearest_shape->material->specular, scene->light[i].intensity, normal_vector, incident_vector, scene->camera.view_point);
 			add_color(&color, specular_reflection);
 			i++;
 		}
 		get_radiance_to_color(&color, 0.0, 1.0);
-		color.color = ((int)color.red << 16) | ((int)color.green << 8) | (int)color.blue;
-		my_mlx_pixel_put(&scene->mlx.img, x, y, color.color);
+		int int_color = ((int)color.red << 16) | ((int)color.green << 8) | (int)color.blue;
+		my_mlx_pixel_put(&scene->mlx.img, x, y, int_color);
 	}
 	else
 		my_mlx_pixel_put(&scene->mlx.img, x, y, 0x000000FF);

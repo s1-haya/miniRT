@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/01 20:33:39 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/06 08:58:39 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ double convert_to_three_dimensional_coordinates(double value, double t_min, doub
 }
 
 #include <stdio.h>
-void draw_determine_intersection_of_ray_and_object(t_scene *scene)
+void render_scene(t_scene *scene)
 {
 	int x;
 	int y;
@@ -67,6 +67,8 @@ void draw_determine_intersection_of_ray_and_object(t_scene *scene)
 		}
 		x++;
 	}
+	mlx_put_image_to_window(scene->mlx.data, scene->mlx.window, scene->mlx.img.data, WINDOW_ORIGIN_X, WINDOW_ORIGIN_Y);
+	mlx_loop(scene->mlx.data);
 }
 
 #include <libc.h>
@@ -103,9 +105,6 @@ int main(void)
 	light[1] = new_light(new_vector(5, 0, -5), new_color(0.5,0.5,0.5));
 	light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
 	scene = new_scene(shape, light, new_camera(VIEWPOINT, LOOKATPOINT, 70), new_mlx_data());
-	draw_determine_intersection_of_ray_and_object(&scene);
-	mlx_put_image_to_window(scene.mlx.data, scene.mlx.window, scene.mlx.img.data, WINDOW_ORIGIN_X, WINDOW_ORIGIN_Y);
-	mlx_loop(scene.mlx.data);
-	system("leaks -q miniRT");
+	render_scene(&scene);
 	return (SUCCESS);
 }
