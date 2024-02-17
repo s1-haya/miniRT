@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/01 20:36:48 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/18 08:22:05 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ SRCS += $(SRCS_DIR)/$(ERROR_DIR)/error.c\
 LIGHT_DIR = light
 SRCS += $(SRCS_DIR)/$(LIGHT_DIR)/light.c\
 
-PARSE_DIR = parse
-SRCS += $(SRCS_DIR)/$(PARSE_DIR)/parse.c\
+PARSE_DIR = parser
+SRCS += $(SRCS_DIR)/$(PARSE_DIR)/parser.c\
 
 SCENE_DIR = scene
 SRCS += $(SRCS_DIR)/$(SCENE_DIR)/scene.c\
