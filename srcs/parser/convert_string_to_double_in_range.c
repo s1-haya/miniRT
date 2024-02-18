@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_string_double_in_range.c                   :+:      :+:    :+:   */
+/*   convert_string_to_double_in_range.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:01:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/22 18:34:25 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/22 23:09:36 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define ERROR (0.0)
-#define ERROR_NOT_IN_RANGE "Error: The value is not within the allowed range."
+#define ERROR_NOT_IN_RANGE "Error: The value is not within the allowed range.\n"
+
+double	ft_strtod(const char *str, char **endptr);
 
 double convert_string_to_double_in_range(char *string,
 										 double min,
@@ -27,7 +30,7 @@ double convert_string_to_double_in_range(char *string,
 	double value;
 	char *endptr;
 
-	value = strtod(string, &endptr);
+	value = ft_strtod(string, &endptr);
 	if (value == HUGE_VAL || value == -HUGE_VAL)
 	{
 		perror("Error: ");
@@ -36,7 +39,7 @@ double convert_string_to_double_in_range(char *string,
 	}
 	if (value < min || max < value)
 	{
-		write(STDERR_FILENO, ERROR_NOT_IN_RANGE, sizeof(ERROR_NOT_IN_RANGE) - 1)
+		write(STDERR_FILENO, ERROR_NOT_IN_RANGE, sizeof(ERROR_NOT_IN_RANGE) - 1);
 		*result = false;
 		return (ERROR);
 	}

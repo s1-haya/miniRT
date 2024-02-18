@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:59:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/21 16:40:48 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/22 23:22:45 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ t_minirt_list *init_minirt_list();
 t_minirt_list *convert_one_line_to_minirt_list(char *line, bool *result);
 char *get_next_line(int fd);
 
+static bool	check_only_new_line(char *line)
+{
+	size_t i;
+
+	i = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] != '\n')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 void load_file_into_minirt_list(t_minirt_list **head, const int fd, bool *result)
 {
 	char	*line;
@@ -37,8 +51,14 @@ void load_file_into_minirt_list(t_minirt_list **head, const int fd, bool *result
 		line = get_next_line(fd);
 		if (line == NULL)
 			break;
-		add_back_minirt_list(head, convert_one_line_to_minirt_list(line, result));
+		if (!check_only_new_line(line))
+			add_back_minirt_list(head, convert_one_line_to_minirt_list(line, result));
 		free(line);
+	}
+	if (*result == false)
+	{
+		delete_minirt_list(*head);
+		*head = NULL;
 	}
 }
 

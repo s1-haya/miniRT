@@ -1,6 +1,6 @@
 TEST_NAME := test_miniRT
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -MMD -MP
+CFLAGS := -Wall -Wextra -Werror -MMD -MP -DUNITY_INCLUDE_DOUBLE
 
 MINIRT_DIR := ..
 MINIRT_AR := $(MINIRT_DIR)/miniRT.a
@@ -14,6 +14,7 @@ PARSER_DIR := parser
 TEST_SRCS += $(PARSER_DIR)/test_is_target_file_extension.c\
 			$(PARSER_DIR)/test_load_file_into_minirt_list.c\
 			$(PARSER_DIR)/test_convert_one_line_to_minirt_list.c\
+			$(PARSER_DIR)/test_convert_string_to_double_in_range.c\
 			$(PARSER_DIR)/test_read_rt_file.c\
 			$(PARSER_DIR)/test_validate.c\
 
@@ -24,7 +25,7 @@ UNITY_DIR := $(MINIRT_DIR)/Unity
 UNITY_SRCS := $(UNITY_DIR)/src/unity.c
 UNITY_OBJS := $(patsubst $(UNITY_DIR)/src/%.c, $(TEST_OBJS_DIR)/%.o, $(UNITY_SRCS))
 
-INC_DIR := ./ $(UNITY_DIR)/src $(MINIRT_DIR)/includes
+INC_DIR := ./ $(UNITY_DIR)/src $(MINIRT_DIR)/includes $(UNITY_DIR)/fixture/src
 INCLUDES := $(addprefix -I, $(INC_DIR))
 
 DEPS := $(TEST_OBJS_DIR:.d=.o)

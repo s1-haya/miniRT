@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/21 19:27:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/22 23:15:26 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ void	parser(t_scene *scene, const char *file_name, bool *result)
 	(void)result;
 	// check_input_scene(scene);
 	// list = read_rt_file(file_name, result);
-	// if (*result == false)
+	// if (*result == NULL)
 	// {
+	//   *result = false;
 	// 	//error_fail_to_read
 	// 	return ;
 	// }
