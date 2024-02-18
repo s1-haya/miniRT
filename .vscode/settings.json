@@ -12,6 +12,7 @@
 		"parser.h": "c",
 		"__node_handle": "c",
 		"cstring": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"stdbool.h": "c"
 	}
 }

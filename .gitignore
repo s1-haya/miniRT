@@ -1,7 +1,9 @@
 .history
+.vscode/*
 miniRT
 a.out
 objs/*
 test/objs/*
 *.rt
 *.txt
+*.a
