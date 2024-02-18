@@ -20,19 +20,31 @@ UNITY_DIR := $(MINIRT_DIR)/Unity
 UNITY_SRCS := $(UNITY_DIR)/src/unity.c
 UNITY_OBJS := $(patsubst $(UNITY_DIR)/src/%.c, $(TEST_OBJS_DIR)/%.o, $(UNITY_SRCS))
 
+INC_DIR := ./ $(UNITY_DIR)/src
+INCLUDES := $(addprefix -I, $(INC_DIR))
+
+DEPS := $(TEST_OBJS_DIR:.d=.o)
+
+.PHONY: all clean fclean
+
 all: $(TEST_NAME)
 
 $(TEST_NAME): $(TEST_OBJS) $(UNITY_OBJS) $(MINIRT_AR) $(LIBFT_AR)
 	$(CC) $(CFLAGS) $(TEST_OBJS) $(UNITY_OBJS) $(MINIRT_AR) $(LIBFT_AR) -o $(TEST_NAME)
-# ./$(TEST_NAME)
-# $(RM) -r $(TEST_OBJS_DIR) $(TEST_OBJS) $(UNITY_OBJS) $(MINIRT_AR) $(LIBFT_AR) $(TEST_NAME)
+	$(RM) -r $(TEST_OBJS_DIR)
 
 $(TEST_OBJS_DIR)/%.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDES) -I$(UNITY_DIR)/src -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(TEST_OBJS_DIR)/%.o: $(UNITY_DIR)/src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	$(RM) -r $(TEST_OBJS_DIR)
+
+fclean: clean
+	$(RM) $(TEST_NAME) $(MINIRT_AR) $(LIBFT_AR)
 
 $(LIBFT_AR):
 	make -C $(LIBFT_DIR)
@@ -40,3 +52,4 @@ $(LIBFT_AR):
 $(MINIRT_AR):
 	make $(MINIRT_AR) -C $(MINIRT_DIR)
 
+-include $(DEPS)

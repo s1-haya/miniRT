@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/18 15:09:43 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/18 15:21:33 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,9 +53,6 @@ SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 
 OBJS_DIR := ./objs
 OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
-
-# INCLUDES_DIR := includes
-# INCLUDES := -I$(INCLUDES_DIR)
 
 DEPS =	$(OBJS:.o=.d)
 

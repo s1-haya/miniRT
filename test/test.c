@@ -1,20 +1,15 @@
-#include "unity.h"
+#include "test.h"
 
-// void setUp(void) {
-//     // ここには各テストケースの前に実行するセットアップコードを記述します
-// }
+void setUp(void) {
+}
 
-// void tearDown(void) {
-//     // ここには各テストケースの後に実行するクリーンアップコードを記述します
-// }
+void tearDown(void) {
+}
 
-// void test_function_should_doSomething(void) {
-//     // ここにテストコードを記述します
-//     TEST_ASSERT_TRUE(1);
-// }
+int main(void) {
+    UNITY_BEGIN(); 
+	// parse
+    test_is_target_file_extension();
 
-// int main(void) {
-//     UNITY_BEGIN(); // テストの初期化
-//     RUN_TEST(test_function_should_doSomething);
-//     return UNITY_END(); // テストの終了と結果の報告
-// }
+    return UNITY_END();
+}
