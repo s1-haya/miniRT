@@ -1,0 +1,42 @@
+TEST_NAME := test_miniRT
+CC := cc
+CFLAGS := -Wall -Wextra -Werror -MMD -MP
+
+MINIRT_DIR := ..
+MINIRT_AR := $(MINIRT_DIR)/miniRT.a
+
+LIBFT_DIR := $(MINIRT_DIR)/libft
+LIBFT_AR := $(MINIRT_DIR)/libft/libft.a
+
+TEST_SRCS := test.c \
+
+PARSER_DIR := parser
+TEST_SRCS += $(PARSER_DIR)/test_is_target_file_extension.c\
+
+TEST_OBJS_DIR := ./objs
+TEST_OBJS := $(patsubst %.c, $(TEST_OBJS_DIR)/%.o, $(TEST_SRCS))
+
+UNITY_DIR := $(MINIRT_DIR)/Unity
+UNITY_SRCS := $(UNITY_DIR)/src/unity.c
+UNITY_OBJS := $(patsubst $(UNITY_DIR)/src/%.c, $(TEST_OBJS_DIR)/%.o, $(UNITY_SRCS))
+
+all: $(TEST_NAME)
+
+$(TEST_NAME): $(TEST_OBJS) $(UNITY_OBJS) $(MINIRT_AR) $(LIBFT_AR)
+	$(CC) $(CFLAGS) $(TEST_OBJS) $(UNITY_OBJS) $(MINIRT_AR) $(LIBFT_AR) -o $(TEST_NAME)
+# ./$(TEST_NAME)
+# $(RM) -r $(TEST_OBJS_DIR) $(TEST_OBJS) $(UNITY_OBJS) $(MINIRT_AR) $(LIBFT_AR) $(TEST_NAME)
+
+$(TEST_OBJS_DIR)/%.o: %.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDES) -I$(UNITY_DIR)/src -c $< -o $@
+
+$(TEST_OBJS_DIR)/%.o: $(UNITY_DIR)/src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIBFT_AR):
+	make -C $(LIBFT_DIR)
+
+$(MINIRT_AR):
+	make $(MINIRT_AR) -C $(MINIRT_DIR)
+

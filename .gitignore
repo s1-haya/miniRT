@@ -3,3 +3,4 @@ miniRT
 a.out
 objs/*
 test_*
+test/objs/*

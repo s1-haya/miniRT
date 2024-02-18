@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/18 12:57:44 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/18 15:09:43 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := miniRT
 NAME_AR := miniRT.a
 TEST_NAME := test_miniRT
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -MMD -MP -g
+CFLAGS := -Wall -Wextra -Werror -MMD -MP
 DEBUG := -g -fsanitize=address -fno-omit-frame-pointer
 
 SRCS_DIR := srcs
@@ -51,22 +51,8 @@ SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/get_value_in_range.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c
 
-TEST_SRCS_DIR := test
-TEST_SRCS := $(TEST_SRCS_DIR)/test.c \
-			$(TEST_SRCS_DIR)/$(PARSER_DIR)/test_is_target_file_extension.c\
-
-
-OBJS_DIR := objs
+OBJS_DIR := ./objs
 OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
-
-TEST_OBJS_DIR := objs
-TEST_OBJS := $(patsubst $(TEST_SRCS_DIR)/%.c, $(TEST_OBJS_DIR)/%.o, $(TEST_SRCS))
-
-UNITY_DIR := Unity
-UNITY_SRCS := $(UNITY_DIR)/src/unity.c
-UNITY_OBJS := $(patsubst $(UNITY_DIR)/src/%c.c, $(OBJS)/%.o, $(UNITY_SRCS))
-# TEST_OBJS := $(patsubst %.c, $(TEST_OBJS_DIR)/%.o, $(notdir $(TEST_SRCS)))
-# TEST_OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(filter-out $(SRCS_DIR)/main.c, $(SRCS))) $(patsubst $(TEST_SRCS_DIR)/%.c, $(TEST_OBJS_DIR)/%.o, $(TEST_SRCS))
 
 # INCLUDES_DIR := includes
 # INCLUDES := -I$(INCLUDES_DIR)
@@ -87,6 +73,9 @@ MINILIBX_AR := ./minilibx-linux/libmlx.a
 MINILIBX_LIB_DIR := ./minilibx-linux
 MINILIBX := mlx
 MINILIBX_INC_DIR := ./minilibx-linux
+
+# test
+TEST_DIR := ./test
 
 # Get target OS name
 UNAME := $(shell uname)
@@ -137,14 +126,8 @@ debug: re
 
 re: fclean all
 
-test: $(TEST_OBJS) $(UNITY_OBJS) $(NAME_AR) $(LIBFT_AR)
-	$(CC) $(CFLAGS) $(TEST_OBJS) $(UNITY_OBJS) $(NAME_AR) $(LIBFT_AR) $(LDFLAGS) -o $(TEST_NAME)
-	./$(TEST_NAME)
-	$(RM) -r $(TEST_OBJS_DIR) $(TEST_OBJS) $(UNITY_OBJS) $(NAME_AR) $(LIBFT_AR) $(TEST_NAME)
-
-$(TEST_OBJS_DIR)/%.o: $(TEST_SRCS_DIR)/%.c
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDES) -I./Unity/src -c $< -o $@
+test: fclean $(TEST_NAME)
+	$(TEST_DIR)/$(TEST_NAME)
 
 $(OBJS_DIR)/%.o: $(UNITY_DIR)/$(SRCS_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -154,5 +137,8 @@ $(MINILIBX):
 
 $(LIBFT_AR):
 	make -C $(LIBFT_DIR)
+
+$(TEST_NAME):
+	make -C $(TEST_DIR)
 
 -include $(DEPS)
