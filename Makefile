@@ -6,11 +6,12 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/18 08:22:05 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/18 10:34:18 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
+NAME_AR = miniRT.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -MMD -MP -g
 DEBUG := -g -fsanitize=address -fno-omit-frame-pointer
@@ -27,8 +28,8 @@ SRCS += $(SRCS_DIR)/$(ERROR_DIR)/error.c\
 LIGHT_DIR = light
 SRCS += $(SRCS_DIR)/$(LIGHT_DIR)/light.c\
 
-PARSE_DIR = parser
-SRCS += $(SRCS_DIR)/$(PARSE_DIR)/parser.c\
+PARSER_DIR = parser
+SRCS += $(SRCS_DIR)/$(PARSER_DIR)/parser.c\
 
 SCENE_DIR = scene
 SRCS += $(SRCS_DIR)/$(SCENE_DIR)/scene.c\
@@ -49,13 +50,14 @@ SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c
 
 TEST_SRCS_DIR := test
-TEST_SRCS := $(TEST_SRCS_DIR)/test.c\
+TEST_SRCS := $(TEST_SRCS_DIR)/$(PARSER_DIR)/test_is_target_file_extension.c\
 
 OBJS_DIR := objs
 OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
 
 TEST_OBJS_DIR := objs
-TEST_OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(filter-out $(SRCS_DIR)/main.c, $(SRCS))) $(patsubst $(TEST_SRCS_DIR)/%.c, $(TEST_OBJS_DIR)/%.o, $(TEST_SRCS))
+TEST_OBJS := $(patsubst $(TEST_SRCS_DIR)/%.c, $(TEST_OBJS_DIR)/%.o, $(TEST_SRCS))
+# TEST_OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(filter-out $(SRCS_DIR)/main.c, $(SRCS))) $(patsubst $(TEST_SRCS_DIR)/%.c, $(TEST_OBJS_DIR)/%.o, $(TEST_SRCS))
 
 # INCLUDES_DIR := includes
 # INCLUDES := -I$(INCLUDES_DIR)
@@ -64,17 +66,17 @@ DEPS =	$(OBJS:.o=.d)
 
 ## Library settings
 # libft
-# LIBFT_DIR := ./libft
-# LIBFT := ./libft/libft.a
-# LIBFT_LIB_DIR := ./libft
-# LIBFT_LIB_NAME := ft
-# LIBFT_INC_DIR := ./libft/includes
+LIBFT_DIR := ./libft
+LIBFT_AR := ./libft/libft.a
+LIBFT_LIB_DIR := ./libft
+LIBFT_LIB_NAME := ft
+LIBFT_INC_DIR := ./libft
 
 # minilibx
 MINILIBX_DIR := ./minilibx-linux
-MINILIBX := ./minilibx-linux/libmlx.a
+MINILIBX_AR := ./minilibx-linux/libmlx.a
 MINILIBX_LIB_DIR := ./minilibx-linux
-MINILIBX_LIB_NAME := mlx
+MINILIBX := mlx
 MINILIBX_INC_DIR := ./minilibx-linux
 
 # Get target OS name
@@ -93,20 +95,23 @@ endif
 LIB_DIR := $(MINILIBX_LIB_DIR) $(X_WINDOW_LIB_DIR)
 LIB_DIR := $(addprefix -L, $(LIB_DIR))
 
-LIBS := $(MINILIBX_LIB_NAME) $(X_WINDOW_LIB_NAME)
+LIBS := $(MINILIBX) $(X_WINDOW_LIB_NAME)
 LIBS := $(addprefix -l, $(LIBS))
 
 LDFLAGS := $(LIB_DIR) $(LIBS)
 
-INC_DIR := ./includes $(MINILIBX_INC_DIR) $(X_WINDOW_INC_DIR)
+INC_DIR := ./includes $(MINILIBX_INC_DIR) $(X_WINDOW_INC_DIR) $(LIBFT_INC_DIR)
 INCLUDES := $(addprefix -I, $(INC_DIR))
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MINILIBX)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@
+$(NAME): $(OBJS) $(MINILIBX_AR) $(LIBFT_AR)
+	$(CC) $(CFLAGS) $(OBJS) $(MINILIBX_AR) $(LIBFT_AR) $(LDFLAGS) -o $@
+
+$(NAME_AR): $(OBJS)
+	$(AR) -r $(NAME_AR) $^
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -116,15 +121,15 @@ clean:
 	$(RM) -r $(OBJS_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(MINILIBX) $(LIBFT_AR)
 
 debug: CFLAGS += $(DEBUG)
 debug: re
 
 re: fclean all
 
-test: $(TEST_OBJS) $(MINILIBX)
-	@$(CC) $(CFLAGS) $(TEST_OBJS) $(LDFLAGS) -o test_miniRT
+test: $(TEST_OBJS) $(NAME_AR)
+	@$(CC) $(CFLAGS) $(TEST_OBJS) $(NAME_AR) $(LDFLAGS) -o test_miniRT
 	@./test_miniRT
 	@$(RM) -r $(TEST_OBJS_DIR) test_miniRT
 
@@ -134,5 +139,8 @@ $(TEST_OBJS_DIR)/%.o: $(TEST_SRCS_DIR)/%.c
 
 $(MINILIBX):
 	make -C $(MINILIBX_DIR)
+
+$(LIBFT_AR):
+	make -C $(LIBFT_DIR)
 
 -include $(DEPS)

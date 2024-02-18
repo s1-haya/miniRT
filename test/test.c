@@ -21,17 +21,17 @@ Vector3D convert_2D_to_3D(int x_screen, int y_screen, int screen_width, int scre
 	return result;
 }
 
-int main()
-{
-	int screen_width = 512;	 // スクリーンの幅
-	int screen_height = 512; // スクリーンの高さ
-	int x_screen = 511;		 // スクリーン X 座標
-	int y_screen = 511;		 // スクリーン Y 座標
+// int main()
+// {
+// 	int screen_width = 512;	 // スクリーンの幅
+// 	int screen_height = 512; // スクリーンの高さ
+// 	int x_screen = 511;		 // スクリーン X 座標
+// 	int y_screen = 511;		 // スクリーン Y 座標
 
-	Vector3D coordinates_3D = convert_2D_to_3D(x_screen, y_screen, screen_width - 1, screen_height - 1);
+// 	Vector3D coordinates_3D = convert_2D_to_3D(x_screen, y_screen, screen_width - 1, screen_height - 1);
 
-	printf("2D coordinates (%d, %d) converted to 3D coordinates: (%.2f, %.2f, %.2f)\n",
-		   x_screen, y_screen, coordinates_3D.x, coordinates_3D.y, coordinates_3D.z);
+// 	printf("2D coordinates (%d, %d) converted to 3D coordinates: (%.2f, %.2f, %.2f)\n",
+// 		   x_screen, y_screen, coordinates_3D.x, coordinates_3D.y, coordinates_3D.z);
 
-	return 0;
-}
+// 	return 0;
+// }

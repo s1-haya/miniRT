@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/26 08:49:01 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/18 08:56:59 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,13 @@ t_cylinder	*new_cylinder(t_vector origin, double radius, double height)
 	return (cylinder);
 }
 
-t_shape	*new_shape(void *shape, t_material *material, enum e_object object, int id)
+t_shape	*new_shape(void *shape, t_material *material, enum e_object object)
 {
 	t_shape	*new_shape;
 	
 	new_shape = (t_shape *)malloc(sizeof(t_shape));
 	if (new_shape == NULL)
 		return (NULL);
-	new_shape->id = id;
 	new_shape->object = object;
 	if (object == PLANE)
 		new_shape->plane = shape;
