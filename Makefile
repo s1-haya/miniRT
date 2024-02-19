@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/18 15:43:30 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/19 13:47:56 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,7 +135,7 @@ $(MINILIBX):
 $(LIBFT_AR):
 	make -C $(LIBFT_DIR)
 
-$(TEST_NAME):
+$(TEST_NAME): $(NAME_AR)
 	make -C $(TEST_DIR)
 
 -include $(DEPS)

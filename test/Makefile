@@ -49,7 +49,4 @@ fclean: clean
 $(LIBFT_AR):
 	make -C $(LIBFT_DIR)
 
-$(MINIRT_AR):
-	make $(MINIRT_AR) -C $(MINIRT_DIR)
-
 -include $(DEPS)

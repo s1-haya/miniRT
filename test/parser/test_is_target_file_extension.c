@@ -42,5 +42,4 @@ void test_is_target_file_extension(void)
     RUN_TEST(test_is_target_file_extension_with_incorrect_start_of_extension);
     RUN_TEST(test_is_target_file_extension_with_filename_starting_dot);
     RUN_TEST(test_is_target_file_extension_with_included_but_incorrect_extension);
-	
 }

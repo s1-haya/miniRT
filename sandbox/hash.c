@@ -53,13 +53,13 @@ void	print_hashmap(t_hashmap *hashmap)
 {
 	if (hashmap != NULL)
 	{
-		while (hashmap->next != NULL)
+		while (hashmap->key != NULL)
 		{
 			printf("key:   %s\n", hashmap->key);
 			// printf("value: %s\n", hashmap->value);
 			hashmap = hashmap->next;
 		}
-		printf("key:   %s\n", hashmap->key);
+		// printf("key:   %s\n", hashmap->key);
 	}
 }
 

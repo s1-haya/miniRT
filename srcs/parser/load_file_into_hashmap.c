@@ -1,15 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   load_file_into_hashmap.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/19 14:03:04 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/02/19 13:59:23 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/02/19 14:04:51 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+// ft ファイルを一行ずつ読み取りt_hashmapに格納する関数作成
+// 入力 ftファイル
+// 出力 t_hashmap *
 
-// void	parser(miniRTの構造体のポインタ, bool result)
+#include <parser.h>
+
+t_hashmap	load_file_into_hashmap()
+{
+	
+}
