@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:59:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/20 17:44:41 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:33:41 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,7 @@ void	add_back_minirt_list(t_minirt_list **head, t_minirt_list *new_list);
 void	delete_minirt_list(t_minirt_list *list);
 void	print_minirt_list(t_minirt_list *list);
 t_minirt_list	*init_minirt_list();
-
-t_minirt_list	*convert_one_line_to_minirt_list(char *line, bool *result)
-{
-	t_minirt_list	*list;
-
-	list = init_minirt_list();
-	if (list == NULL)
-	{
-		*result = false;
-		return (NULL);
-	}
-	list->identifier = ;
-	list->value = 
-	// list.value = ["Value", "key"];
-	return (list);
-}
+t_minirt_list	*convert_one_line_to_minirt_list(char *line, bool *result);
 
 void	load_file_into_minirt_list(t_minirt_list *head, const char *file_name, bool *result)
 {
@@ -49,7 +34,7 @@ void	load_file_into_minirt_list(t_minirt_list *head, const char *file_name, bool
 
 	// *result = is_target_file_extension(file_name, ".rt");
 	fd = open(file_name, O_RDONLY);
-	while (result)
+	while (*result)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
@@ -74,7 +59,7 @@ int main(void)
 		print_minirt_list(list);
 		delete_minirt_list(list);
 		system("leaks -q a.out");
-		return (0)
+		return (0);
 	}
 	printf("ERROR: \n");
 	return (1);

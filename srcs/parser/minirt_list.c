@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:42:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/20 17:44:46 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:09:49 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	add_back_minirt_list(t_minirt_list **head, t_minirt_list *new_list)
 	}
 }
 
+#include <stdio.h>
 void	print_minirt_list(t_minirt_list *list)
 {
 	if (list != NULL)
