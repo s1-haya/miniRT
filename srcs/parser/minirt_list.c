@@ -6,12 +6,30 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:42:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/20 19:09:49 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:55:46 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <stdlib.h>
+
+void	delete_value(char **value)
+{
+	size_t	i;
+
+	i = 0;
+	if (value != NULL)
+	{
+		while (value[i] != NULL)
+		{
+			free(value[i]);
+			value[i] = NULL;
+			i++;
+		}
+		free(value);
+		value = NULL;
+	}
+}
 
 void	delete_minirt_list(t_minirt_list *list)
 {
@@ -21,6 +39,7 @@ void	delete_minirt_list(t_minirt_list *list)
 	{
 		iterator = list;
 		list = list->next;
+		delete_value(iterator->value);
 		free(iterator->identifier);
 		iterator->identifier = NULL;
 		free(iterator);
@@ -57,6 +76,20 @@ void	add_back_minirt_list(t_minirt_list **head, t_minirt_list *new_list)
 }
 
 #include <stdio.h>
+void	print_value(char **value)
+{
+	size_t	i;
+
+	i = 0;
+	if (value != NULL)
+	{
+		while (value[i] != NULL)
+		{
+			printf("value[%zu]: %s\n", i, value[i]);
+			i++;
+		}
+	}
+}
 void	print_minirt_list(t_minirt_list *list)
 {
 	if (list != NULL)
@@ -64,7 +97,7 @@ void	print_minirt_list(t_minirt_list *list)
 		while (list != NULL)
 		{
 			printf("identifier:   %s\n", list->identifier);
-			// printf("value: %s\n", list->value);
+			print_value(list->value);
 			list = list->next;
 		}
 		// printf("identifier:   %s\n", list->identifier);

@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:59:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/20 19:33:41 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:45:17 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ int main(void)
 		return (0);
 	}
 	printf("ERROR: \n");
+	print_minirt_list(list);
+	delete_minirt_list(list);
+	system("leaks -q a.out");
 	return (1);
 }
