@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:54:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/17 12:32:31 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:26:34 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ char	*get_next_line(int fd)
 // {
 //     int        fd;
 //     char    *line;
-//     fd = open("./file", O_RDONLY);
+//     fd = open("./test.rt", O_RDONLY);
 //     while (1)
 // 	{
 //         line = get_next_line(fd);

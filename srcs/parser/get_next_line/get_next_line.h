@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:54:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2023/02/16 22:36:26 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:17:06 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *str);
 char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strchr(char *s, char c);
+size_t	get_next_line_index(char *s, char c);
 char	*ft_strndup(char *str, size_t len);
 #endif
