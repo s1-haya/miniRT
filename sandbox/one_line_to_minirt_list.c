@@ -29,14 +29,22 @@ t_minirt_list *one_line_to_minirt_list(const char *input, bool *result) {
 
     *result = true;
     new_element->identifier = strndup(input, first_space - input);
+	// printf("space %ss\n", first_space + 1);
     new_element->value = ft_split(first_space + 1, ' ');
+    if (new_element->value[0] == NULL) {
+        *result = false;
+		free(new_element->identifier);
+		free(new_element->value);
+		free(new_element);
+        return NULL;
+    }
     new_element->next = NULL;
     return new_element;
 }
 
 #include <libc.h>
 int main() {
-    const char *input = "a            fdf ae fa    .dfa";
+    const char *input = "a            ";
     bool result;
 
     t_minirt_list *parsed = one_line_to_minirt_list(input, &result);
