@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:59:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/21 11:42:08 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:40:48 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void load_file_into_minirt_list(t_minirt_list **head, const int fd, bool *result
 		line = get_next_line(fd);
 		if (line == NULL)
 			break;
-		printf("line: %s\n", line);
 		add_back_minirt_list(head, convert_one_line_to_minirt_list(line, result));
 		free(line);
 	}
