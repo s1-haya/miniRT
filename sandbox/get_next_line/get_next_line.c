@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:54:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/20 14:26:34 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:08:19 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,24 +125,27 @@ char	*get_next_line(int fd)
 // static void destructor() {
 //     system("leaks -q a.out");
 // }
-// #include <fcntl.h>
-// #include <stdio.h>
-// int main()
-// {
-//     int        fd;
-//     char    *line;
-//     fd = open("./test.rt", O_RDONLY);
-//     while (1)
-// 	{
-//         line = get_next_line(fd);
-//         if (line == NULL)
-//             break;
-//         printf("line %s", line);
-// 		free(line);
-// 	}
-// 	close (fd);
-//     return (0);
-// }
+#include <fcntl.h>
+#include <stdio.h>
+int main(int argc, char *argv[])
+{
+    int        fd;
+    char    *line;
+
+	if (argc == 1 || argc > 2)
+		return (1);
+    fd = open(argv[1], O_RDONLY);
+    while (1)
+	{
+        line = get_next_line(fd);
+        if (line == NULL)
+            break;
+        printf("line %s", line);
+		free(line);
+	}
+	close (fd);
+    return (0);
+}
 
 // // #include <fcntl.h>
 // // #include <stdio.h>

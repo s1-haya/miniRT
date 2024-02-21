@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/18 08:57:51 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:29:42 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #define SUCCESS 0
 #define FAILURE 1
 
+bool	verify_single_argument(int argc);
 t_shape		*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_distance, bool exit);
 void		cast_a_shadow(t_scene *scene, t_shape *nearest_shape, int x, int y);
 t_mlx_data	new_mlx_data();
@@ -72,7 +73,7 @@ void render_scene(t_scene *scene)
 }
 
 #include <libc.h>
-int main(void)
+int main(int argc, char *argv[])
 {
 	t_shape			**shape;
 	t_light			*light;
@@ -81,6 +82,9 @@ int main(void)
 	// 2 init(parse)
 	// 3 draw
 	// 4 hook, loop
+	(void)argv;
+	if (!verify_single_argument(argc))
+		return (FAILURE);
 	shape = (t_shape **)malloc(sizeof(t_shape *) * SIZE);
 	if (shape == NULL)
 		return (FAILURE);
@@ -104,6 +108,7 @@ int main(void)
 	light[0] = new_light(new_vector(5, 1, -5), new_color(1,1,1));
 	light[1] = new_light(new_vector(5, 0, -5), new_color(0.5,0.5,0.5));
 	light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
+	// parser(scene,  result);
 	scene = new_scene(shape, light, new_camera(VIEWPOINT, LOOKATPOINT, 70), new_mlx_data());
 	render_scene(&scene);
 	return (SUCCESS);

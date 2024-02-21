@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/21 11:16:22 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/21 18:27:51 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ UNTIL_DIR = until
 SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/ray.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/vector.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/verify_single_argument.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/get_value_in_range.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/set_error_and_return_null.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c
