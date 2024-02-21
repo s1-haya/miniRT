@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:01:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/21 09:04:03 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:27:43 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_minirt_list	*convert_one_line_to_minirt_list(char *line, bool *result)
 	list = init_minirt_list();
 	if (list == NULL)
 		return (set_error_and_return_null(result));
+	while (*line == ' ')
+		line++;
 	first_space = ft_strchr(line, ' ');
 	if (first_space == NULL)
 	{

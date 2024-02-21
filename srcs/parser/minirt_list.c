@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:42:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/20 19:55:46 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:30:43 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	print_value(char **value)
 	{
 		while (value[i] != NULL)
 		{
-			printf("value[%zu]: %s\n", i, value[i]);
+			printf("- value[%zu]:   %s\n", i, value[i]);
 			i++;
 		}
 	}
@@ -94,9 +94,10 @@ void	print_minirt_list(t_minirt_list *list)
 {
 	if (list != NULL)
 	{
+		printf("minirt_list\n");
 		while (list != NULL)
 		{
-			printf("identifier:   %s\n", list->identifier);
+			printf("- identifier: %s\n", list->identifier);
 			print_value(list->value);
 			list = list->next;
 		}

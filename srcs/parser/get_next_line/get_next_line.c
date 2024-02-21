@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 13:54:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/20 14:26:34 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:50:08 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,18 +113,6 @@ char	*get_next_line(int fd)
 	return (set_a_new_line(fd, &saved));
 }
 
-//coment is not japanese
-//改行なし　
-//1　buf_sizeがあるかどうかだな
-// ない場合　savedを出力
-//2　改行があるかどうか
-// ない場合　1に戻る。
-//3  return get_a_new__line();
-// saved 改行ありorなし確認関数
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q a.out");
-// }
 // #include <fcntl.h>
 // #include <stdio.h>
 // int main()
