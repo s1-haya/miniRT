@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/21 18:27:51 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/21 19:35:23 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,15 @@ SRCS += $(SRCS_DIR)/$(PARSER_DIR)/parser.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/minirt_list.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/read_rt_file.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/convert_one_line_to_minirt_list.c\
+
+VALIDATION_DIR = validation
+SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_ambient_lighting.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_camera.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_light.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_plane.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_sphere.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_cylinder.c\
 
 SCENE_DIR = scene
 SRCS += $(SRCS_DIR)/$(SCENE_DIR)/scene.c\
