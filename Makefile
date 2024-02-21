@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/21 09:32:12 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/21 09:52:34 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,9 +60,9 @@ SRCS += $(GNL_DIR)/get_next_line.c\
 		$(GNL_DIR)/get_next_line_until.c\
 
 OBJS_DIR := ./objs
-OBJS_DIR := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
+OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
 
-DEPS =	$(OBJS_DIR:.o=.d)
+DEPS =	$(OBJS:.o=.d)
 
 ## Library settings
 # libft
@@ -110,10 +110,10 @@ INCLUDES := $(addprefix -I, $(INC_DIR))
 
 all: $(NAME)
 
-$(NAME): $(OBJS_DIR) $(MINILIBX_AR) $(LIBFT_AR)
-	$(CC) $(CFLAGS) $(OBJS_DIR) $(MINILIBX_AR) $(LIBFT_AR) $(LDFLAGS) -o $@
+$(NAME): $(OBJS) $(MINILIBX_AR) $(LIBFT_AR)
+	$(CC) $(CFLAGS) $(OBJS) $(MINILIBX_AR) $(LIBFT_AR) $(LDFLAGS) -o $@
 
-$(NAME_AR): $(OBJS_DIR)
+$(NAME_AR): $(OBJS)
 	$(AR) -r $(NAME_AR) $^
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
