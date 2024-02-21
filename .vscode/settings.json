@@ -10,6 +10,8 @@
 		"__locale": "c",
 		"get_next_line.h": "c",
 		"parser.h": "c",
-		"__node_handle": "c"
+		"__node_handle": "c",
+		"cstring": "c",
+		"libft.h": "c"
 	}
 }

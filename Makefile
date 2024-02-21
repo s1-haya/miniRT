@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/19 13:47:56 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/21 09:32:12 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,9 @@ SRCS += $(SRCS_DIR)/$(LIGHT_DIR)/light.c\
 PARSER_DIR = parser
 SRCS += $(SRCS_DIR)/$(PARSER_DIR)/parser.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/is_target_file_extension.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/load_file_into_minirt_list.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/minirt_list.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/convert_one_line_to_minirt_list.c\
 
 SCENE_DIR = scene
 SRCS += $(SRCS_DIR)/$(SCENE_DIR)/scene.c\
@@ -49,12 +52,17 @@ SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/ray.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/vector.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/get_value_in_range.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/set_error_and_return_null.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c
 
-OBJS_DIR := ./objs
-OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
+GNL_DIR := $(SRCS_DIR)/$(PARSER_DIR)/get_next_line
+SRCS += $(GNL_DIR)/get_next_line.c\
+		$(GNL_DIR)/get_next_line_until.c\
 
-DEPS =	$(OBJS:.o=.d)
+OBJS_DIR := ./objs
+OBJS_DIR := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
+
+DEPS =	$(OBJS_DIR:.o=.d)
 
 ## Library settings
 # libft
@@ -95,17 +103,17 @@ LIBS := $(addprefix -l, $(LIBS))
 
 LDFLAGS := $(LIB_DIR) $(LIBS)
 
-INC_DIR := ./includes $(MINILIBX_INC_DIR) $(X_WINDOW_INC_DIR) $(LIBFT_INC_DIR)
+INC_DIR := ./includes $(MINILIBX_INC_DIR) $(X_WINDOW_INC_DIR) $(LIBFT_INC_DIR) $(GNL_DIR)
 INCLUDES := $(addprefix -I, $(INC_DIR))
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MINILIBX_AR) $(LIBFT_AR)
-	$(CC) $(CFLAGS) $(OBJS) $(MINILIBX_AR) $(LIBFT_AR) $(LDFLAGS) -o $@
+$(NAME): $(OBJS_DIR) $(MINILIBX_AR) $(LIBFT_AR)
+	$(CC) $(CFLAGS) $(OBJS_DIR) $(MINILIBX_AR) $(LIBFT_AR) $(LDFLAGS) -o $@
 
-$(NAME_AR): $(OBJS)
+$(NAME_AR): $(OBJS_DIR)
 	$(AR) -r $(NAME_AR) $^
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
@@ -136,6 +144,7 @@ $(LIBFT_AR):
 	make -C $(LIBFT_DIR)
 
 $(TEST_NAME): $(NAME_AR)
-	make -C $(TEST_DIR)
+	$(RM) -r $(TEST_DIR)/$(OBJS_DIR)
+	@make -C $(TEST_DIR)
 
 -include $(DEPS)

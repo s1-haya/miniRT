@@ -28,7 +28,9 @@ t_minirt_list *one_line_to_minirt_list(const char *input, bool *result) {
     }
 
     *result = true;
+	printf("first space: %s\n", first_space);
     new_element->identifier = strndup(input, first_space - input);
+	printf("identifer: %s\n", new_element->identifier);
 	// printf("space %ss\n", first_space + 1);
     new_element->value = ft_split(first_space + 1, ' ');
     if (new_element->value[0] == NULL) {
@@ -44,7 +46,7 @@ t_minirt_list *one_line_to_minirt_list(const char *input, bool *result) {
 
 #include <libc.h>
 int main() {
-    const char *input = "a            ";
+    const char *input = "a          d  ";
     bool result;
 
     t_minirt_list *parsed = one_line_to_minirt_list(input, &result);
