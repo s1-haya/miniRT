@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:59:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/21 09:21:35 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:42:08 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,23 @@ t_minirt_list *init_minirt_list();
 t_minirt_list *convert_one_line_to_minirt_list(char *line, bool *result);
 char *get_next_line(int fd);
 
-void load_file_into_minirt_list(t_minirt_list *head, const char *file_name, bool *result)
+void load_file_into_minirt_list(t_minirt_list **head, const int fd, bool *result)
 {
-	char *line;
-	int fd;
+	char	*line;
 
-	// *result = is_target_file_extension(file_name, ".rt");
-	fd = open(file_name, O_RDONLY);
 	while (*result)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break;
-		add_back_minirt_list(&head, convert_one_line_to_minirt_list(line, result));
+		printf("line: %s\n", line);
+		add_back_minirt_list(head, convert_one_line_to_minirt_list(line, result));
 		free(line);
 	}
-	close(fd);
 }
 
 // 文字列からt_minirt_listを作成する関数（空白1文字で区切る、res）
-#include <libc.h>
+// #include <libc.h>
 // int main(void)
 // {
 // 	t_minirt_list *list;

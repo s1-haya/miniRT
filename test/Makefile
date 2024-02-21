@@ -14,6 +14,7 @@ PARSER_DIR := parser
 TEST_SRCS += $(PARSER_DIR)/test_is_target_file_extension.c\
 			$(PARSER_DIR)/test_load_file_into_minirt_list.c\
 			$(PARSER_DIR)/test_convert_one_line_to_minirt_list.c\
+			$(PARSER_DIR)/test_read_rt_file.c\
 
 TEST_OBJS_DIR := ./objs
 TEST_OBJS := $(patsubst %.c, $(TEST_OBJS_DIR)/%.o, $(TEST_SRCS))
