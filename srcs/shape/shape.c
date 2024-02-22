@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/26 08:49:01 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:54:25 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ t_shape	*new_shape(void *shape, t_material *material, enum e_object object, int 
 	new_shape = (t_shape *)malloc(sizeof(t_shape));
 	if (new_shape == NULL)
 		return (NULL);
-	new_shape->id = id;
+	// new_shape->id = id;
+	(void)id; //
 	new_shape->object = object;
 	if (object == PLANE)
 		new_shape->plane = shape;

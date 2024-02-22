@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: erin <erin@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/18 08:22:05 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/20 19:04:30 by erin             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ UNTIL_DIR = until
 SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/ray.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/vector.c\
-		$(SRCS_DIR)/$(UNTIL_DIR)/get_value_in_range.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/clamp.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c
 
 TEST_SRCS_DIR := test
@@ -90,13 +90,13 @@ else
 	X_WINDOW_INC_DIR := /usr/include
 endif
 
-LIB_DIR := $(MINILIBX_LIB_DIR) $(X_WINDOW_LIB_DIR)
-LIB_DIR := $(addprefix -L, $(LIB_DIR))
+# LIB_DIR := $(MINILIBX_LIB_DIR) $(X_WINDOW_LIB_DIR)
+# LIB_DIR := $(addprefix -L, $(LIB_DIR))
 
-LIBS := $(MINILIBX_LIB_NAME) $(X_WINDOW_LIB_NAME)
-LIBS := $(addprefix -l, $(LIBS))
+# LIBS := $(MINILIBX_LIB_NAME) $(X_WINDOW_LIB_NAME)
+# LIBS := $(addprefix -l, $(LIBS))
 
-LDFLAGS := $(LIB_DIR) $(LIBS)
+# LDFLAGS := $(LIB_DIR) $(LIBS)
 
 INC_DIR := ./includes $(MINILIBX_INC_DIR) $(X_WINDOW_INC_DIR)
 INCLUDES := $(addprefix -I, $(INC_DIR))
@@ -105,8 +105,8 @@ INCLUDES := $(addprefix -I, $(INC_DIR))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MINILIBX)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $@
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)

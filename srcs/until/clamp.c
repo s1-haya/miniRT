@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_value_in_range.c                               :+:      :+:    :+:   */
+/*   clamp.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:10:49 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/01 18:15:54 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:03:59 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-double	get_value_in_range(double v, double v_min, double v_max)
+double	clamp(double v, double v_min, double v_max)
 {
 	if (v < v_min)
 		return (v_min);

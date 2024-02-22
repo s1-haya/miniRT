@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_a_shadow.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/06 12:07:05 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:01:08 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 #define C_EPSILON (1.0 / 512)
 
-double get_value_in_range(double v, double v_min, double v_max);
+double clamp(double v, double v_min, double v_max);
 void my_mlx_pixel_put(t_img *img_data, int x, int y, int color);
 t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit);
 
@@ -41,9 +41,9 @@ t_color	get_diffuse_reflection(t_color coefficient, t_color intensity_of_light_s
 {
 	t_color	diffue;
 
-	diffue.red = coefficient.red * intensity_of_light_source.red * get_value_in_range(dot_product(normal, incident), 0.0, 1.0);
-	diffue.green = coefficient.green * intensity_of_light_source.green * get_value_in_range(dot_product(normal, incident), 0.0, 1.0);
-	diffue.blue = coefficient.blue * intensity_of_light_source.blue * get_value_in_range(dot_product(normal, incident), 0.0, 1.0);
+	diffue.red = coefficient.red * intensity_of_light_source.red * clamp(dot_product(normal, incident), 0.0, 1.0);
+	diffue.green = coefficient.green * intensity_of_light_source.green * clamp(dot_product(normal, incident), 0.0, 1.0);
+	diffue.blue = coefficient.blue * intensity_of_light_source.blue * clamp(dot_product(normal, incident), 0.0, 1.0);
 	return (diffue);
 }
 
@@ -64,9 +64,9 @@ t_color get_specular_reflection(t_color coefficient, t_color intensity_of_light_
 	// normalize_vector(&a);
 	b = get_inverse_vector(viewpoint);
 	normalize_vector(&b);
-	specular.red = coefficient.red * intensity_of_light_source.red * pow(get_value_in_range(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
-	specular.green = coefficient.green * intensity_of_light_source.green * pow(get_value_in_range(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
-	specular.blue = coefficient.blue * intensity_of_light_source.blue * pow(get_value_in_range(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
+	specular.red = coefficient.red * intensity_of_light_source.red * pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
+	specular.green = coefficient.green * intensity_of_light_source.green * pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
+	specular.blue = coefficient.blue * intensity_of_light_source.blue * pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
 	return (specular);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/06 08:58:39 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:50:39 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ t_scene	new_scene(t_shape **shape,
 				t_light *light, 
 				t_camera camera,
 				t_mlx_data data);
-double get_value_in_range(double v, double v_min, double v_max);
+double clamp(double v, double v_min, double v_max);
 
-// 　スクリーン（二次元）座標から三次元座標に変換
-double convert_to_three_dimensional_coordinates(double value, double t_min, double t_max)
+double	scaling(double value, double t_min, double t_max)
 {
 	return (t_min + (t_max - t_min) * value);
 }
@@ -41,25 +40,21 @@ double convert_to_three_dimensional_coordinates(double value, double t_min, doub
 #include <stdio.h>
 void render_scene(t_scene *scene)
 {
-	int x;
-	int y;
-	double lx;
-	double ly;
-	t_ray			ray;
-	t_shape			*nearest_shape;
+	int		x;
+	int		y;
+	double	lx;
+	double	ly;
+	t_ray	ray;
+	t_shape	*nearest_shape;
 
 	x = 0;
 	while (x < WINDOW_MAX_X)
 	{
-		// 　スクリーン（二次元）座標から三次元座標に変換
-		lx = convert_to_three_dimensional_coordinates(get_value_in_range(x, WINDOW_ORIGIN_X, WINDOW_MAX_X - 1) / WINDOW_MAX_X - WINDOW_ORIGIN_X, -1.0, 1.0);
+		lx = scaling(clamp(x, WINDOW_ORIGIN_X, WINDOW_MAX_X - 1) / WINDOW_MAX_X - WINDOW_ORIGIN_X, -1.0, 1.0);
 		y = 0;
 		while (y < WINDOW_MAX_Y)
 		{
-			ly = convert_to_three_dimensional_coordinates(get_value_in_range(y, WINDOW_ORIGIN_Y, WINDOW_MAX_Y - 1) / WINDOW_MAX_Y - WINDOW_ORIGIN_Y, 1.0, -1.0);
-			// t_vector a = add_vectors(VIEWPOINT, scalar_multiply(subtract_vectors(LOOKATPOINT, VIEWPOINT), DISTANCE));
-			// t_vector b = add_vectors(VIEWPOINT, add_vectors(scalar_multiply(new_vector(1, 0, 0), lx), scalar_multiply(new_vector(0, 1, 0), ly)));
-			// t_vector z = add_vectors(a, b);
+			ly = scaling(clamp(y, WINDOW_ORIGIN_Y, WINDOW_MAX_Y - 1) / WINDOW_MAX_Y - WINDOW_ORIGIN_Y, 1.0, -1.0);
 			ray = new_ray(scene->camera.view_point, subtract_vectors(new_vector(lx, ly, 0), scene->camera.view_point));
 			nearest_shape = determine_intersection_ray_and_object(scene->shape, ray, LONG_MAX, false);
 			cast_a_shadow(scene, nearest_shape, x, y);
