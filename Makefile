@@ -6,7 +6,7 @@
 #    By: erin <erin@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/20 19:04:30 by erin             ###   ########.fr        #
+#    Updated: 2024/02/22 15:33:43 by erin             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS += $(SRCS_DIR)/$(PARSE_DIR)/parser.c\
 
 SCENE_DIR = scene
 SRCS += $(SRCS_DIR)/$(SCENE_DIR)/scene.c\
-		$(SRCS_DIR)/$(SCENE_DIR)/cast_a_shadow.c\
+		$(SRCS_DIR)/$(SCENE_DIR)/shading.c\
 
 SHAPE_DIR = shape
 SRCS += $(SRCS_DIR)/$(SHAPE_DIR)/shape.c\

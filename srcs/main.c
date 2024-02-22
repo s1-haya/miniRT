@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/22 12:50:39 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/22 18:36:19 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-t_shape		*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_distance, bool exit);
-void		cast_a_shadow(t_scene *scene, t_shape *nearest_shape, int x, int y);
+t_shape		*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_distance, bool is_exit);
+void		shading(t_scene *scene, t_shape *nearest_shape, int x, int y);
 t_mlx_data	new_mlx_data();
 t_camera	new_camera(t_vector view_point, t_vector look_at_point, size_t horizontal_value);
 t_scene	new_scene(t_shape **shape,
@@ -57,7 +57,7 @@ void render_scene(t_scene *scene)
 			ly = scaling(clamp(y, WINDOW_ORIGIN_Y, WINDOW_MAX_Y - 1) / WINDOW_MAX_Y - WINDOW_ORIGIN_Y, 1.0, -1.0);
 			ray = new_ray(scene->camera.view_point, subtract_vectors(new_vector(lx, ly, 0), scene->camera.view_point));
 			nearest_shape = determine_intersection_ray_and_object(scene->shape, ray, LONG_MAX, false);
-			cast_a_shadow(scene, nearest_shape, x, y);
+			shading(scene, nearest_shape, x, y);
 			y++;
 		}
 		x++;
@@ -97,8 +97,8 @@ int main(void)
 	// shape[1] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
 	light = (t_light *)malloc(sizeof(t_light) * LIGHT_SIZE);
 	light[0] = new_light(new_vector(5, 1, -5), new_color(1,1,1));
-	light[1] = new_light(new_vector(5, 0, -5), new_color(0.5,0.5,0.5));
-	light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
+	// light[1] = new_light(new_vector(5, 0, -5), new_color(0.5,0.5,0.5));
+	// light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
 	scene = new_scene(shape, light, new_camera(VIEWPOINT, LOOKATPOINT, 70), new_mlx_data());
 	render_scene(&scene);
 	return (SUCCESS);
