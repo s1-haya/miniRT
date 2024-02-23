@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:38:29 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 16:04:55 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:27:33 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ double convert_string_to_double_in_range(const char *string,
 										bool *result);
 t_rgb	convert_value_to_rgb(const char *value, bool *result);
 
-bool	validate_ambient_lighting(char **value, bool *result)
+void	validate_ambient_lighting(char **value, bool *result)
 {
-	(void)value;
 	if (value[2] != NULL)
 	{
 		*result = false;
-		return (false);
+		return ;
 	}
 	convert_string_to_double_in_range(value[0], MIN, MAX, result);
 	convert_value_to_rgb(value[1], result);
-	return (true);
 }
