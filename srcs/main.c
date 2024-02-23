@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/22 18:36:19 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/23 11:49:18 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ int main(void)
 	// shape[1] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
 	light = (t_light *)malloc(sizeof(t_light) * LIGHT_SIZE);
 	light[0] = new_light(new_vector(5, 1, -5), new_color(1,1,1));
-	// light[1] = new_light(new_vector(5, 0, -5), new_color(0.5,0.5,0.5));
-	// light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
+	light[1] = new_light(new_vector(5, 0, -5), new_color(0.5,0.5,0.5));
+	light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
 	scene = new_scene(shape, light, new_camera(VIEWPOINT, LOOKATPOINT, 70), new_mlx_data());
 	render_scene(&scene);
 	return (SUCCESS);
