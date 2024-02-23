@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 12:21:14 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/23 16:48:33 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,33 @@ double	scaling(double value, double t_min, double t_max)
 	return (t_min + (t_max - t_min) * value);
 }
 
+double	map(double x, double max, double assign, double sign)
+{
+	return (sign * (2 * x) / (max - 1) + assign);
+}
+
+t_ray	set_viewpoint(t_camera *camera, double lx, double ly)
+{
+	const t_vector	up = new_vector(0, 1, 0);
+	t_vector		d_lookat;
+	t_vector		d_x;
+	t_vector		d_y;
+	t_vector		pw;
+
+	d_lookat  = subtract_vectors(camera->look_at_point, camera->view_point);
+	normalize_vector(&d_lookat);
+	d_x = cross_product(up, d_lookat);
+	normalize_vector(&d_x);
+	d_y = cross_product(d_lookat, d_x);
+	normalize_vector(&d_y);
+	pw = camera->view_point;
+	pw = add_vectors(pw, scalar_multiply(camera->look_at_point, camera->distance));
+	pw = add_vectors(pw, scalar_multiply(d_x, lx));
+	pw = add_vectors(pw, scalar_multiply(d_y, ly));
+	// pw = new_vector(map)
+	return (new_ray(camera->view_point, subtract_vectors(pw, camera->view_point)));
+}
+
 #include <stdio.h>
 void render_scene(t_scene *scene)
 {
@@ -47,15 +74,18 @@ void render_scene(t_scene *scene)
 	t_ray	ray;
 	t_shape	*nearest_shape;
 
-	x = 0;
+	x = WINDOW_ORIGIN_X;
 	while (x < WINDOW_MAX_X)
 	{
-		lx = scaling(clamp(x, WINDOW_ORIGIN_X, WINDOW_MAX_X - 1) / WINDOW_MAX_X - WINDOW_ORIGIN_X, -1.0, 1.0);
-		y = 0;
+		// lx = scaling((double)x / (WINDOW_MAX_X - WINDOW_ORIGIN_X), -1.0, 1.0);
+		lx = map((double)x, WINDOW_MAX_X, -1.0, 1.0);
+		y = WINDOW_ORIGIN_Y;
 		while (y < WINDOW_MAX_Y)
 		{
-			ly = scaling(clamp(y, WINDOW_ORIGIN_Y, WINDOW_MAX_Y - 1) / WINDOW_MAX_Y - WINDOW_ORIGIN_Y, 1.0, -1.0);
-			ray = new_ray(scene->camera.view_point, subtract_vectors(new_vector(lx, ly, 0), scene->camera.view_point));
+			// ly = scaling((double)y / (WINDOW_MAX_Y - WINDOW_ORIGIN_Y), -1.0, 1.0);
+			ly = map((double)y, WINDOW_MAX_Y, 1.0, -1.0);
+			ray = set_viewpoint(&scene->camera, lx, ly);
+			// ray = new_ray(scene->camera.view_point, subtract_vectors(new_vector(lx, ly, 0), scene->camera.view_point));
 			nearest_shape = determine_intersection_ray_and_object(scene->shape, ray, LONG_MAX, false);
 			shading(scene, nearest_shape, x, y);
 			y++;
@@ -90,7 +120,7 @@ int main(void)
 	shape[1] = new_shape(new_cylinder(new_vector(2, 0, 20), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 1);
 	shape[2] = new_shape(new_cylinder(new_vector(1, 0, 15), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);
 	shape[3] = new_shape(new_cylinder(new_vector(0, 0, 10), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 3);
-	shape[4] = new_shape(new_cylinder(new_vector(-1, 0, 5), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 4);
+	shape[4] = new_shape(new_cylinder(new_vector(0, 0, 0), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 4);
 	// shape[5] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
 
 	// shape[0] = new_shape(new_cylinder(new_vector(0, 0, 5), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);
