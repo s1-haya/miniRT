@@ -136,28 +136,34 @@ double	get_intersection_ray_and_object(t_shape *shape, t_ray ray)
 static bool	cylinder_form_bottom(t_cylinder *cylinder, t_ray ray)
 {
 	t_vector	intersection_vector;
+	double		a;
+	double		b;
+	double		c;
 	double		d;
 	double		t1;
+	double		t2;
 	double		t_min_y;
+	double		t_max_y;
 
 	intersection_vector = subtract_vectors(ray.point, cylinder->origin);
-	t_min_y = min((cylinder->height / 2 - intersection_vector.y) \
-		/ ray.direction.y, (-cylinder->height / 2 - \
-				intersection_vector.y) / ray.direction.y);
-	d = discriminant(vector_length2_xz(ray.direction), \
-		2 * dot_product_xz(intersection_vector, ray.direction), \
-		vector_length2_xz(intersection_vector) - pow(cylinder->radius, 2.0));
+	a = vector_length2_xz(ray.direction);
+	b = 2 * dot_product_xz(intersection_vector, ray.direction);
+	c = vector_length2_xz(intersection_vector) - pow(cylinder->radius, 2.0);
+	t_min_y = min((cylinder->height / 2 - intersection_vector.y) / ray.direction.y, (-cylinder->height / 2 - intersection_vector.y) / ray.direction.y);
+	t_max_y = max((cylinder->height / 2 - intersection_vector.y) / ray.direction.y, (-cylinder->height / 2 - intersection_vector.y) / ray.direction.y);
+	d = discriminant(a, b, c);
 	if (d < 0)
 		return (false);
-	t1 = (-2 * dot_product_xz(intersection_vector, ray.direction) + sqrt(d)) \
-						/ (2 * vector_length2_xz(ray.direction));
-	return (t_min_y >= t1);
+	t1 = (-b - sqrt(d)) / (2 * a);
+	t2 = (-b + sqrt(d)) / (2 * a);
+	return (t_max_y <= t2);
 }
 
 t_intersection	*intersection_normal_vec(t_shape *shape, t_ray ray)
 {
 	t_intersection	*res;
 	double			t;
+	static double	distance = 0;
 
 	t = get_intersection_ray_and_object(shape, ray);
 	res = new_intersection(ray, t);
@@ -169,8 +175,9 @@ t_intersection	*intersection_normal_vec(t_shape *shape, t_ray ray)
 		res->normal = subtract_vectors(res->point, shape->sphere->origin);
 	else if (shape->object == CYLINDER && cylinder_form_bottom(shape->cylinder, ray))
 		res->normal = new_vector(0, 1, 0);
-	else if (shape->object == CYLINDER && !cylinder_form_bottom(shape->cylinder, ray))
+	if ((shape->object == CYLINDER && !cylinder_form_bottom(shape->cylinder, ray)) || distance < res->distance)
 		res->normal = subtract_vectors(res->point, shape->cylinder->origin);
+	distance = res->distance;
 	return (res);
 }
 
