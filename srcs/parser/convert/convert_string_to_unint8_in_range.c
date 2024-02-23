@@ -6,16 +6,19 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:16:54 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 17:17:55 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:52:34 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 #define ERROR (0xFF)
 #define ERROR_NOT_IN_RANGE "Error: The value is not within the allowed range.\n"
 #define ERROR_NULL_STRING "Error: The string is NULL.\n"
+
+double	ft_strtod(const char *str, char **endptr);
 
 uint8_t	convert_string_to_unint8_in_range(const char *value,
 												uint8_t min,

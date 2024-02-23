@@ -6,21 +6,23 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 17:26:36 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:54:14 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include <stdbool.h>
 
+#define DELMITER_CHAR ','
+
 char	**ft_split(char const *str, char c);
 void	delete_value(char **value);
-double	convert_string_to_double_in_range(const char *string,
+double convert_string_to_double_in_range(const char *string,
 										 double min,
 										 double max,
 										 bool *result);
 
-t_vecotr	convert_value_to_vector_in_range(const char **value,
+t_vector	convert_value_to_vector_in_range(const char *value,
 												double min,
 												double max,
 												bool *result)

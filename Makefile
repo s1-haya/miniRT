@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/23 17:14:51 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/23 17:46:22 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,26 +20,26 @@ DEBUG := -g -fsanitize=address -fno-omit-frame-pointer
 SRCS_DIR := srcs
 SRCS := $(SRCS_DIR)/main.c\
 
-CAMERA_DIR = camera
+CAMERA_DIR := camera
 SRCS += $(SRCS_DIR)/$(CAMERA_DIR)/camera.c\
 
 ERROR_DIR = error
 SRCS += $(SRCS_DIR)/$(ERROR_DIR)/error.c\
 
-LIGHT_DIR = light
+LIGHT_DIR := light
 SRCS += $(SRCS_DIR)/$(LIGHT_DIR)/light.c\
 
-PARSER_DIR = parser
+PARSER_DIR := parser
 SRCS += $(SRCS_DIR)/$(PARSER_DIR)/parser.c\
-		$(SRCS_DIR)/$(PARSER_DIR)/is_target_file_extension.c\
-		$(SRCS_DIR)/$(PARSER_DIR)/load_file_into_minirt_list.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/minirt_list.c\
-		$(SRCS_DIR)/$(PARSER_DIR)/read_rt_file.c\
-		$(SRCS_DIR)/$(PARSER_DIR)/convert_string_to_double_in_range.c\
-		$(SRCS_DIR)/$(PARSER_DIR)/convert_value_to_rgb.c\
-		$(SRCS_DIR)/$(PARSER_DIR)/convert_one_line_to_minirt_list.c\
 
-VALIDATION_DIR = validation
+READ_RTFILE_DIR := read_rtfile
+SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(READ_RTFILE_DIR)/is_target_file_extension.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(READ_RTFILE_DIR)/load_file_into_minirt_list.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(READ_RTFILE_DIR)/read_rt_file.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(READ_RTFILE_DIR)/convert_one_line_to_minirt_list.c\
+
+VALIDATION_DIR := validation
 SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_ambient_lighting.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_camera.c\
@@ -47,6 +47,13 @@ SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_plane.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_sphere.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_cylinder.c\
+
+CONVERT_DIR := convert
+SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_string_to_double_in_range.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_string_to_unint8_in_range.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_value_to_vector_in_range.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_value_to_rgb.c\
+
 
 SCENE_DIR = scene
 SRCS += $(SRCS_DIR)/$(SCENE_DIR)/scene.c\
