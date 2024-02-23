@@ -15,6 +15,7 @@ int main(void) {
     test_read_rt_file();
     test_validate();
     test_convert_string_to_double_in_range();
+    test_convert_value_to_rgb();
     // test_load_file_into_minirt_list();
     system("leaks -q test_miniRT");
     return UNITY_END();

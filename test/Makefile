@@ -15,6 +15,7 @@ TEST_SRCS += $(PARSER_DIR)/test_is_target_file_extension.c\
 			$(PARSER_DIR)/test_load_file_into_minirt_list.c\
 			$(PARSER_DIR)/test_convert_one_line_to_minirt_list.c\
 			$(PARSER_DIR)/test_convert_string_to_double_in_range.c\
+			$(PARSER_DIR)/test_convert_value_to_rgb.c\
 			$(PARSER_DIR)/test_read_rt_file.c\
 			$(PARSER_DIR)/test_validate.c\
 

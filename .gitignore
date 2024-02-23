@@ -6,4 +6,4 @@ objs/*
 test/objs/*
 *.rt
 *.txt
-*.a
+miniRT.a
