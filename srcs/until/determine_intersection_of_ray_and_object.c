@@ -173,10 +173,10 @@ t_intersection	*intersection_normal_vec(t_shape *shape, t_ray ray)
 		res->normal = shape->plane->normal;
 	else if (shape->object == SPHERE)
 		res->normal = subtract_vectors(res->point, shape->sphere->origin);
-	else if (shape->object == CYLINDER && cylinder_form_bottom(shape->cylinder, ray))
-		res->normal = new_vector(0, 1, 0);
-	if ((shape->object == CYLINDER && !cylinder_form_bottom(shape->cylinder, ray)) || distance < res->distance)
+	else if (shape->object == CYLINDER)
 		res->normal = subtract_vectors(res->point, shape->cylinder->origin);
+	if (shape->object == CYLINDER && cylinder_form_bottom(shape->cylinder, ray) && distance > res->distance)
+		res->normal = new_vector(0, 1, 0);
 	distance = res->distance;
 	return (res);
 }
