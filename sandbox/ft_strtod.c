@@ -65,7 +65,7 @@ double	ft_strtod(const char *str, char **endptr)
 	exponent = processExponentPart(&str, &expSign);
 
 	if (endptr != NULL) *endptr = (char *)str;
-	return result * sign * pow(10.0, exponent * expSign);
+	return (result * sign * pow(10.0, exponent * expSign));
 }
 
 int main() {

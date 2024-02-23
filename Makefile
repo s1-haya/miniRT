@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/22 19:23:23 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/23 16:01:34 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS += $(SRCS_DIR)/$(PARSER_DIR)/parser.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/minirt_list.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/read_rt_file.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/convert_string_to_double_in_range.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/convert_value_to_rgb.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/convert_one_line_to_minirt_list.c\
 
 VALIDATION_DIR = validation

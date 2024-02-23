@@ -6,14 +6,14 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:42:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/21 17:48:16 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:57:49 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <stdlib.h>
 
-static void	delete_value(char **value)
+void	delete_value(char **value)
 {
 	size_t	i;
 

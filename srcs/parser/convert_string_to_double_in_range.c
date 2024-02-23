@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:01:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/22 23:09:36 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:04:30 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 
 #define ERROR (0.0)
 #define ERROR_NOT_IN_RANGE "Error: The value is not within the allowed range.\n"
+#define ERROR_NULL_STRING "Error: The string is NULL.\n"
 
 double	ft_strtod(const char *str, char **endptr);
 
-double convert_string_to_double_in_range(char *string,
+double convert_string_to_double_in_range(const char *string,
 										 double min,
 										 double max,
 										 bool *result)
@@ -30,6 +31,12 @@ double convert_string_to_double_in_range(char *string,
 	double value;
 	char *endptr;
 
+	if (string == NULL)
+	{
+		write(STDERR_FILENO, ERROR_NULL_STRING, sizeof(ERROR_NULL_STRING) - 1);
+		*result = false;
+		return (ERROR);
+	}
 	value = ft_strtod(string, &endptr);
 	if (value == HUGE_VAL || value == -HUGE_VAL)
 	{
@@ -37,7 +44,7 @@ double convert_string_to_double_in_range(char *string,
 		*result = false;
 		return (ERROR);
 	}
-	if (value < min || max < value)
+	if (*endptr != '\0' || value < min || max < value)
 	{
 		write(STDERR_FILENO, ERROR_NOT_IN_RANGE, sizeof(ERROR_NOT_IN_RANGE) - 1);
 		*result = false;
