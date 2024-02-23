@@ -13,6 +13,7 @@
 		"__node_handle": "c",
 		"cstring": "c",
 		"libft.h": "c",
-		"stdbool.h": "c"
+		"stdbool.h": "c",
+		"color.h": "c"
 	}
 }
