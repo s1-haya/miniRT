@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 13:11:52 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/24 13:48:30 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	shading(t_scene *scene, t_shape *nearest_shape, int x, int y)
 	t_color		color;
 	t_color		ambient_right;
 	size_t		i;
-	// t_ray		shade_ray;
+	t_ray		shadow_ray;
 
 	color = new_color(0, 0, 0);
 	i = 0;
@@ -95,12 +95,12 @@ void	shading(t_scene *scene, t_shape *nearest_shape, int x, int y)
 			incident_vector = subtract_vectors(scene->light[i].light_ray.point, nearest_shape->intersection->point);
 			scene->light[i].distance = vector_length(incident_vector);
 			normalize_vector(&incident_vector);
-			// shade_ray = new_ray(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), incident_vector);
-			// if (determine_intersection_ray_and_object(scene->shape, shade_ray, scene->light[i].distance - C_EPSILON, true) != NULL)
-			// {
-			// 	i++;
-			// 	continue;
-			// }
+			shadow_ray = new_ray(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), incident_vector);
+			if (determine_intersection_ray_and_object(scene->shape, shadow_ray, scene->light[i].distance - C_EPSILON, true) != NULL)
+			{
+				i++;
+				continue;
+			}
 			// get_radiance(shape *shape, t_intesection *intesection, t_light *light)
 			normal_vector = nearest_shape->intersection->normal;
 			ambient_right = get_ambient_right(nearest_shape->material->ambient, AMBIENT_LIGHT_INTENSITY);

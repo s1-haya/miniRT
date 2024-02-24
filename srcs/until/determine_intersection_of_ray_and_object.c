@@ -186,26 +186,25 @@ t_intersection	*intersection_normal_vec(t_shape *shape, t_ray ray)
 t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool is_exit)
 {
 	size_t			z;
-	// double			t;
+	double			t = 100000;
 	t_shape			*nearest_shape;
-	t_intersection	*tmp;
+	t_intersection	*intersection;
 
 	z = 0;
 	nearest_shape = NULL;
 	while (z < SIZE)
 	{
-		// t = get_intersection_ray_and_object(shape[z], ray);
-		// tmp = new_intersection(ray, t);
-		tmp = intersection_normal_vec(shape[z], ray);
-		if (tmp != NULL && light_source_distance > tmp->distance)
+		intersection = intersection_normal_vec(shape[z], ray);
+		if (intersection != NULL && light_source_distance > intersection->distance)
 		{
-			if (nearest_shape == NULL || nearest_shape->intersection->distance > tmp->distance)
+			if (nearest_shape == NULL || vector_length(subtract_vectors(intersection->point, ray.point)) < t)
 			{
-				shape[z]->intersection = tmp;
+				shape[z]->intersection = intersection;
 				nearest_shape = shape[z];
 				if (is_exit)
 					return (nearest_shape);
 			}
+			t = vector_length(subtract_vectors(intersection->point, ray.point));
 		}
 		z++;
 	}
