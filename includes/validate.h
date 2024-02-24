@@ -6,16 +6,21 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:36:35 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 17:53:28 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:14:02 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONVERT_H
 # define CONVERT_H
+
 #include "color.h"
 #include "vector.h"
 #include <stdbool.h>
 #include <stdlib.h>
+#include <limits.h>
+
+#define MIN_DIRECTION (-1.0)
+#define MAX_DIRECTION (1.0)
 
 double		convert_string_to_double_in_range(const char *string,
 										 double min,

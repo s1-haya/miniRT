@@ -15,6 +15,7 @@
 		"libft.h": "c",
 		"stdbool.h": "c",
 		"color.h": "c",
-		"convert.h": "c"
+		"convert.h": "c",
+		"validate.h": "c"
 	}
 }

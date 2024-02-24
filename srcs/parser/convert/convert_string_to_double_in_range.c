@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:01:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 18:01:27 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:45:42 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ double convert_string_to_double_in_range(const char *string,
 	}
 	if ((*endptr != '\0' && *endptr != '\n') || value < min || max < value)
 	{
-		printf("*endptr %s\n", endptr);
+		// printf("*endptr %s value: %f\n", endptr, value);
 		write(STDERR_FILENO, ERROR_NOT_IN_RANGE, sizeof(ERROR_NOT_IN_RANGE) - 1);
 		*result = false;
 		return (ERROR);
