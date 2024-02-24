@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 17:50:02 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/24 18:15:09 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_cylinder	*new_cylinder(t_vector origin, double radius, double height)
 	cylinder->origin = origin;
 	cylinder->radius = radius;
 	cylinder->height = height;
-	cylinder->from_bottom = false;
 	return (cylinder);
 }
 
