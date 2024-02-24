@@ -33,7 +33,8 @@ double	max(double n1, double n2)
 
 double	determine_intersection_ray_and_plane(t_plane *plane, t_ray ray)
 {
-	return (-dot_product(ray.point, plane->normal) + dot_product(plane->point, plane->normal) / dot_product(ray.direction, plane->normal));
+	// return (-dot_product(ray.point, plane->normal) + dot_product(plane->point, plane->normal) / dot_product(ray.direction, plane->normal));
+	return (-dot_product(ray.point, plane->normal) / dot_product(ray.direction, plane->normal));
 }
 
 static double	discriminant(double a, double b, double c)
@@ -156,6 +157,7 @@ static bool	cylinder_form_bottom(t_cylinder *cylinder, t_ray ray)
 		return (false);
 	t1 = (-b - sqrt(d)) / (2 * a);
 	t2 = (-b + sqrt(d)) / (2 * a);
+	// return (t_min_y >= t1);
 	return (t_max_y <= t2);
 }
 
