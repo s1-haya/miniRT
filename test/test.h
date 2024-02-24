@@ -10,4 +10,5 @@ void	test_convert_string_to_double_in_range(void);
 void	test_convert_value_to_rgb(void);
 void	test_read_rt_file(void);
 void	test_validate(void);
+void	test_parser(void);
 #endif

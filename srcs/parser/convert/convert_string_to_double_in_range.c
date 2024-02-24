@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:01:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 10:45:42 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:37:11 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ double convert_string_to_double_in_range(const char *string,
 	double value;
 	char *endptr;
 
+	if (result == false)
+		return (ERROR);
 	if (string == NULL)
 	{
 		write(STDERR_FILENO, ERROR_NULL_STRING, sizeof(ERROR_NULL_STRING) - 1);

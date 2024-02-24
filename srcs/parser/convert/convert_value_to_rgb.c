@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:27:15 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 17:29:25 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:43:14 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_rgb	convert_value_to_rgb(const char *value, bool *result)
 	{
 		*result = false;
 		rgb.red = 0;
+		delete_value(value_rgb);
 		return (rgb);
 	}
 	rgb.red = convert_string_to_unint8_in_range(value_rgb[0], MIN, MAX, result);

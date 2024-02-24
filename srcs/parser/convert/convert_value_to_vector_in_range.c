@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 17:54:14 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:43:06 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_vector	convert_value_to_vector_in_range(const char *value,
 	{
 		*result = false;
 		vector.x = 0;
+		delete_value(value_vector);
 		return (vector);
 	}
 	vector.x = convert_string_to_double_in_range(value_vector[0], min, max, result);

@@ -18,6 +18,7 @@ TEST_SRCS += $(PARSER_DIR)/test_is_target_file_extension.c\
 			$(PARSER_DIR)/test_convert_value_to_rgb.c\
 			$(PARSER_DIR)/test_read_rt_file.c\
 			$(PARSER_DIR)/test_validate.c\
+			$(PARSER_DIR)/test_parser.c\
 
 TEST_OBJS_DIR := ./objs
 TEST_OBJS := $(patsubst %.c, $(TEST_OBJS_DIR)/%.o, $(TEST_SRCS))

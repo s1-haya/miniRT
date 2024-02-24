@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:16:54 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 17:52:34 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:36:21 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ uint8_t	convert_string_to_unint8_in_range(const char *value,
 	double	value_double;
 	char	*end;
 
+	if (result == false)
+		return (ERROR);
 	if (value == NULL)
 	{
 		write(STDERR_FILENO, ERROR_NULL_STRING, sizeof(ERROR_NULL_STRING) - 1);
