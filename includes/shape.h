@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/22 17:00:28 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/24 17:49:55 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,14 @@ typedef struct s_sphere
 	double		radius;
 }	t_sphere;
 
+#include <stdbool.h>
+
 typedef struct s_cylinder
 {
 	t_vector	origin;
 	double		radius;
 	double		height;
+	bool		from_bottom;
 }	t_cylinder;
 
 typedef struct s_shape
