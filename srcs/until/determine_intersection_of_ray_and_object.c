@@ -86,28 +86,46 @@ t_intersection	*determine_intersection_ray_and_sphere(t_sphere *sphere, t_ray ra
 	return (intersection);
 }
 
-double vector_length2_xz(t_vector v)
-{
-	double	length;
-
-	length = v.x * v.x + v.z * v.z;
-	return (length);
-}
-
-double dot_product_xz(t_vector v1, t_vector v2)
-{
-	return (v1.x * v2.x + v1.z * v2.z);
-}
-
 static bool	cylinder_form_bottom(t_cylinder *cylinder, t_ray ray, double t)
 {
 	double	temp;
-	const t_vector	n = new_vector(0, 1, 0);
 	t_vector	intersection_point;
 
 	intersection_point = add_vectors(ray.point, scalar_multiply(ray.direction, t));
-	temp = dot_product(subtract_vectors(intersection_point, cylinder->origin), n);
+	temp = dot_product(subtract_vectors(intersection_point, cylinder->origin), CYLINDER_AXIS);
 	return (0 <= temp && temp <= cylinder->height);
+}
+
+t_vector	normal_util(t_intersection *intersection, t_cylinder *cylinder)
+{
+	t_vector	normal;
+
+	normal = subtract_vectors(subtract_vectors(\
+		intersection->point, cylinder->origin), scalar_multiply(CYLINDER_AXIS, \
+	dot_product(subtract_vectors(intersection->point, cylinder->origin), CYLINDER_AXIS)));
+	normalize_vector(&normal);
+	return (normal);
+}
+
+t_intersection *get_intersection_ray_and_cylinder(t_cylinder *cylinder, t_ray ray, double t1, double t2)
+{
+	t_intersection	*intersection;
+
+	intersection = NULL;
+	if (cylinder_form_bottom(cylinder, ray, t1))
+	{
+		intersection = new_intersection(ray, t1);
+		if (intersection)
+			intersection->normal = normal_util(intersection, cylinder);
+	}
+	else if (cylinder_form_bottom(cylinder, ray, t2))
+	{
+		intersection = new_intersection(ray, t2);
+		if (intersection)
+			intersection->normal = \
+				get_inverse_vector(normal_util(intersection, cylinder));
+	}
+	return (intersection);
 }
 
 t_intersection *determine_intersection_ray_and_cylinder(t_cylinder *cylinder, t_ray ray)
@@ -115,38 +133,20 @@ t_intersection *determine_intersection_ray_and_cylinder(t_cylinder *cylinder, t_
 	double		a;
 	double		b;
 	double		c;
-	const t_vector	n = new_vector(0, 1, 0);
-	t_intersection	*intersection = NULL;
+	double		d;
 
-	a = pow(vector_length(cross_product(ray.direction, n)), 2.0);
-	b = 2 * dot_product(cross_product(ray.direction, n), cross_product(subtract_vectors(ray.point, cylinder->origin), n));
-	c = pow(vector_length(cross_product(subtract_vectors(ray.point, cylinder->origin), n)), 2.0) - pow(cylinder->radius, 2.0);
+	a = pow(vector_length(cross_product(ray.direction, CYLINDER_AXIS)), 2.0);
+	b = 2 * dot_product(cross_product(ray.direction, CYLINDER_AXIS), \
+		cross_product(subtract_vectors(ray.point, cylinder->origin), CYLINDER_AXIS));
+	c = pow(vector_length(cross_product(subtract_vectors(ray.point, \
+		cylinder->origin), CYLINDER_AXIS)), 2.0) - pow(cylinder->radius, 2.0);
 	if (a == 0)
 		return (NULL);
-	double d = discriminant(a, b, c);
+	d = discriminant(a, b, c);
 	if (d < 0)
 		return (NULL);
-	double t1 = (-b - sqrt(d)) / (2 * a);
-	double t2 = (-b + sqrt(d)) / (2 * a);
-	if (cylinder_form_bottom(cylinder, ray, t1))
-	{
-		intersection = new_intersection(ray, t1);
-		if (intersection)
-		{
-			intersection->normal = subtract_vectors(subtract_vectors(intersection->point, cylinder->origin), scalar_multiply(n, dot_product(subtract_vectors(intersection->point, cylinder->origin), n)));
-			normalize_vector(&intersection->normal);
-		}
-	}
-	else if (cylinder_form_bottom(cylinder, ray, t2))
-	{
-		intersection = new_intersection(ray, t2);
-		if (intersection)
-		{
-			intersection->normal = subtract_vectors(scalar_multiply(n, dot_product(subtract_vectors(intersection->point, cylinder->origin), n)), subtract_vectors(intersection->point, cylinder->origin));
-			normalize_vector(&intersection->normal);
-		}
-	}
-	return (intersection);
+	return (get_intersection_ray_and_cylinder(cylinder, ray, \
+			(-b - sqrt(d)) / (2 * a), (-b + sqrt(d)) / (2 * a)));
 }
 
 t_intersection	*get_intersection_ray_and_object(t_shape *shape, t_ray ray)
@@ -164,48 +164,6 @@ t_intersection	*get_intersection_ray_and_object(t_shape *shape, t_ray ray)
 	return (intersection);
 }
 
-// static bool	cylinder_form_bottom(t_cylinder *cylinder, t_ray ray)
-// {
-// 	t_vector	intersection_vector;
-// 	double		a;
-// 	double		b;
-// 	double		c;
-// 	double		d;
-// 	double		t1;
-// 	double		t2;
-// 	double		t_min_y;
-// 	double		t_max_y;
-
-// 	intersection_vector = subtract_vectors(ray.point, cylinder->origin);
-// 	a = vector_length2_xz(ray.direction);
-// 	b = 2 * dot_product_xz(intersection_vector, ray.direction);
-// 	c = vector_length2_xz(intersection_vector) - pow(cylinder->radius, 2.0);
-// 	t_min_y = min((cylinder->height / 2 - intersection_vector.y) / ray.direction.y, (-cylinder->height / 2 - intersection_vector.y) / ray.direction.y);
-// 	t_max_y = max((cylinder->height / 2 - intersection_vector.y) / ray.direction.y, (-cylinder->height / 2 - intersection_vector.y) / ray.direction.y);
-// 	d = discriminant(a, b, c);
-// 	if (d < 0)
-// 		return (false);
-// 	t1 = (-b - sqrt(d)) / (2 * a);
-// 	t2 = (-b + sqrt(d)) / (2 * a);
-// 	return (t_min_y >= t1);
-// 	// return (t_max_y <= t2);
-// }
-
-t_intersection	*intersection_normal_vec(t_shape *shape, t_ray ray)
-{
-	t_intersection	*res;
-	// double			t;
-	// static double	distance = 0;
-	// const t_vector	n = new_vector(0, 1, 0);
-
-	// res = new_intersection(ray, t);
-	res = get_intersection_ray_and_object(shape, ray);
-	// if (!res)
-		// return (NULL);
-	// distance = res->distance;
-	return (res);
-}
-
 t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool is_exit)
 {
 	size_t			z;
@@ -217,7 +175,7 @@ t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, doubl
 	nearest_shape = NULL;
 	while (z < SIZE)
 	{
-		intersection = intersection_normal_vec(shape[z], ray);
+		intersection = get_intersection_ray_and_object(shape[z], ray);
 		if (intersection != NULL && light_source_distance > intersection->distance)
 		{
 			if (nearest_shape == NULL || vector_length(subtract_vectors(intersection->point, ray.point)) < t)
@@ -226,7 +184,6 @@ t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, doubl
 				nearest_shape = shape[z];
 				if (is_exit)
 					return (nearest_shape);
-				// printf("%d\n", nearest_shape->object);
 			}
 			t = vector_length(subtract_vectors(intersection->point, ray.point));
 		}

@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 19:13:07 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/24 19:44:09 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@
 #define WINDOW_ORIGIN_Y 0
 #define WINDOW_MAX_X 512
 #define WINDOW_MAX_Y 512
-#define VIEWPOINT new_vector(0, 5, -5)
-#define LOOKATPOINT new_vector(0, -1, 1)
+#define VIEWPOINT new_vector(0, 7, -3)
+#define LOOKATPOINT new_vector(0, -2, 1)
 // #define LOOKATPOINT new_vector(5, 0, -25)
 #define DISTANCE 1.3
 #define SIZE 5
 #define LIGHT_SIZE 3
 #define SCREEN_DISTANCE 3
+
+#define CYLINDER_AXIS new_vector(0, 1, 0) //fileから読み込む
 
 // 環境光反射係数
 #define AMBIENT_LIGNT_REFLECTION_COEFFICIENT new_color(0.01,0.01,0.01)
