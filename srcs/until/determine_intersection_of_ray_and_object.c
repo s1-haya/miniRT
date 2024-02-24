@@ -92,7 +92,7 @@ static bool	cylinder_form_bottom(t_cylinder *cylinder, t_ray ray, double t)
 	t_vector	intersection_point;
 
 	intersection_point = add_vectors(ray.point, scalar_multiply(ray.direction, t));
-	temp = dot_product(subtract_vectors(intersection_point, cylinder->origin), CYLINDER_AXIS);
+	temp = dot_product(subtract_vectors(intersection_point, cylinder->origin), cylinder->axis);
 	return (0 <= temp && temp <= cylinder->height);
 }
 
@@ -101,8 +101,8 @@ t_vector	normal_util(t_intersection *intersection, t_cylinder *cylinder)
 	t_vector	normal;
 
 	normal = subtract_vectors(subtract_vectors(\
-		intersection->point, cylinder->origin), scalar_multiply(CYLINDER_AXIS, \
-	dot_product(subtract_vectors(intersection->point, cylinder->origin), CYLINDER_AXIS)));
+		intersection->point, cylinder->origin), scalar_multiply(cylinder->axis, \
+	dot_product(subtract_vectors(intersection->point, cylinder->origin), cylinder->axis)));
 	normalize_vector(&normal);
 	return (normal);
 }
@@ -135,11 +135,11 @@ t_intersection *determine_intersection_ray_and_cylinder(t_cylinder *cylinder, t_
 	double		c;
 	double		d;
 
-	a = pow(vector_length(cross_product(ray.direction, CYLINDER_AXIS)), 2.0);
-	b = 2 * dot_product(cross_product(ray.direction, CYLINDER_AXIS), \
-		cross_product(subtract_vectors(ray.point, cylinder->origin), CYLINDER_AXIS));
+	a = pow(vector_length(cross_product(ray.direction, cylinder->axis)), 2.0);
+	b = 2 * dot_product(cross_product(ray.direction, cylinder->axis), \
+		cross_product(subtract_vectors(ray.point, cylinder->origin), cylinder->axis));
 	c = pow(vector_length(cross_product(subtract_vectors(ray.point, \
-		cylinder->origin), CYLINDER_AXIS)), 2.0) - pow(cylinder->radius, 2.0);
+		cylinder->origin), cylinder->axis)), 2.0) - pow(cylinder->radius, 2.0);
 	if (a == 0)
 		return (NULL);
 	d = discriminant(a, b, c);
