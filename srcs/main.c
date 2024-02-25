@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/25 13:15:33 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/25 13:38:36 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,29 @@ t_ray	set_viewpoint(t_camera *camera, double lx, double ly)
 	return (new_ray(camera->view_point, subtract_vectors(pw, camera->view_point)));
 }
 
+
+/////////////////////////////////////////////////////////////////////////// keyconf
+int	esc_key(int keycode, t_mlx_data *mlx) // sceneにしてこの中でfree
+{
+	if (keycode == 53)
+	{
+		mlx_destroy_window(mlx->data, mlx->window);
+		// ft_free_exit(data->map, EXIT_SUCCESS, -1);
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
+}
+
+int	close_window(t_mlx_data *mlx) // sceneにしてこの中でfree
+{
+	mlx_destroy_window(mlx->data, mlx->window);
+	// ft_free_exit(data->map, EXIT_SUCCESS, -1);
+	exit(EXIT_SUCCESS);
+	return (0);
+}
+
+///////////////////////////////////////////////////////////////////////////
+
 #include <stdio.h>
 void render_scene(t_scene *scene)
 {
@@ -86,6 +109,8 @@ void render_scene(t_scene *scene)
 		x++;
 	}
 	mlx_put_image_to_window(scene->mlx.data, scene->mlx.window, scene->mlx.img.data, WINDOW_ORIGIN_X, WINDOW_ORIGIN_Y);
+	mlx_hook(scene->mlx.window, 2, 1L << 0, esc_key, &scene->mlx);
+	mlx_hook(scene->mlx.window, 17, 1L << 17, close_window, &scene->mlx);
 	mlx_loop(scene->mlx.data);
 }
 
@@ -108,7 +133,7 @@ int main(void)
 	// shape[3] = new_shape(new_sphere(new_vector(0, 0, 10), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 3);
 	// shape[4] = new_shape(new_sphere(new_vector(0, 1, 0), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 4);
 	// shape[5] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
-	
+
 	shape[0] = new_shape(new_cylinder(new_vector(3, 0, 25), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 0);
 	shape[1] = new_shape(new_cylinder(new_vector(2, 0, 20), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 1);
 	shape[2] = new_shape(new_cylinder(new_vector(0, 2, 2), 1, 5, new_vector(1, 0, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);

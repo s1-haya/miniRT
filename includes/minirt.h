@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/25 13:14:22 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/25 13:34:18 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 #define DISTANCE 1.3
 #define SIZE 5
 #define LIGHT_SIZE 3
-#define SCREEN_DISTANCE 3
 
 // #define CYLINDER_AXIS new_vector(0, 1, 0) //fileから読み込む
 
@@ -77,6 +76,7 @@ typedef struct s_mlx_data
 {
 	void			*data;
 	void			*window;
+	void			*mlx;
 	t_img			img;
 } t_mlx_data;
 
