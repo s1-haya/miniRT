@@ -96,7 +96,7 @@ static bool	cylinder_form_bottom(t_cylinder *cylinder, t_ray ray, double t)
 	return (0 <= temp && temp <= cylinder->height);
 }
 
-t_vector	normal_util(t_intersection *intersection, t_cylinder *cylinder)
+t_vector	cylinder_normal(t_intersection *intersection, t_cylinder *cylinder)
 {
 	t_vector	normal;
 
@@ -116,14 +116,14 @@ t_intersection *get_intersection_ray_and_cylinder(t_cylinder *cylinder, t_ray ra
 	{
 		intersection = new_intersection(ray, t1);
 		if (intersection)
-			intersection->normal = normal_util(intersection, cylinder);
+			intersection->normal = cylinder_normal(intersection, cylinder);
 	}
 	else if (cylinder_form_bottom(cylinder, ray, t2))
 	{
 		intersection = new_intersection(ray, t2);
 		if (intersection)
 			intersection->normal = \
-				get_inverse_vector(normal_util(intersection, cylinder));
+				get_inverse_vector(cylinder_normal(intersection, cylinder));
 	}
 	return (intersection);
 }
@@ -164,10 +164,9 @@ t_intersection	*get_intersection_ray_and_object(t_shape *shape, t_ray ray)
 	return (intersection);
 }
 
-t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool is_exit)
+t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance)
 {
 	size_t			z;
-	double			t = 100000;
 	t_shape			*nearest_shape;
 	t_intersection	*intersection;
 
@@ -176,16 +175,11 @@ t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, doubl
 	while (z < SIZE)
 	{
 		intersection = get_intersection_ray_and_object(shape[z], ray);
-		if (intersection != NULL && light_source_distance > intersection->distance)
+		if (intersection != NULL && light_source_distance > vector_length(subtract_vectors(intersection->point, ray.point)))
 		{
-			if (nearest_shape == NULL || vector_length(subtract_vectors(intersection->point, ray.point)) < t)
-			{
-				shape[z]->intersection = intersection;
-				nearest_shape = shape[z];
-				if (is_exit)
-					return (nearest_shape);
-			}
-			t = vector_length(subtract_vectors(intersection->point, ray.point));
+			shape[z]->intersection = intersection;
+			nearest_shape = shape[z];
+			light_source_distance = vector_length(subtract_vectors(intersection->point, ray.point));
 		}
 		z++;
 	}

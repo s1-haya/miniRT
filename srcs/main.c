@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 20:03:12 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/25 13:15:33 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-t_shape		*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_distance, bool is_exit);
+t_shape		*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_distance);
 void		shading(t_scene *scene, t_shape *nearest_shape, int x, int y);
 t_mlx_data	new_mlx_data();
 t_camera	new_camera(t_vector view_point, t_vector look_at_point, double horizontal_value);
@@ -57,7 +57,6 @@ t_ray	set_viewpoint(t_camera *camera, double lx, double ly)
 	pw = add_vectors(pw, scalar_multiply(camera->look_at_point, camera->distance));
 	pw = add_vectors(pw, scalar_multiply(d_x, lx));
 	pw = add_vectors(pw, scalar_multiply(d_y, ly));
-	// pw = new_vector(map)
 	return (new_ray(camera->view_point, subtract_vectors(pw, camera->view_point)));
 }
 
@@ -80,7 +79,7 @@ void render_scene(t_scene *scene)
 		{
 			ly = map((double)y, WINDOW_MAX_Y, 1.0, -1.0);
 			ray = set_viewpoint(&scene->camera, lx, ly);
-			nearest_shape = determine_intersection_ray_and_object(scene->shape, ray, LONG_MAX, false);
+			nearest_shape = determine_intersection_ray_and_object(scene->shape, ray, LONG_MAX);
 			shading(scene, nearest_shape, x, y);
 			y++;
 		}
@@ -113,15 +112,15 @@ int main(void)
 	shape[0] = new_shape(new_cylinder(new_vector(3, 0, 25), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 0);
 	shape[1] = new_shape(new_cylinder(new_vector(2, 0, 20), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 1);
 	shape[2] = new_shape(new_cylinder(new_vector(0, 2, 2), 1, 5, new_vector(1, 0, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);
-	shape[3] = new_shape(new_cylinder(new_vector(0, 0, 3), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 3);
-	shape[4] = new_shape(new_cylinder(new_vector(0, 1, 0), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 4);
+	shape[3] = new_shape(new_cylinder(new_vector(0, 0, 2), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 3);
+	shape[4] = new_shape(new_cylinder(new_vector(0, 0, 0), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 4);
 	shape[3] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, 0, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
 
 	// shape[0] = new_shape(new_cylinder(new_vector(0, 0, 5), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);
 	// shape[1] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
 	light = (t_light *)malloc(sizeof(t_light) * LIGHT_SIZE);
 	light[0] = new_light(new_vector(2, 2, 0), new_color(1,1,1));
-	light[1] = new_light(new_vector(0, 3, 0), new_color(0.5,0.5,0.5));
+	light[1] = new_light(new_vector(0, 5, 0), new_color(0.5,0.5,0.5));
 	// light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
 	scene = new_scene(shape, light, new_camera(VIEWPOINT, LOOKATPOINT, 80.0), new_mlx_data());
 	render_scene(&scene);

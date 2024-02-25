@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 20:02:53 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/25 13:14:22 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define WINDOW_ORIGIN_Y 0
 #define WINDOW_MAX_X 512
 #define WINDOW_MAX_Y 512
-#define VIEWPOINT new_vector(0, 7, -5)
+#define VIEWPOINT new_vector(0, 7, -6)
 #define LOOKATPOINT new_vector(0, -1, 1)
 // #define LOOKATPOINT new_vector(5, 0, -25)
 #define DISTANCE 1.3
