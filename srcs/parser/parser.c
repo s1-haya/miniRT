@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 16:38:44 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:42:30 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	parser(t_scene *scene, const char *file_name, bool *result)
 		*result = false;
 		return ;
 	}
-	print_minirt_list(free_list);
 	count_parameter = init_parameter_count();
 	while (list != NULL)
 	{

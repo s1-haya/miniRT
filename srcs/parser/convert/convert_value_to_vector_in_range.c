@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 12:08:27 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:45:29 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	**ft_split(char const *str, char c);
 void	delete_value(char **value);
 double	convert_string_to_double_in_range(const char *string,
 			double min, double max, bool *result);
+size_t	get_string_array_size(char **array);
 
 t_vector	convert_value_to_vector_in_range(const char *value,
 			double min, double max, bool *result)
@@ -30,7 +31,8 @@ t_vector	convert_value_to_vector_in_range(const char *value,
 	t_vector	vector;
 
 	value_vector = ft_split(value, DELMITER_CHAR);
-	if (*result == false || value_vector == NULL)
+	if (*result == false || value_vector == NULL 
+		|| get_string_array_size(value_vector) != 3)
 	{
 		if (value_vector == NULL)
 			write(STDERR_FILENO, ERROR_NOT_MEMORY_ALLOCATED,

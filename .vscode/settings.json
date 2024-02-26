@@ -16,6 +16,7 @@
 		"stdbool.h": "c",
 		"color.h": "c",
 		"convert.h": "c",
-		"validate.h": "c"
+		"validate.h": "c",
+		"locale": "c"
 	}
 }

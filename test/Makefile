@@ -1,6 +1,6 @@
 TEST_NAME := test_miniRT
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -MMD -MP -DUNITY_INCLUDE_DOUBLE
+CFLAGS := -Wall -Wextra -Werror -MMD -MP -DUNITY_INCLUDE_DOUBLE -g -fsanitize=address -fno-omit-frame-pointer
 
 MINIRT_DIR := ..
 MINIRT_AR := $(MINIRT_DIR)/miniRT.a
