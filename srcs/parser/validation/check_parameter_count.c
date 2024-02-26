@@ -6,12 +6,13 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:39:37 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 13:27:07 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:37:29 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <unistd.h>
+#include <stdio.h>
 
 #define MAX_PRAMTER_COUNT (1)
 #define ERROR_EXCEEDS_MAX_LIMIT "Error: \
@@ -40,6 +41,12 @@ t_param_count	init_parameter_count()
 // 	}
 // 	return (false);
 // }
+void	printf_param_count(t_param_count parameter_count)
+{
+	printf("ambient: %zu, ", parameter_count.ambient);
+	printf("camera:  %zu, ", parameter_count.camera);
+	printf("light:   %zu\n", parameter_count.light);
+}
 
 bool	check_parameter_count(t_param_count parameter_count)
 {
