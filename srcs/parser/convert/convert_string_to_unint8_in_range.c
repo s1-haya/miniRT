@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:16:54 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 11:36:21 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:06:00 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 #include <stdbool.h>
 
 #define ERROR (0xFF)
-#define ERROR_NOT_IN_RANGE "Error: The value is not within the allowed range.\n"
+#define ERROR_VALUE_RANGE "Error: The value is not within the allowed range.\n"
 #define ERROR_NULL_STRING "Error: The string is NULL.\n"
 
 double	ft_strtod(const char *str, char **endptr);
 
 uint8_t	convert_string_to_unint8_in_range(const char *value,
-												uint8_t min,
-												uint8_t max,
-												bool *result)
+						uint8_t min, uint8_t max, bool *result)
 {
 	double	value_double;
 	char	*end;
@@ -39,9 +37,9 @@ uint8_t	convert_string_to_unint8_in_range(const char *value,
 	value_double = ft_strtod(value, &end);
 	if (*end != '\0' || value_double < min || max < value_double)
 	{
-		write(STDERR_FILENO, ERROR_NOT_IN_RANGE, sizeof(ERROR_NOT_IN_RANGE) - 1);
+		write(STDERR_FILENO, ERROR_VALUE_RANGE, sizeof(ERROR_VALUE_RANGE) - 1);
 		*result = false;
 		return (ERROR);
 	}
-	return ((uint8_t)value_double);	
+	return ((uint8_t)value_double);
 }

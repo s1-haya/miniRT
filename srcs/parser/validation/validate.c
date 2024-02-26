@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:33:48 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 16:30:10 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:40:53 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,17 @@ void	validate_cylinder(char **value, bool *result);
 
 void	validate(t_minirt_list *list, bool *result)
 {
-	if (!ft_strncmp(AMBIENT_LIGHTING, list->identifier, 
-			ft_strlen(AMBIENT_LIGHTING)))
+	if (!ft_strcmp(AMBIENT_LIGHTING, list->identifier))
 		validate_ambient_lighting(list->value, result);
-	else if (!ft_strncmp(CAMERA, list->identifier, 
-			ft_strlen(CAMERA)))
+	else if (!ft_strcmp(CAMERA, list->identifier))
 		validate_camera(list->value, result);
-	else if (!ft_strncmp(LIGHT, list->identifier, 
-			ft_strlen(LIGHT)))
+	else if (!ft_strcmp(LIGHT, list->identifier))
 		validate_light(list->value, result);
-	else if (!ft_strncmp(PLANE, list->identifier, 
-			ft_strlen(PLANE)))
+	else if (!ft_strcmp(PLANE, list->identifier))
 		validate_plane(list->value, result);
-	else if (!ft_strncmp(SPHERE, list->identifier, 
-			ft_strlen(SPHERE)))
+	else if (!ft_strcmp(SPHERE, list->identifier))
 		validate_sphere(list->value, result);
-	else if (!ft_strncmp(CYLINDER, list->identifier, 
-			ft_strlen(CYLINDER)))
+	else if (!ft_strcmp(CYLINDER, list->identifier))
 		validate_cylinder(list->value, result);
 	else
 		*result = false;

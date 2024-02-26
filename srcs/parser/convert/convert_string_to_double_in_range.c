@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:01:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 11:37:11 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:05:06 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,18 @@
 #include <stdbool.h>
 
 #define ERROR (0.0)
-#define ERROR_NOT_IN_RANGE "Error: The value is not within the allowed range.\n"
+#define ERROR_NOT_RANGE "Error: The value is not within the allowed range.\n"
 #define ERROR_NULL_STRING "Error: The string is NULL.\n"
 
 double	ft_strtod(const char *str, char **endptr);
 
-double convert_string_to_double_in_range(const char *string,
-										 double min,
-										 double max,
-										 bool *result)
+double	convert_string_to_double_in_range(const char *string,
+							double min, double max, bool *result)
 {
-	double value;
-	char *endptr;
+	double	value;
+	char	*endptr;
 
-	if (result == false)
+	if (*result == false)
 		return (ERROR);
 	if (string == NULL)
 	{
@@ -47,8 +45,7 @@ double convert_string_to_double_in_range(const char *string,
 	}
 	if ((*endptr != '\0' && *endptr != '\n') || value < min || max < value)
 	{
-		// printf("*endptr %s value: %f\n", endptr, value);
-		write(STDERR_FILENO, ERROR_NOT_IN_RANGE, sizeof(ERROR_NOT_IN_RANGE) - 1);
+		write(STDERR_FILENO, ERROR_NOT_RANGE, sizeof(ERROR_NOT_RANGE) - 1);
 		*result = false;
 		return (ERROR);
 	}
