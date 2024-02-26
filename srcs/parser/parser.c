@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 11:25:09 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:23:51 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 #include "parser.h"
 
 t_minirt_list	*read_rt_file(const char *file_name, bool *result);
-bool			validate(t_minirt_list *list, bool *result);
+bool			validate(t_minirt_list *list,
+					t_param_count *count, bool *result);
+t_param_count	init_parameter_count();
+bool			check_parameter_count(t_param_count parameter_count);
 void			delete_minirt_list(t_minirt_list *list);
 void			print_minirt_list(t_minirt_list *list);
 
@@ -58,6 +61,7 @@ void	check_input_scene(t_scene *scene)
 void	parser(t_scene *scene, const char *file_name, bool *result)
 {
 	t_minirt_list	*list;
+	t_param_count	count_parameter;
 	t_minirt_list	*free_list;
 
 	// check_input_scene(scene);
@@ -66,21 +70,22 @@ void	parser(t_scene *scene, const char *file_name, bool *result)
 	free_list = list;
 	if (result == false)
 	{
-		//error_fail_to_read
 		*result = false;
 		return ;
 	}
+	count_parameter = init_parameter_count();
 	print_minirt_list(free_list);
 	while (list != NULL)
 	{
-		validate(list, result);
-		if (*result == false)
+		validate(list, &count_parameter, result);
+		if (check_parameter_count(count_parameter)
+			|| *result == false)
 		{
-			//error_fail_to_validate
 			delete_minirt_list(list);
 			return ;
 		}
 		list = list->next;
 	}
+	check_parameter_count(count_parameter);
 	delete_minirt_list(free_list);
 }

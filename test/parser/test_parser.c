@@ -79,6 +79,45 @@ void	test_last_char_with_false()
 	TEST_ASSERT_FALSE(result);
 }
 
+void	test_multi_ambient_identifier_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/multi_ambient_identifier.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
+void	test_multi_camera_identifier_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/multi_camera_identifier.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
+void	test_multi_light_identifier_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/multi_light_identifier.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
 void	test_only_space_with_false()
 {
 	t_scene scene;
@@ -91,6 +130,7 @@ void	test_only_space_with_false()
 	parser(&scene, "./ft_file/error/only_space.rt", &result);
 	TEST_ASSERT_FALSE(result);
 }
+
 void	test_only_tab_with_false()
 {
 	t_scene scene;
@@ -154,4 +194,7 @@ void	test_parser(void)
 	RUN_TEST(test_not_file_with_false);
 	RUN_TEST(test_not_identifier_with_false);
 	RUN_TEST(test_not_value_with_false);
+	RUN_TEST(test_multi_ambient_identifier_with_false);
+	RUN_TEST(test_multi_camera_identifier_with_false);
+	RUN_TEST(test_multi_light_identifier_with_false);
 }

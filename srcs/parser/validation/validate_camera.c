@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:02 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 11:14:22 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:16:21 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #define MIN_HORIZONTAL_ANGLE (0)
 #define MAX_HORIZONTAL_ANGLE (180)
 
-void	validate_camera(char **value, bool *result)
+void	validate_camera(char **value,
+				t_param_count *count, bool *result)
 {
 	size_t	size;
 
@@ -25,6 +26,7 @@ void	validate_camera(char **value, bool *result)
 		*result = false;
 		return ;
 	}
+	count->camera ++;
 	convert_value_to_vector_in_range(value[0], INT_MIN,
 										INT_MAX, result);
 	convert_value_to_vector_in_range(value[1], MIN_DIRECTION,

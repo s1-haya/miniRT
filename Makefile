@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/23 17:46:22 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/26 13:10:25 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,13 +47,13 @@ SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_plane.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_sphere.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_cylinder.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/check_parameter_count.c\
 
 CONVERT_DIR := convert
 SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_string_to_double_in_range.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_string_to_unint8_in_range.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_value_to_vector_in_range.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_value_to_rgb.c\
-
 
 SCENE_DIR = scene
 SRCS += $(SRCS_DIR)/$(SCENE_DIR)/scene.c\
