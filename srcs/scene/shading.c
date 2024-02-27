@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_a_shadow.c                                    :+:      :+:    :+:   */
+/*   shading.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/06 12:07:05 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:48:30 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,16 @@
 
 #define C_EPSILON (1.0 / 512)
 
-double get_value_in_range(double v, double v_min, double v_max);
+double clamp(double v, double v_min, double v_max);
 void my_mlx_pixel_put(t_img *img_data, int x, int y, int color);
 t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance, bool exit);
 
-void print_vector(t_vector vector, char *name);
+void print_vector(t_vector vector)
+{
+	printf("x: %lf\n", vector.x);
+	printf("y: %lf\n", vector.y);
+	printf("z: %lf\n", vector.z);
+}
 
 t_color	get_ambient_right(t_color ambient, double intensity)
 {
@@ -41,9 +46,9 @@ t_color	get_diffuse_reflection(t_color coefficient, t_color intensity_of_light_s
 {
 	t_color	diffue;
 
-	diffue.red = coefficient.red * intensity_of_light_source.red * get_value_in_range(dot_product(normal, incident), 0.0, 1.0);
-	diffue.green = coefficient.green * intensity_of_light_source.green * get_value_in_range(dot_product(normal, incident), 0.0, 1.0);
-	diffue.blue = coefficient.blue * intensity_of_light_source.blue * get_value_in_range(dot_product(normal, incident), 0.0, 1.0);
+	diffue.red = coefficient.red * intensity_of_light_source.red * clamp(dot_product(normal, incident), 0.0, 1.0);
+	diffue.green = coefficient.green * intensity_of_light_source.green * clamp(dot_product(normal, incident), 0.0, 1.0);
+	diffue.blue = coefficient.blue * intensity_of_light_source.blue * clamp(dot_product(normal, incident), 0.0, 1.0);
 	return (diffue);
 }
 
@@ -64,68 +69,42 @@ t_color get_specular_reflection(t_color coefficient, t_color intensity_of_light_
 	// normalize_vector(&a);
 	b = get_inverse_vector(viewpoint);
 	normalize_vector(&b);
-	specular.red = coefficient.red * intensity_of_light_source.red * pow(get_value_in_range(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
-	specular.green = coefficient.green * intensity_of_light_source.green * pow(get_value_in_range(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
-	specular.blue = coefficient.blue * intensity_of_light_source.blue * pow(get_value_in_range(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
+	specular.red = coefficient.red * intensity_of_light_source.red * pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
+	specular.green = coefficient.green * intensity_of_light_source.green * pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
+	specular.blue = coefficient.blue * intensity_of_light_source.blue * pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
 	return (specular);
 }
 
-void cast_a_shadow(t_scene *scene, t_shape *nearest_shape, int x, int y)
+void	shading(t_scene *scene, t_shape *nearest_shape, int x, int y)
 {
-	// 入射ベクトル
 	t_vector	incident_vector;
-	// 法線ベクトル
 	t_vector	normal_vector;
-	// 入射ベクトルと法線ベクトルの内積（0, 1制限）
 	t_color		diffuse_reflection;
 	t_color		specular_reflection;
 	t_color		color;
 	t_color		ambient_right;
 	size_t		i;
-	t_ray		shade_ray;
+	t_ray		shadow_ray;
 
 	color = new_color(0, 0, 0);
 	i = 0;
 	if (nearest_shape != NULL)
 	{
-		// printf("shepe[%d]\n", nearest_shape->id);
-		// print_vector(LIGHT_SOURCE, "light");
 		while (i  < LIGHT_SIZE)
 		{
-			// print_vector(nearest_shape->intersection->point, "intersection");
-			// print_vector(incident_vector, "incident");
-			// print_vector(scalar_multiply(incident_vector, C_EPSILON), "start point");
-			// print_vector(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), "C_EP");
-			// shade_ray.direction = incident_vector;
 			incident_vector = subtract_vectors(scene->light[i].light_ray.point, nearest_shape->intersection->point);
 			scene->light[i].distance = vector_length(incident_vector);
 			normalize_vector(&incident_vector);
-			shade_ray = new_ray(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), incident_vector);
-			// shade_ray.direction = incident_vector;
-			if (determine_intersection_ray_and_object(scene->shape, shade_ray, scene->light[i].distance - C_EPSILON, true) != NULL)
+			shadow_ray = new_ray(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), incident_vector);
+			if (determine_intersection_ray_and_object(scene->shape, shadow_ray, scene->light[i].distance - C_EPSILON, true) != NULL)
 			{
 				i++;
 				continue;
 			}
 			// get_radiance(shape *shape, t_intesection *intesection, t_light *light)
-			if (nearest_shape->object == PLANE)
-				normal_vector = nearest_shape->plane->normal;
-			else if (nearest_shape->object == SPHERE)
-				normal_vector = subtract_vectors(nearest_shape->intersection->point, nearest_shape->sphere->origin);
-			else
-			{
-				//double dot_product(t_vector v1, t_vector v2)
-				normal_vector = subtract_vectors(nearest_shape->intersection->point, nearest_shape->cylinder->origin);
-				// normal_vector.y = 0;
-				if (dot_product(nearest_shape->intersection->point, normal_vector) == 0)
-					normal_vector.y = 0; 
-				// normal_vector = subtract_vectors(nearest_shape->intersection->point, nearest_shape->cylinder->origin);
-			}
-			normalize_vector(&normal_vector);
+			normal_vector = nearest_shape->intersection->normal;
 			ambient_right = get_ambient_right(nearest_shape->material->ambient, AMBIENT_LIGHT_INTENSITY);
 			add_color(&color, ambient_right);
-			// print_vector(normal_vector, "normal_vector");
-			// print_vector(normal_vector, "normal_vector");
 			diffuse_reflection = get_diffuse_reflection(nearest_shape->material->diffuse, scene->light[i].intensity, new_vector(2 * ((normal_vector.x + 1) / 2) - 1, 2 * ((normal_vector.y + 1) / 2) - 1, 2 * ((normal_vector.z + 1) / 2) - 1), incident_vector);
 			add_color(&color, diffuse_reflection);
 			specular_reflection = get_specular_reflection(nearest_shape->material->specular, scene->light[i].intensity, normal_vector, incident_vector, scene->camera.view_point);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:14:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/20 01:47:28 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:58:07 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_intersection	*new_intersection(t_ray ray, double t)
 			return (NULL);
 		intersection->point = add_vectors(ray.point, scalar_multiply(ray.direction, t));
 		intersection->distance = vector_length(intersection->point);
-		intersection->normal = add_vectors(ray.point, scalar_multiply(ray.direction, t));
+		intersection->normal = new_vector(0, 0, 0);
 		normalize_vector(&(intersection->normal));
 		return (intersection);
 	}

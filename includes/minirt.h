@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/01 20:38:20 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:06:34 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@
 #define WINDOW_ORIGIN_Y 0
 #define WINDOW_MAX_X 512
 #define WINDOW_MAX_Y 512
-#define VIEWPOINT new_vector(5, 10, -30)
-#define LOOKATPOINT new_vector(0, 0, 2)
+#define VIEWPOINT new_vector(0, 5, -5)
+#define LOOKATPOINT new_vector(0, -1, 1)
+// #define LOOKATPOINT new_vector(5, 0, -25)
 #define DISTANCE 1.3
 #define SIZE 5
 #define LIGHT_SIZE 3
+#define SCREEN_DISTANCE 3
 
 // 環境光反射係数
 #define AMBIENT_LIGNT_REFLECTION_COEFFICIENT new_color(0.01,0.01,0.01)
@@ -53,7 +55,6 @@ typedef struct s_range
 	int	max;
 }	t_range;
 
-
 typedef struct s_three_d_map
 {
 	t_range	x;
@@ -68,7 +69,6 @@ typedef	struct s_img
 	int			bits_per_pixel;
 	int 		size_line;
 	int			endian;
-	
 }	t_img;
 
 typedef struct s_mlx_data

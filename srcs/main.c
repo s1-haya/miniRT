@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/06 08:58:39 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:50:13 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,47 +22,66 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-t_shape		*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_distance, bool exit);
-void		cast_a_shadow(t_scene *scene, t_shape *nearest_shape, int x, int y);
+t_shape		*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_distance, bool is_exit);
+void		shading(t_scene *scene, t_shape *nearest_shape, int x, int y);
 t_mlx_data	new_mlx_data();
-t_camera	new_camera(t_vector view_point, t_vector look_at_point, size_t horizontal_value);
+t_camera	new_camera(t_vector view_point, t_vector look_at_point, double horizontal_value);
 t_scene	new_scene(t_shape **shape,
 				t_light *light, 
 				t_camera camera,
 				t_mlx_data data);
-double get_value_in_range(double v, double v_min, double v_max);
+double clamp(double v, double v_min, double v_max);
 
-// 　スクリーン（二次元）座標から三次元座標に変換
-double convert_to_three_dimensional_coordinates(double value, double t_min, double t_max)
+double	scaling(double value, double t_min, double t_max)
 {
 	return (t_min + (t_max - t_min) * value);
+}
+
+double	map(double x, double max, double assign, double sign)
+{
+	return (sign * (2 * x) / (max - 1) + assign);
+}
+
+t_ray	set_viewpoint(t_camera *camera, double lx, double ly)
+{
+	const t_vector	up = new_vector(0, 1, 0);
+	t_vector		d_x;
+	t_vector		d_y;
+	t_vector		pw;
+
+	d_x = cross_product(up, camera->look_at_point);
+	normalize_vector(&d_x);
+	d_y = cross_product(camera->look_at_point, d_x);
+	normalize_vector(&d_y);
+	pw = camera->view_point;
+	pw = add_vectors(pw, scalar_multiply(camera->look_at_point, camera->distance));
+	pw = add_vectors(pw, scalar_multiply(d_x, lx));
+	pw = add_vectors(pw, scalar_multiply(d_y, ly));
+	// pw = new_vector(map)
+	return (new_ray(camera->view_point, subtract_vectors(pw, camera->view_point)));
 }
 
 #include <stdio.h>
 void render_scene(t_scene *scene)
 {
-	int x;
-	int y;
-	double lx;
-	double ly;
-	t_ray			ray;
-	t_shape			*nearest_shape;
+	int		x;
+	int		y;
+	double	lx;
+	double	ly;
+	t_ray	ray;
+	t_shape	*nearest_shape;
 
-	x = 0;
+	x = WINDOW_ORIGIN_X;
 	while (x < WINDOW_MAX_X)
 	{
-		// 　スクリーン（二次元）座標から三次元座標に変換
-		lx = convert_to_three_dimensional_coordinates(get_value_in_range(x, WINDOW_ORIGIN_X, WINDOW_MAX_X - 1) / WINDOW_MAX_X - WINDOW_ORIGIN_X, -1.0, 1.0);
-		y = 0;
+		lx = map((double)x, WINDOW_MAX_X, -1.0, 1.0);
+		y = WINDOW_ORIGIN_Y;
 		while (y < WINDOW_MAX_Y)
 		{
-			ly = convert_to_three_dimensional_coordinates(get_value_in_range(y, WINDOW_ORIGIN_Y, WINDOW_MAX_Y - 1) / WINDOW_MAX_Y - WINDOW_ORIGIN_Y, 1.0, -1.0);
-			// t_vector a = add_vectors(VIEWPOINT, scalar_multiply(subtract_vectors(LOOKATPOINT, VIEWPOINT), DISTANCE));
-			// t_vector b = add_vectors(VIEWPOINT, add_vectors(scalar_multiply(new_vector(1, 0, 0), lx), scalar_multiply(new_vector(0, 1, 0), ly)));
-			// t_vector z = add_vectors(a, b);
-			ray = new_ray(scene->camera.view_point, subtract_vectors(new_vector(lx, ly, 0), scene->camera.view_point));
+			ly = map((double)y, WINDOW_MAX_Y, 1.0, -1.0);
+			ray = set_viewpoint(&scene->camera, lx, ly);
 			nearest_shape = determine_intersection_ray_and_object(scene->shape, ray, LONG_MAX, false);
-			cast_a_shadow(scene, nearest_shape, x, y);
+			shading(scene, nearest_shape, x, y);
 			y++;
 		}
 		x++;
@@ -84,27 +103,27 @@ int main(void)
 	shape = (t_shape **)malloc(sizeof(t_shape *) * SIZE);
 	if (shape == NULL)
 		return (FAILURE);
-	// shape[0] = new_shape(new_sphere(new_vector(3, 0, 25), 3), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 0);
-	// shape[1] = new_shape(new_sphere(new_vector(2, 0, 20), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 1);
-	// shape[2] = new_shape(new_sphere(new_vector(1, 0, 15), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 2);
-	// shape[3] = new_shape(new_sphere(new_vector(0, 0, 10), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 3);
-	// shape[4] = new_shape(new_sphere(new_vector(-1, 0, 5), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 4);
+	shape[0] = new_shape(new_sphere(new_vector(3, 0, 25), 3), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 0);
+	shape[1] = new_shape(new_sphere(new_vector(2, 0, 20), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 1);
+	shape[2] = new_shape(new_sphere(new_vector(1, 0, 15), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 2);
+	shape[3] = new_shape(new_sphere(new_vector(0, 0, 10), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 3);
+	shape[4] = new_shape(new_sphere(new_vector(0, 1, 0), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 4);
 	// shape[5] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
 	
-	shape[0] = new_shape(new_cylinder(new_vector(3, 0, 25), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 0);
-	shape[1] = new_shape(new_cylinder(new_vector(2, 0, 20), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 1);
-	shape[2] = new_shape(new_cylinder(new_vector(1, 0, 15), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);
-	shape[3] = new_shape(new_cylinder(new_vector(0, 0, 10), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 3);
-	shape[4] = new_shape(new_cylinder(new_vector(-1, 0, 5), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 4);
-	// shape[5] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
+	// shape[0] = new_shape(new_cylinder(new_vector(3, 0, 25), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 0);
+	// shape[1] = new_shape(new_cylinder(new_vector(2, 0, 20), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 1);
+	// shape[2] = new_shape(new_cylinder(new_vector(1, 0, 15), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);
+	// shape[3] = new_shape(new_cylinder(new_vector(0, 0, 3), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 3);
+	// shape[4] = new_shape(new_cylinder(new_vector(0, 1, 0), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 4);
+	shape[3] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, 0, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
 
 	// shape[0] = new_shape(new_cylinder(new_vector(0, 0, 5), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);
 	// shape[1] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
 	light = (t_light *)malloc(sizeof(t_light) * LIGHT_SIZE);
-	light[0] = new_light(new_vector(5, 1, -5), new_color(1,1,1));
-	light[1] = new_light(new_vector(5, 0, -5), new_color(0.5,0.5,0.5));
-	light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
-	scene = new_scene(shape, light, new_camera(VIEWPOINT, LOOKATPOINT, 70), new_mlx_data());
+	light[0] = new_light(new_vector(2, 2, 0), new_color(1,1,1));
+	light[1] = new_light(new_vector(0, 3, 0), new_color(0.5,0.5,0.5));
+	// light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
+	scene = new_scene(shape, light, new_camera(VIEWPOINT, LOOKATPOINT, 80.0), new_mlx_data());
 	render_scene(&scene);
 	return (SUCCESS);
 }
