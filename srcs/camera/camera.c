@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 07:58:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 12:35:33 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/25 13:33:53 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_camera	new_camera(t_vector view_point, t_vector look_at_point, double horizont
 	camera.view_point = view_point;
 	camera.look_at_point = look_at_point;
 	normalize_vector(&camera.look_at_point); //引数の段階でチェックする
-	// camera.distance = 2;
 	horizontal_value *= M_PI / 180.0;
 	camera.distance = (3.5 / 2) / tan(horizontal_value / 2.0); // 3.5はスクリーンの幅(defineする)
 	camera.horizontal_viewing_angle = horizontal_value;

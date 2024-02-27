@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/22 17:00:28 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/24 19:54:50 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,14 @@ typedef struct s_sphere
 	double		radius;
 }	t_sphere;
 
+#include <stdbool.h>
+
 typedef struct s_cylinder
 {
 	t_vector	origin;
 	double		radius;
 	double		height;
+	t_vector	axis;
 }	t_cylinder;
 
 typedef struct s_shape
@@ -59,7 +62,7 @@ typedef struct s_shape
 // t_plane		*new_plane();
 t_shape	*new_shape(void *shape, t_material *material, enum e_object object, int id);
 t_sphere	*new_sphere(t_vector origin, double radius);
-t_cylinder	*new_cylinder(t_vector origin, double radius, double height);
+t_cylinder	*new_cylinder(t_vector origin, double radius, double height, t_vector axis);
 t_plane	*new_plane(t_vector normal, t_vector point);
 t_ray	new_ray(t_vector point, t_vector direction);
 t_intersection	*new_intersection(t_ray ray, double t);
