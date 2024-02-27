@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 17:45:29 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:47:19 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #define DELMITER_CHAR ','
 #define ERROR_NOT_MEMORY_ALLOCATED "Error: Memory allocation failed.\
-						Please close other applications and try again.\n"
+Please close other applications and try again.\n"
 
 char	**ft_split(char const *str, char c);
 void	delete_value(char **value);
@@ -31,7 +31,7 @@ t_vector	convert_value_to_vector_in_range(const char *value,
 	t_vector	vector;
 
 	value_vector = ft_split(value, DELMITER_CHAR);
-	if (*result == false || value_vector == NULL 
+	if (*result == false || value_vector == NULL
 		|| get_string_array_size(value_vector) != 3)
 	{
 		if (value_vector == NULL)

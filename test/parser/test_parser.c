@@ -23,6 +23,19 @@ void	test_parser_multi_line_with_true()
 	TEST_ASSERT_TRUE(result);
 }
 
+void	test_parser_basic_with_true()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/success/basic.rt", &result);
+	TEST_ASSERT_TRUE(result);
+}
+
 void	test_parser_one_line_with_false()
 {
 	t_scene scene;
@@ -209,6 +222,58 @@ void	test_multi_identifier_and_acl_with_false()
 	TEST_ASSERT_FALSE(result);
 }
 
+void	test_rgb_in_out_of_range_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/rgb_in_out_of_range.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
+void	test_not_unint8_fov_value_in_camera_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/not_unint8_fov_value_in_camera.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
+void	test_before_comma_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/before_comma.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
+void	test_more_int_max_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/more_int_max.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
 void	test_more_param_size_in_light_with_false()
 {
 	t_scene scene;
@@ -287,6 +352,84 @@ void	test_more_param_size_in_cylinder_with_false()
 	TEST_ASSERT_FALSE(result);
 }
 
+void	test_less_param_size_in_light_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/less_param_size_in_light.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
+void	test_less_param_size_in_ambient_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/less_param_size_in_ambient.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
+void	test_less_param_size_in_camera_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/less_param_size_in_camera.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
+void	test_less_param_size_in_plane_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/less_param_size_in_plane.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
+void	test_less_param_size_in_sphere_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/less_param_size_in_sphere.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
+void	test_less_param_size_in_cylinder_with_false()
+{
+	t_scene scene;
+	t_camera camera;
+	t_mlx_data data;
+	bool result = true;
+	camera.distance = 0;
+	data.data = 0;
+	scene = new_scene(NULL, NULL, camera, data);
+	parser(&scene, "./ft_file/error/less_param_size_in_cylinder.rt", &result);
+	TEST_ASSERT_FALSE(result);
+}
+
 
 void	test_parser_with_false()
 {
@@ -304,6 +447,10 @@ void	test_parser_with_false()
 	RUN_TEST(test_multi_camera_identifier_with_false);
 	RUN_TEST(test_multi_light_identifier_with_false);
 	RUN_TEST(test_multi_identifier_and_acl_with_false);
+	RUN_TEST(test_not_unint8_fov_value_in_camera_with_false);
+	RUN_TEST(test_rgb_in_out_of_range_with_false);
+	RUN_TEST(test_before_comma_with_false);
+	RUN_TEST(test_more_int_max_with_false);
 
 	RUN_TEST(test_more_param_size_in_ambient_with_false);
 	RUN_TEST(test_more_param_size_in_camera_with_false);
@@ -311,10 +458,18 @@ void	test_parser_with_false()
 	RUN_TEST(test_more_param_size_in_plane_with_false);
 	RUN_TEST(test_more_param_size_in_cylinder_with_false);
 	RUN_TEST(test_more_param_size_in_sphere_with_false);
+
+	RUN_TEST(test_less_param_size_in_ambient_with_false);
+	RUN_TEST(test_less_param_size_in_camera_with_false);
+	RUN_TEST(test_less_param_size_in_light_with_false);
+	RUN_TEST(test_less_param_size_in_plane_with_false);
+	RUN_TEST(test_less_param_size_in_cylinder_with_false);
+	RUN_TEST(test_less_param_size_in_sphere_with_false);
 }
 
 void	test_parser(void)
 {
 	RUN_TEST(test_parser_multi_line_with_true);
+	RUN_TEST(test_parser_basic_with_true);
 	test_parser_with_false();
 }

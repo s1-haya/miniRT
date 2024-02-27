@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 17:42:30 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:52:40 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "parser.h"
 
 #define ERROR_NOT_SET_UPEER_CHARACTER "Error: Prameter don't set. \
-							parameter of upeer character must be set, please."
+parameter of upeer character must be set, please."
 
 t_minirt_list	*read_rt_file(const char *file_name, bool *result);
 bool			validate(t_minirt_list *list,

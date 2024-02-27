@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:02 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 16:32:24 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:54:20 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,9 @@ void	validate_camera(char **value,
 										MAX_DIRECTION, result);
 	convert_string_to_unint8_in_range(value[2], MIN_HORIZONTAL_ANGLE,
 										MAX_HORIZONTAL_ANGLE, result);
-	if (size == 5)
+	if (size == 4)
 	{
 		// 注視点t_vector(double x, double y, double z)
 		// convert_value_to_vector_in_range(value[3])
-		// スクリーンまでの距離（焦点距離） double型
-		// convert_string_to_double_in_range(value[3])
-		
 	}
 }
