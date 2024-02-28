@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/18 08:56:59 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/24 19:59:00 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,17 @@ t_sphere	*new_sphere(t_vector origin, double radius)
 	return (sphere);
 }
 
-t_cylinder	*new_cylinder(t_vector origin, double radius, double height)
+t_cylinder	*new_cylinder(t_vector origin, double radius, double height, t_vector axis)
 {
 	t_cylinder	*cylinder;
 
 	cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
 	if (cylinder == NULL)
 		return (NULL);
-	cylinder->origin = origin;
+	cylinder->origin = subtract_vectors(origin, scalar_multiply(axis, height / 2));
 	cylinder->radius = radius;
 	cylinder->height = height;
+	cylinder->axis = axis;
 	return (cylinder);
 }
 

@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: erin <erin@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
 #    Updated: 2024/02/26 13:10:25 by hsawamur         ###   ########.fr        #
@@ -57,7 +57,7 @@ SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_string_to_double_in_ran
 
 SCENE_DIR = scene
 SRCS += $(SRCS_DIR)/$(SCENE_DIR)/scene.c\
-		$(SRCS_DIR)/$(SCENE_DIR)/cast_a_shadow.c\
+		$(SRCS_DIR)/$(SCENE_DIR)/shading.c\
 
 SHAPE_DIR = shape
 SRCS += $(SRCS_DIR)/$(SHAPE_DIR)/shape.c\
@@ -74,6 +74,7 @@ SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/get_value_in_range.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/get_string_array_size.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/set_error_and_return_null.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/clamp.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c
 
 GNL_DIR := $(SRCS_DIR)/$(PARSER_DIR)/get_next_line
@@ -120,7 +121,7 @@ LIB_DIR := $(MINILIBX_LIB_DIR) $(X_WINDOW_LIB_DIR)
 LIB_DIR := $(addprefix -L, $(LIB_DIR))
 
 LIBS := $(MINILIBX) $(X_WINDOW_LIB_NAME)
-LIBS := $(addprefix -l, $(LIBS))
+LIBS := $(addprefix -l, $(LIBS))n
 
 LDFLAGS := $(LIB_DIR) $(LIBS)
 
@@ -131,7 +132,7 @@ INCLUDES := $(addprefix -I, $(INC_DIR))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MINILIBX_AR) $(LIBFT_AR)
+$(NAME): $(OBJS) $(MINILIBX_AR) $(LIBFT_AR)　$(LDFLAGS)
 	$(CC) $(CFLAGS) $(OBJS) $(MINILIBX_AR) $(LIBFT_AR) $(LDFLAGS) -o $@
 
 $(NAME_AR): $(OBJS)
