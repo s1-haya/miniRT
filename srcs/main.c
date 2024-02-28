@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/25 13:38:36 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/28 19:55:47 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,11 @@ int main(int argc, char *argv[])
 	result = true;
 	scene = new_scene(NULL, NULL,  new_camera(VIEWPOINT, LOOKATPOINT, 70), new_mlx_data());
 	parser(&scene, argv[1], &result);
-	if (！result)
-  {
-    //sceneをfreeする。
-    return (FAILURE);
-  }
+	if (!result)
+	{
+		//sceneをfreeする。
+		return (FAILURE);
+	}
 	render_scene(&scene);
 	return (SUCCESS);
 }

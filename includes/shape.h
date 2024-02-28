@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 19:54:50 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/28 19:57:40 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_shape
 // t_shape		*new_shape();
 // t_sphere	new_sphere();
 // t_plane		*new_plane();
-t_shape	*new_shape(void *shape, t_material *material, enum e_object object, int id);
+t_shape	*new_shape(void *shape, t_material *material, enum e_object object);
 t_sphere	*new_sphere(t_vector origin, double radius);
 t_cylinder	*new_cylinder(t_vector origin, double radius, double height, t_vector axis);
 t_plane	*new_plane(t_vector normal, t_vector point);

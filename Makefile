@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: erin <erin@student.42.fr>                  +#+  +:+       +#+         #
+#    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/26 13:10:25 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/28 20:08:17 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,6 @@ SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/ray.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/vector.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/verify_single_argument.c\
-		$(SRCS_DIR)/$(UNTIL_DIR)/get_value_in_range.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/get_string_array_size.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/set_error_and_return_null.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/clamp.c\
@@ -132,7 +131,7 @@ INCLUDES := $(addprefix -I, $(INC_DIR))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MINILIBX_AR) $(LIBFT_AR)　$(LDFLAGS)
+$(NAME): $(OBJS) $(MINILIBX_AR) $(LIBFT_AR)
 	$(CC) $(CFLAGS) $(OBJS) $(MINILIBX_AR) $(LIBFT_AR) $(LDFLAGS) -o $@
 
 $(NAME_AR): $(OBJS)
