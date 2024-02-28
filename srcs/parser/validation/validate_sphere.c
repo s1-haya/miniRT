@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   validate_sphere.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 20:03:27 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 11:27:22 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/02/21 17:39:42 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/02/24 11:13:49 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
+#include "validate.h"
 
-t_scene	new_scene(t_shape **shape,
-				t_light *light, 
-				t_camera camera,
-				t_mlx_data data)
+void	validate_sphere(char **value, bool *result)
 {
-	t_scene	scene;
+	size_t	size;
 
-	scene.shape = shape;
-	scene.light = light;
-	scene.camera = camera;
-	scene.mlx = data;
-	return (scene);
+	size = get_string_array_size(value);
+	if (size != 3)
+	{
+		*result = false;
+		return ;
+	}
+	convert_value_to_vector_in_range(value[0], INT_MIN,
+										INT_MAX, result);
+	convert_string_to_double_in_range(value[1], INT_MIN,
+										INT_MAX, result);
+	convert_value_to_rgb(value[2], result);
 }

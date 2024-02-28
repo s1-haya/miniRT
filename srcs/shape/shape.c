@@ -68,15 +68,13 @@ t_cylinder	*new_cylinder(t_vector origin, double radius, double height, t_vector
 	return (cylinder);
 }
 
-t_shape	*new_shape(void *shape, t_material *material, enum e_object object, int id)
+t_shape	*new_shape(void *shape, t_material *material, enum e_object object)
 {
 	t_shape	*new_shape;
 	
 	new_shape = (t_shape *)malloc(sizeof(t_shape));
 	if (new_shape == NULL)
 		return (NULL);
-	// new_shape->id = id;
-	(void)id; //
 	new_shape->object = object;
 	if (object == PLANE)
 		new_shape->plane = shape;

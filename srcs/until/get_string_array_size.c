@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   get_string_array_size.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 20:03:27 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 11:27:22 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/02/23 17:13:16 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/02/23 17:15:08 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
+#include <stdlib.h>
 
-t_scene	new_scene(t_shape **shape,
-				t_light *light, 
-				t_camera camera,
-				t_mlx_data data)
+size_t	get_string_array_size(char **array)
 {
-	t_scene	scene;
+	size_t size;
 
-	scene.shape = shape;
-	scene.light = light;
-	scene.camera = camera;
-	scene.mlx = data;
-	return (scene);
+	size = 0;
+	while (array[size] != NULL)
+		size++;
+	return (size);
 }

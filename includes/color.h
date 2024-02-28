@@ -6,12 +6,21 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:09:01 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/06 10:25:39 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:55:36 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
+
+# include <stdint.h>
+
+typedef struct s_rgb
+{
+	uint8_t	red;
+	uint8_t	green;
+	uint8_t	blue;
+}	t_rgb;
 
 typedef struct s_color
 {

@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 20:03:27 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 11:27:22 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/02/18 11:43:37 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/02/26 16:36:05 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-t_scene	new_scene(t_shape **shape,
-				t_light *light, 
-				t_camera camera,
-				t_mlx_data data)
-{
-	t_scene	scene;
+#include <stdlib.h>
+#include <stdbool.h>
 
-	scene.shape = shape;
-	scene.light = light;
-	scene.camera = camera;
-	scene.mlx = data;
-	return (scene);
-}
+typedef struct s_minirt_list {
+	char					*identifier;
+	char					**value;
+	struct s_minirt_list	*next;
+}	t_minirt_list;
+
+typedef struct s_param_count {
+	size_t	ambient;
+	size_t	camera;
+	size_t	light;
+}	t_param_count;
+
+bool	is_target_file_extension(const char *filename, const char *extension);
+
+#endif

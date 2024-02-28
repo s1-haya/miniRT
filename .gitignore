@@ -1,8 +1,10 @@
 .history
+.vscode/*
 miniRT
 a.out
 objs/*
-.vscode
+test/objs/*
+*.rt
+*.txt
+miniRT.a
 
-
-libft

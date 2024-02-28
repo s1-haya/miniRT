@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   set_error_and_return_null.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 20:03:27 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 11:27:22 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/02/20 19:05:16 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/02/20 19:32:23 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
+#include <stdbool.h>
+#include <stdlib.h>
 
-t_scene	new_scene(t_shape **shape,
-				t_light *light, 
-				t_camera camera,
-				t_mlx_data data)
+void	*set_error_and_return_null(bool *result)
 {
-	t_scene	scene;
-
-	scene.shape = shape;
-	scene.light = light;
-	scene.camera = camera;
-	scene.mlx = data;
-	return (scene);
+	*result = false;
+	return (NULL);
 }

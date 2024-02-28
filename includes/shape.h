@@ -66,5 +66,5 @@ t_cylinder	*new_cylinder(t_vector origin, double radius, double height, t_vector
 t_plane	*new_plane(t_vector normal, t_vector point);
 t_ray	new_ray(t_vector point, t_vector direction);
 t_intersection	*new_intersection(t_ray ray, double t);
-t_material	*new_material(t_color ambient, t_color diffuse, t_color specular, double shininess);
+t_material		*new_material(t_color ambient, t_color diffuse, t_color specular, double shininess);
 #endif
