@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/28 20:08:17 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/28 20:21:22 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,8 +73,8 @@ SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/verify_single_argument.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/get_string_array_size.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/set_error_and_return_null.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c \
 		$(SRCS_DIR)/$(UNTIL_DIR)/clamp.c\
-		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c
 
 GNL_DIR := $(SRCS_DIR)/$(PARSER_DIR)/get_next_line
 SRCS += $(GNL_DIR)/get_next_line.c\
@@ -120,7 +120,7 @@ LIB_DIR := $(MINILIBX_LIB_DIR) $(X_WINDOW_LIB_DIR)
 LIB_DIR := $(addprefix -L, $(LIB_DIR))
 
 LIBS := $(MINILIBX) $(X_WINDOW_LIB_NAME)
-LIBS := $(addprefix -l, $(LIBS))n
+LIBS := $(addprefix -l, $(LIBS))
 
 LDFLAGS := $(LIB_DIR) $(LIBS)
 
