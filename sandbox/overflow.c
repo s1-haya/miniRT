@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// https://learn.microsoft.com/ja-jp/cpp/c-runtime-library/errno-doserrno-sys-errlist-and-sys-nerr?view=msvc-170
+// https://learn.microsoft.com/ja-jp/cpp/c-runtime-libft/errno-doserrno-sys-errlist-and-sys-nerr?view=msvc-170
 
 int main() {
     char *end;

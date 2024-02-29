@@ -5,8 +5,8 @@ CFLAGS := -Wall -Wextra -Werror -MMD -MP -DUNITY_INCLUDE_DOUBLE -g -fsanitize=ad
 MINIRT_DIR := ..
 MINIRT_AR := $(MINIRT_DIR)/miniRT.a
 
-LIBFT_DIR := $(MINIRT_DIR)/library
-LIBFT_AR := $(MINIRT_DIR)/library/library.a
+LIBFT_DIR := $(MINIRT_DIR)/libft
+LIBFT_AR := $(MINIRT_DIR)/libft/libft.a
 
 TEST_SRCS := test.c \
 
