@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 16:32:34 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:29:14 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define MIN_LIGHT (0.0)
 #define MAX_LIGHT (1.0)
 
-void	validate_light(char **value,
+void	validate_light(t_scene *scene, char **value,
 				t_param_count *count, bool *result)
 {
 	size_t	size;
@@ -27,9 +27,11 @@ void	validate_light(char **value,
 		return ;
 	}
 	count->light ++;
-	convert_value_to_vector_in_range(value[0], INT_MIN,
-										INT_MAX, result);
-	convert_string_to_double_in_range(value[1], MIN_LIGHT,
-										MAX_LIGHT, result);
-	convert_value_to_rgb(value[2], result);
+	scene->light = new_light(convert_value_to_vector_in_range(value[0], INT_MIN,
+										INT_MAX, result),
+							convert_string_to_double_in_range(value[1], MIN_LIGHT,
+										MAX_LIGHT, result),
+							convert_value_to_rgb(value[2], result));
+	if (scene->light == NULL)
+		*result = false;
 }

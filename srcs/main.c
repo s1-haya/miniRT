@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/28 20:28:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:00:52 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,35 @@
 #include "shape.h"
 #include "color.h"
 #include "scene.h"
+#include "libft.h"
 
 #define SUCCESS 0
 #define FAILURE 1
 
-bool	verify_single_argument(int argc);
-void	parser(t_scene *scene, const char *file_name, bool *result);
-t_shape		*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_distance);
-void		shading(t_scene *scene, t_shape *nearest_shape, int x, int y);
-t_mlx_data	new_mlx_data();
-t_camera	new_camera(t_vector view_point, t_vector look_at_point, double horizontal_value);
-t_scene	new_scene(t_shape **shape,
-				t_light *light, 
-				t_camera camera,
-				t_mlx_data data);
+bool verify_single_argument(int argc);
+void parser(t_scene *scene, const char *file_name, bool *result);
+t_shape *determine_intersection_ray_and_object(t_list *shape, t_ray ray, double light_distance);
+void shading(t_scene *scene, t_shape *nearest_shape, int x, int y);
+t_mlx_data new_mlx_data();
+t_camera new_camera(t_vector view_point, t_vector look_at_point, double horizontal_value);
 double clamp(double v, double v_min, double v_max);
 
-double	scaling(double value, double t_min, double t_max)
+double scaling(double value, double t_min, double t_max)
 {
 	return (t_min + (t_max - t_min) * value);
 }
 
-double	map(double x, double max, double assign, double sign)
+double map(double x, double max, double assign, double sign)
 {
 	return (sign * (2 * x) / (max - 1) + assign);
 }
 
-t_ray	set_viewpoint(t_camera *camera, double lx, double ly)
+t_ray set_viewpoint(t_camera *camera, double lx, double ly)
 {
-	const t_vector	up = new_vector(0, 1, 0);
-	t_vector		d_x;
-	t_vector		d_y;
-	t_vector		pw;
+	const t_vector up = new_vector(0, 1, 0);
+	t_vector d_x;
+	t_vector d_y;
+	t_vector pw;
 
 	d_x = cross_product(up, camera->look_at_point);
 	normalize_vector(&d_x);
@@ -62,9 +59,8 @@ t_ray	set_viewpoint(t_camera *camera, double lx, double ly)
 	return (new_ray(camera->view_point, subtract_vectors(pw, camera->view_point)));
 }
 
-
 /////////////////////////////////////////////////////////////////////////// keyconf
-int	esc_key(int keycode, t_mlx_data *mlx) // sceneにしてこの中でfree
+int esc_key(int keycode, t_mlx_data *mlx) // sceneにしてこの中でfree
 {
 	if (keycode == 53)
 	{
@@ -75,7 +71,7 @@ int	esc_key(int keycode, t_mlx_data *mlx) // sceneにしてこの中でfree
 	return (0);
 }
 
-int	close_window(t_mlx_data *mlx) // sceneにしてこの中でfree
+int close_window(t_mlx_data *mlx) // sceneにしてこの中でfree
 {
 	mlx_destroy_window(mlx->data, mlx->window);
 	// ft_free_exit(data->map, EXIT_SUCCESS, -1);
@@ -88,12 +84,12 @@ int	close_window(t_mlx_data *mlx) // sceneにしてこの中でfree
 #include <stdio.h>
 void render_scene(t_scene *scene)
 {
-	int		x;
-	int		y;
-	double	lx;
-	double	ly;
-	t_ray	ray;
-	t_shape	*nearest_shape;
+	int x;
+	int y;
+	double lx;
+	double ly;
+	t_ray ray;
+	t_shape *nearest_shape;
 
 	x = WINDOW_ORIGIN_X;
 	while (x < WINDOW_MAX_X)
@@ -116,50 +112,64 @@ void render_scene(t_scene *scene)
 	mlx_loop(scene->mlx.data);
 }
 
+void	printRGB(t_rgb rgb)
+{
+	printf("red %d, green %d, blue %d\n", rgb.red, rgb.green, rgb.blue);
+}
+
+void	printSphere(t_sphere *sphere)
+{
+	printf("sphere:\n");
+	printVector(sphere->origin, "sphere origin");
+	printf("radius %f\n", sphere->radius);
+	printRGB(sphere->rgb);
+}
+
+void	printPlane(t_plane *plane)
+{
+	printf("plane:\n");
+	printVector(plane->point, "plane point");
+	printVector(plane->normal, "plane normal");
+	printRGB(plane->rgb);
+}
+
+void	printShape(t_list *list)
+{
+	while (list != NULL)
+	{
+		if (((t_shape *)list->content)->object == PLANE)
+			printPlane((t_plane *)(((t_shape *)list->content)->substance));
+		else if (((t_shape *)list->content)->object == SPHERE)
+			printSphere((t_sphere *)(((t_shape *)list->content)->substance));
+		else if (((t_shape *)list->content)->object == CYLINDER)
+			printf("cylinder:\n");
+		else
+			printf("none;\n");
+		list = list->next;
+	}
+}
+
 #include <libc.h>
 int main(int argc, char *argv[])
 {
-	t_shape			**shape;
-	t_light			*light;
-	t_scene			scene;
-	bool			result;
-	// 1 is_valid
-	// 2 init(parse)
-	// 3 draw
-	// 4 hook, loop
-	(void)argv;
+	t_scene	scene;
+	bool	result;
+
 	if (!verify_single_argument(argc))
 		return (FAILURE);
 	result = true;
-	// parser(&scene, argv[1], &result);
-	shape = (t_shape **)malloc(sizeof(t_shape *) * SIZE);
-	if (shape == NULL)
-		return (FAILURE);
-	// shape[0] = new_shape(new_sphere(new_vector(3, 0, 25), 3), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 0);
-	// shape[1] = new_shape(new_sphere(new_vector(2, 0, 20), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 1);
-	// shape[2] = new_shape(new_sphere(new_vector(1, 0, 15), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 2);
-	// shape[3] = new_shape(new_sphere(new_vector(0, 0, 10), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 3);
-	// shape[4] = new_shape(new_sphere(new_vector(0, 1, 0), 1), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), SPHERE, 4);
-	// shape[5] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
-
-	shape[0] = new_shape(new_cylinder(new_vector(3, 0, 25), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
-	shape[1] = new_shape(new_cylinder(new_vector(2, 0, 20), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
-	shape[2] = new_shape(new_cylinder(new_vector(0, 2, 2), 1, 5, new_vector(1, 0, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
-	shape[3] = new_shape(new_cylinder(new_vector(0, 0, 2), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00,0.69,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
-	shape[4] = new_shape(new_cylinder(new_vector(0, 0, 0), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
-	shape[3] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, 0, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE);
-
-	// shape[0] = new_shape(new_cylinder(new_vector(0, 0, 5), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);
-	// shape[1] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
-	light = (t_light *)malloc(sizeof(t_light) * LIGHT_SIZE);
-	light[0] = new_light(new_vector(2, 2, 0), new_color(1,1,1));
-	light[1] = new_light(new_vector(0, 5, 0), new_color(0.5,0.5,0.5));
-	// light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
-	scene = new_scene(shape, light, new_camera(VIEWPOINT, LOOKATPOINT, 80.0), new_mlx_data());
+	scene.mlx = new_mlx_data();
+	parser(&scene, argv[1], &result);
 	if (!result)
 	{
-		//sceneをfreeする。
+		// sceneをfreeする。
 		return (FAILURE);
+	}
+	if (scene.shape != NULL)
+	{
+		printf("ok\n");
+		printShape(scene.shape);
+		printf("end\n");
 	}
 	render_scene(&scene);
 	return (SUCCESS);

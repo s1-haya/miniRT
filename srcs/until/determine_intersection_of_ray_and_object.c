@@ -5,6 +5,7 @@
 #include "minirt.h"
 #include "vector.h"
 #include "shape.h"
+#include "libft.h"
 
 t_vector new_vector(double x, double y, double z);
 t_vector add_vectors(t_vector v1, t_vector v2);
@@ -154,34 +155,34 @@ t_intersection	*get_intersection_ray_and_object(t_shape *shape, t_ray ray)
 	t_intersection	*intersection;
 
 	if (shape->object == PLANE)
-		intersection = determine_intersection_ray_and_plane(shape->plane, ray);
+		intersection = determine_intersection_ray_and_plane(shape->substance, ray);
 	else if (shape->object == SPHERE)
-		intersection = determine_intersection_ray_and_sphere(shape->sphere, ray);
+		intersection = determine_intersection_ray_and_sphere(shape->substance, ray);
 	else if (shape->object == CYLINDER)
-		intersection = determine_intersection_ray_and_cylinder(shape->cylinder, ray);
+		intersection = determine_intersection_ray_and_cylinder(shape->substance, ray);
 	else
 		intersection = NULL;
 	return (intersection);
 }
 
-t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance)
+t_shape	*determine_intersection_ray_and_object(t_list *shape_list, t_ray ray, double light_source_distance)
 {
-	size_t			z;
+	t_list			*iterator;
 	t_shape			*nearest_shape;
 	t_intersection	*intersection;
 
-	z = 0;
+	iterator = shape_list;
 	nearest_shape = NULL;
-	while (z < SIZE)
+	while (iterator != NULL)
 	{
-		intersection = get_intersection_ray_and_object(shape[z], ray);
+		intersection = get_intersection_ray_and_object(iterator->content, ray);
 		if (intersection != NULL && light_source_distance > vector_length(subtract_vectors(intersection->point, ray.point)))
 		{
-			shape[z]->intersection = intersection;
-			nearest_shape = shape[z];
+			((t_shape *)iterator->content)->intersection = intersection;
+			nearest_shape = iterator->content;
 			light_source_distance = vector_length(subtract_vectors(intersection->point, ray.point));
 		}
-		z++;
+		iterator = iterator->next;
 	}
 	return (nearest_shape);
 }

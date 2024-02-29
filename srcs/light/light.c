@@ -11,15 +11,19 @@
 /* ************************************************************************** */
 
 #include "light.h"
+#include "color.h"
+#include <stdlib.h>
 
-t_light	new_light(t_vector point, t_color intensity)
+t_light	*new_light(t_vector point, double intensity, t_rgb rgb)
 {
-	t_light	light;
+	t_light	*light;
 
-	// light = malloc(sizeof(t_light));
-	// if (light == NULL)
-	// 	return (NULL);
-	light.light_ray.point = point;
-	light.intensity = intensity;
+	light = malloc(sizeof(t_light));
+	if (light == NULL)
+		return (NULL);
+	light->point = point;
+	light->intensity = intensity;
+	light->rgb = rgb;
+	light->next = NULL;
 	return (light);
 }
