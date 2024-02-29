@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:49:12 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 07:31:34 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:27:24 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 #include "minirt.h"
 
 typedef struct s_scene {
-	t_shape			**shape;
+	t_shape			*shape;
 	t_light			*light;
 	t_camera		camera;
 	t_mlx_data		mlx;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/24 19:59:00 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/29 12:29:50 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_shape	*new_shape(void *shape, t_material *material, enum e_object object)
 		new_shape->cylinder = shape;
 	new_shape->intersection = NULL;
 	new_shape->material = material;
+	new_shape->next = NULL;
 	return (new_shape);
 }
 

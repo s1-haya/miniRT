@@ -164,24 +164,24 @@ t_intersection	*get_intersection_ray_and_object(t_shape *shape, t_ray ray)
 	return (intersection);
 }
 
-t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance)
+t_shape	*determine_intersection_ray_and_object(t_shape *shape, t_ray ray, double light_source_distance)
 {
-	size_t			z;
+	t_shape			*iterator;
 	t_shape			*nearest_shape;
 	t_intersection	*intersection;
 
-	z = 0;
+	iterator = shape;
 	nearest_shape = NULL;
-	while (z < SIZE)
+	while (iterator != NULL)
 	{
-		intersection = get_intersection_ray_and_object(shape[z], ray);
+		intersection = get_intersection_ray_and_object(iterator, ray);
 		if (intersection != NULL && light_source_distance > vector_length(subtract_vectors(intersection->point, ray.point)))
 		{
-			shape[z]->intersection = intersection;
-			nearest_shape = shape[z];
+			iterator->intersection = intersection;
+			nearest_shape = iterator;
 			light_source_distance = vector_length(subtract_vectors(intersection->point, ray.point));
 		}
-		z++;
+		iterator = iterator->next;
 	}
 	return (nearest_shape);
 }

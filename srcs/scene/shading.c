@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 11:09:51 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:31:23 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 double clamp(double v, double v_min, double v_max);
 void my_mlx_pixel_put(t_img *img_data, int x, int y, int color);
-t_shape	*determine_intersection_ray_and_object(t_shape **shape, t_ray ray, double light_source_distance);
+t_shape	*determine_intersection_ray_and_object(t_shape *shape, t_ray ray, double light_source_distance);
 
 void print_vector(t_vector vector)
 {

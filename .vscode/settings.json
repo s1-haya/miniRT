@@ -18,6 +18,10 @@
 		"convert.h": "c",
 		"validate.h": "c",
 		"locale": "c",
-		"light.h": "c"
+		"light.h": "c",
+		"scene.h": "c",
+		"shape.h": "c",
+		"camera.h": "c",
+		"vector.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/28 20:39:30 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:30:19 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_shape
 	t_cylinder		*cylinder;
 	t_intersection	*intersection;
 	t_material		*material;
+	struct s_shape	*next;
 }	t_shape;
 
 // t_shape shape[sphere, plane, sphere, shpere]
