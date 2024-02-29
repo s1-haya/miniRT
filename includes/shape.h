@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/28 19:57:40 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:39:30 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef enum e_object
 {
+	NONE,
 	PLANE,
 	SPHERE, 
 	CYLINDER

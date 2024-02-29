@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/25 13:34:18 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/29 09:28:02 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 #define VIEWPOINT new_vector(0, 7, -6)
 #define LOOKATPOINT new_vector(0, -1, 1)
 // #define LOOKATPOINT new_vector(5, 0, -25)
-#define DISTANCE 1.3
 #define SIZE 5
 #define LIGHT_SIZE 3
 
