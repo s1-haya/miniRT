@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:36:35 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 08:31:05 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:44:59 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "parser.h"
 #include "color.h"
 #include "vector.h"
+#include "libft.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <limits.h>

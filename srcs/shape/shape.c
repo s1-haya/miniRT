@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 12:50:17 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:55:57 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,33 @@
 // t_shape		*new_shape();
 // t_sphere	new_sphere();
 // t_plane		*new_plane();
-t_material	*new_material(t_color ambient, t_color diffuse, t_color specular, double shininess)
-{
-	t_material	*material;
+// t_material	*new_material(t_color ambient, t_color diffuse, t_color specular)
+// {
+// 	t_material	*material;
 
-	material = malloc(sizeof(t_material));
-	if (material == NULL)
-		return (NULL);
-	material->ambient = ambient;
-	material->diffuse = diffuse;
-	material->specular = specular;
-	material->shininess = shininess;
-	return (material);
-}
+// 	material = malloc(sizeof(t_material));
+// 	if (material == NULL)
+// 		return (NULL);
+// 	material->ambient = ambient;
+// 	material->diffuse = diffuse;
+// 	material->specular = specular;
+// 	return (material);
+// }
 
-t_plane	*new_plane(t_vector normal, t_vector point)
+t_plane	*new_plane(t_vector point, t_vector normal, t_rgb rgb)
 {
 	t_plane	*plane;
 
 	plane = (t_plane *)malloc(sizeof(t_plane));
 	if (plane == NULL)
 		return (NULL);
-	plane->normal = normal;
 	plane->point = point;
+	plane->normal = normal;
+	plane->rgb = rgb;
 	return (plane);
 }
 
-t_sphere	*new_sphere(t_vector origin, double radius)
+t_sphere	*new_sphere(t_vector origin, double radius, t_rgb rgb)
 {
 	t_sphere	*sphere;
 
@@ -51,6 +51,7 @@ t_sphere	*new_sphere(t_vector origin, double radius)
 		return (NULL);
 	sphere->origin = origin;
 	sphere->radius = radius;
+	sphere->rgb = rgb;
 	return (sphere);
 }
 
@@ -69,7 +70,7 @@ t_cylinder	*new_cylinder(t_vector origin, t_vector axis, double radius, double h
 	return (cylinder);
 }
 
-t_shape	*new_shape(void *shape, t_material *material, enum e_object object)
+t_shape	*new_shape(void *shape, enum e_object object)
 {
 	t_shape	*new_shape;
 	
@@ -79,8 +80,6 @@ t_shape	*new_shape(void *shape, t_material *material, enum e_object object)
 	new_shape->object = object;
 	new_shape->substance = shape;
 	new_shape->intersection = NULL;
-	new_shape->material = material;
-	new_shape->next = NULL;
 	return (new_shape);
 }
 

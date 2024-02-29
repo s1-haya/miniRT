@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 13:29:19 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:12:58 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,28 @@
 #include "shape.h"
 #include "vector.h"
 #include "color.h"
+#include "libft.h"
 
 #define C_EPSILON (1.0 / 512)
 
 double clamp(double v, double v_min, double v_max);
 void my_mlx_pixel_put(t_img *img_data, int x, int y, int color);
-t_shape	*determine_intersection_ray_and_object(t_shape *shape, t_ray ray, double light_source_distance);
+t_shape	*determine_intersection_ray_and_object(t_list *shape, t_ray ray, double light_source_distance);
 
 void print_vector(t_vector vector)
 {
 	printf("x: %lf\n", vector.x);
 	printf("y: %lf\n", vector.y);
 	printf("z: %lf\n", vector.z);
+}
+
+t_rgb	get_rgb_in_shape(t_shape *shape)
+{
+	if (shape->object == PLANE)
+		return (((t_plane *)shape->substance)->rgb);
+	else if (shape->object == SPHERE)
+		return (((t_sphere *)shape->substance)->rgb);
+	return (((t_cylinder *)shape->substance)->rgb);
 }
 
 void	add_ambient_light(t_color *color, t_ambient_light ambient)
@@ -45,14 +55,15 @@ void	add_ambient_light(t_color *color, t_ambient_light ambient)
 void	add_diffuse_reflection(t_color *color, t_shape *nearest_shape, t_vector incident, t_light light)
 {
 	t_color			diffuse_reflection;
-	const t_color	coefficient = nearest_shape->material->diffuse;
+	t_rgb			rgb;
 	const t_vector	normal = nearest_shape->intersection->normal;
 
-	diffuse_reflection.red = coefficient.red * light.intensity * light.rgb.red / 255.0
+	rgb = get_rgb_in_shape(nearest_shape);
+	diffuse_reflection.red = rgb.red / 255.0 * light.intensity * light.rgb.red / 255.0
 								* clamp(dot_product(normal, incident), 0.0, 1.0);
-	diffuse_reflection.green = coefficient.green * light.intensity * light.rgb.green / 255.0
+	diffuse_reflection.green = rgb.green / 255.0 * light.intensity * light.rgb.green / 255.0
 								* clamp(dot_product(normal, incident), 0.0, 1.0);
-	diffuse_reflection.blue = coefficient.blue * light.intensity * light.rgb.blue / 255.0
+	diffuse_reflection.blue = rgb.blue / 255.0 * light.intensity * light.rgb.blue / 255.0
 								* clamp(dot_product(normal, incident), 0.0, 1.0);
 	add_color(color, diffuse_reflection);
 }
@@ -62,8 +73,8 @@ void	add_specular_reflection(t_color *color, t_scene *scene, t_shape *nearest_sh
 	t_color			specular_reflection;
 	t_vector		a; //入射角の正反射
 	t_vector		b; //視点ベクトルの反対
-	const t_color	coefficient = nearest_shape->material->specular;
 	t_vector		incident_vector;
+	t_rgb			rgb;
 
 	incident_vector = subtract_vectors(light.point, \
 					nearest_shape->intersection->point);
@@ -76,11 +87,12 @@ void	add_specular_reflection(t_color *color, t_scene *scene, t_shape *nearest_sh
 			get_inverse_vector(incident_vector));
 	b = get_inverse_vector(scene->camera.view_point);
 	normalize_vector(&b);
-	specular_reflection.red = coefficient.red * light.intensity  * light.rgb.red / 255.0
+	rgb = get_rgb_in_shape(nearest_shape);
+	specular_reflection.red = rgb.red / 255.0 * light.intensity  * light.rgb.red / 255.0
 					* pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
-	specular_reflection.green = coefficient.green * light.intensity  * light.rgb.green / 255.0
+	specular_reflection.green = rgb.green / 255.0 * light.intensity  * light.rgb.green / 255.0
 					* pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
-	specular_reflection.blue = coefficient.blue * light.intensity  * light.rgb.blue / 255.0
+	specular_reflection.blue = rgb.blue / 255.0 * light.intensity  * light.rgb.blue / 255.0
 					* pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
 	add_color(color, specular_reflection);
 }
@@ -131,5 +143,5 @@ void	shading(t_scene *scene, t_shape *nearest_shape, int x, int y)
 		my_mlx_pixel_put(&scene->mlx.img, x, y, int_color);
 	}
 	else
-		my_mlx_pixel_put(&scene->mlx.img, x, y, 0x000000FF);
+		my_mlx_pixel_put(&scene->mlx.img, x, y, 0x0000000);
 }
