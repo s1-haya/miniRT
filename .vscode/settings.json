@@ -17,6 +17,7 @@
 		"color.h": "c",
 		"convert.h": "c",
 		"validate.h": "c",
-		"locale": "c"
+		"locale": "c",
+		"light.h": "c"
 	}
 }
