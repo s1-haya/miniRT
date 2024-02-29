@@ -154,11 +154,11 @@ t_intersection	*get_intersection_ray_and_object(t_shape *shape, t_ray ray)
 	t_intersection	*intersection;
 
 	if (shape->object == PLANE)
-		intersection = determine_intersection_ray_and_plane(shape->plane, ray);
+		intersection = determine_intersection_ray_and_plane(shape->substance, ray);
 	else if (shape->object == SPHERE)
-		intersection = determine_intersection_ray_and_sphere(shape->sphere, ray);
+		intersection = determine_intersection_ray_and_sphere(shape->substance, ray);
 	else if (shape->object == CYLINDER)
-		intersection = determine_intersection_ray_and_cylinder(shape->cylinder, ray);
+		intersection = determine_intersection_ray_and_cylinder(shape->substance, ray);
 	else
 		intersection = NULL;
 	return (intersection);

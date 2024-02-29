@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 12:29:50 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:50:17 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_sphere	*new_sphere(t_vector origin, double radius)
 	return (sphere);
 }
 
-t_cylinder	*new_cylinder(t_vector origin, double radius, double height, t_vector axis)
+t_cylinder	*new_cylinder(t_vector origin, t_vector axis, double radius, double height, t_rgb rgb)
 {
 	t_cylinder	*cylinder;
 
@@ -62,9 +62,10 @@ t_cylinder	*new_cylinder(t_vector origin, double radius, double height, t_vector
 	if (cylinder == NULL)
 		return (NULL);
 	cylinder->origin = subtract_vectors(origin, scalar_multiply(axis, height / 2));
+	cylinder->axis = axis;
 	cylinder->radius = radius;
 	cylinder->height = height;
-	cylinder->axis = axis;
+	cylinder->rgb = rgb;
 	return (cylinder);
 }
 
@@ -76,12 +77,7 @@ t_shape	*new_shape(void *shape, t_material *material, enum e_object object)
 	if (new_shape == NULL)
 		return (NULL);
 	new_shape->object = object;
-	if (object == PLANE)
-		new_shape->plane = shape;
-	else if (object == SPHERE)
-		new_shape->sphere = shape;
-	else if (object == CYLINDER)
-		new_shape->cylinder = shape;
+	new_shape->substance = shape;
 	new_shape->intersection = NULL;
 	new_shape->material = material;
 	new_shape->next = NULL;

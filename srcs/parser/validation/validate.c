@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:33:48 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 11:45:14 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:42:32 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 
 void	validate_ambient_lighting(t_scene *scene, char **value, t_param_count *count, bool *result);
 void	validate_camera(t_scene *scene, char **value, t_param_count *count, bool *result);
-void	validate_light(t_scene *scene,char **value, t_param_count *count, bool *result);
-void	validate_plane(char **value, bool *result);
-void	validate_sphere(char **value, bool *result);
-void	validate_cylinder(char **value, bool *result);
+void	validate_light(t_scene *scene, char **value, t_param_count *count, bool *result);
+void	validate_plane(t_scene *scene, char **value, bool *result);
+void	validate_sphere(t_scene *scene, char **value, bool *result);
+void	validate_cylinder(t_scene *scene, char **value, bool *result);
 
 void	validate(t_scene *scene, t_minirt_list *list, t_param_count *count, bool *result)
 {
@@ -37,11 +37,11 @@ void	validate(t_scene *scene, t_minirt_list *list, t_param_count *count, bool *r
 	else if (!ft_strcmp(LIGHT, list->identifier))
 		validate_light(scene, list->value, count, result);
 	else if (!ft_strcmp(PLANE, list->identifier))
-		validate_plane(list->value, result);
+		validate_plane(scene, list->value, result);
 	else if (!ft_strcmp(SPHERE, list->identifier))
-		validate_sphere(list->value, result);
+		validate_sphere(scene, list->value, result);
 	else if (!ft_strcmp(CYLINDER, list->identifier))
-		validate_cylinder(list->value, result);
+		validate_cylinder(scene, list->value, result);
 	else
 		*result = false;
 }

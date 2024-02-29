@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 12:37:04 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:57:37 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,20 +114,9 @@ void render_scene(t_scene *scene)
 	mlx_loop(scene->mlx.data);
 }
 
-t_rgb new_rgb(uint8_t red, uint8_t green, uint8_t blue)
-{
-	t_rgb rgb;
-
-	rgb.red = red;
-	rgb.green = green;
-	rgb.blue = blue;
-	return (rgb);
-}
-
 #include <libc.h>
 int main(int argc, char *argv[])
 {
-	t_shape *shape;
 	// t_light			*light;
 	t_scene scene;
 	bool result;
@@ -155,11 +144,7 @@ int main(int argc, char *argv[])
 	// shape[4] = new_shape(new_cylinder(new_vector(0, 0, 0), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69, 0.69, 0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
 	// shape[3] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, 0, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69, 0.69, 1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE);
 
-	shape = new_shape(new_cylinder(new_vector(3, 0, 25), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00, 0.69, 0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
-	shape->next = new_shape(new_cylinder(new_vector(2, 0, 20), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69, 0.00, 0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
-	shape->next->next = new_shape(new_cylinder(new_vector(0, 2, 2), 1, 5, new_vector(1, 0, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00, 0.00, 0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
-	shape->next->next->next = new_shape(new_cylinder(new_vector(0, 0, 0), 1, 2, new_vector(0, 1, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69, 0.69, 0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
-	shape->next->next->next->next = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, 0, 0)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69, 0.69, 1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE);
+	// shape = new_shape(new_cylinder(new_vector(3, 0, 25), new_vector(0, 1, 0), 1, 2, new_rgb(255, 255, 255)), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.00, 0.69, 0.00), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER);
 
 	// shape[0] = new_shape(new_cylinder(new_vector(0, 0, 5), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);
 	// shape[1] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
@@ -171,7 +156,7 @@ int main(int argc, char *argv[])
 	// light = new_light(new_vector(2, 2, 0), 1, new_rgb(255, 255, 255));
 	// light->next =  new_light(new_vector(0, 5, 0), 0.5, new_rgb(255, 255, 255));
 	// light->next->next = new_light(new_vector(5, 20, -5), 0.5, new_rgb(255, 255, 255));
-	scene = new_scene(shape, NULL, new_mlx_data());
+	scene = new_scene(NULL, NULL, new_mlx_data());
 	parser(&scene, argv[1], &result);
 	if (!result)
 	{
