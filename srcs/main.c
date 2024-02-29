@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 12:57:37 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:30:34 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,16 @@ void render_scene(t_scene *scene)
 	mlx_hook(scene->mlx.window, 17, 1L << 17, close_window, &scene->mlx);
 	mlx_loop(scene->mlx.data);
 }
+
+// t_rgb	new_rgb(uint8_t red, uint8_t green, uint8_t blue)
+// {
+// 	t_rgb	rgb;
+
+// 	rgb.red = red;
+// 	rgb.green = green;
+// 	rgb.blue = blue;
+// 	return (rgb);
+// }
 
 #include <libc.h>
 int main(int argc, char *argv[])

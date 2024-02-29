@@ -18,10 +18,14 @@
 		"convert.h": "c",
 		"validate.h": "c",
 		"locale": "c",
+<<<<<<< HEAD
 		"light.h": "c",
 		"scene.h": "c",
 		"shape.h": "c",
 		"camera.h": "c",
 		"vector.h": "c"
+=======
+		"light.h": "c"
+>>>>>>> origin/25-parseした値をsceneの構造体に入れる
 	}
 }
