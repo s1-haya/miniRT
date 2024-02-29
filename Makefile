@@ -6,7 +6,7 @@
 #    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/28 20:21:22 by hsawamur         ###   ########.fr        #
+#    Updated: 2024/02/29 11:33:17 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,12 +86,12 @@ OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
 DEPS =	$(OBJS:.o=.d)
 
 ## Library settings
-# libft
-LIBFT_DIR := ./libft
-LIBFT_AR := ./libft/libft.a
-LIBFT_LIB_DIR := ./libft
+# library
+LIBFT_DIR := ./library
+LIBFT_AR := ./library/library.a
+LIBFT_LIB_DIR := ./library
 LIBFT_LIB_NAME := ft
-LIBFT_INC_DIR := ./libft
+LIBFT_INC_DIR := ./library
 
 # minilibx
 MINILIBX_DIR := ./minilibx-linux
