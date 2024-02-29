@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 09:31:28 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:09:51 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	add_ambient_light(t_color *color, t_ambient_light ambient)
 {
 	t_color				ambient_right;
 
-	ambient_right.red = ambient.rgb.red / 255.0 * AMBIENT_LIGHT_INTENSITY;
-	ambient_right.green = ambient.rgb.green / 255.0 * AMBIENT_LIGHT_INTENSITY;
-	ambient_right.blue = ambient.rgb.blue / 255.0 * AMBIENT_LIGHT_INTENSITY;
+	ambient_right.red = ambient.rgb.red / 255.0 * ambient.intensity;
+	ambient_right.green = ambient.rgb.green / 255.0 * ambient.intensity;
+	ambient_right.blue = ambient.rgb.blue / 255.0 * ambient.intensity;
 	add_color(color, ambient_right);
 }
 
@@ -47,15 +47,13 @@ void	add_diffuse_reflection(t_color *color, t_shape *nearest_shape, t_vector inc
 	t_color			diffuse_reflection;
 	const t_color	coefficient = nearest_shape->material->diffuse;
 	const t_vector	normal = nearest_shape->intersection->normal;
-	const double	intensity_of_light_source = light.intensity;
 
-	diffuse_reflection.red = coefficient.red * intensity_of_light_source \
-			* clamp(dot_product(normal, incident), 0.0, 1.0);
-	diffuse_reflection.green = coefficient.green \
-			* intensity_of_light_source \
-			* clamp(dot_product(normal, incident), 0.0, 1.0);
-	diffuse_reflection.blue = coefficient.blue * intensity_of_light_source \
-			* clamp(dot_product(normal, incident), 0.0, 1.0);
+	diffuse_reflection.red = coefficient.red * light.intensity * light.rgb.red / 255.0
+								* clamp(dot_product(normal, incident), 0.0, 1.0);
+	diffuse_reflection.green = coefficient.green * light.intensity * light.rgb.green / 255.0
+								* clamp(dot_product(normal, incident), 0.0, 1.0);
+	diffuse_reflection.blue = coefficient.blue * light.intensity * light.rgb.blue / 255.0
+								* clamp(dot_product(normal, incident), 0.0, 1.0);
 	add_color(color, diffuse_reflection);
 }
 
@@ -78,12 +76,12 @@ void	add_specular_reflection(t_color *color, t_scene *scene, t_shape *nearest_sh
 			get_inverse_vector(incident_vector));
 	b = get_inverse_vector(scene->camera.view_point);
 	normalize_vector(&b);
-	specular_reflection.red = coefficient.red * light.intensity * \
-				pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
-	specular_reflection.green = coefficient.green * light.intensity * \
-				pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
-	specular_reflection.blue = coefficient.blue * light.intensity * \
-				pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
+	specular_reflection.red = coefficient.red * light.intensity  * light.rgb.red / 255.0
+					* pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
+	specular_reflection.green = coefficient.green * light.intensity  * light.rgb.green / 255.0
+					* pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
+	specular_reflection.blue = coefficient.blue * light.intensity  * light.rgb.blue / 255.0
+					* pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
 	add_color(color, specular_reflection);
 }
 
@@ -116,15 +114,18 @@ void	draw_shadow_shading(t_scene *scene, t_shape *nearest_shape, t_color *color,
 void	shading(t_scene *scene, t_shape *nearest_shape, int x, int y)
 {
 	t_color		color;
-	size_t		i;
+	t_light		*light;
 	int			int_color;
 
 	color = new_color(0, 0, 0);
-	i = 0;
+	light = scene->light;
 	if (nearest_shape != NULL)
 	{
-		while (i < LIGHT_SIZE)
-			draw_shadow_shading(scene, nearest_shape, &color, &scene->light[i++]);
+		while (light != NULL)
+		{
+			draw_shadow_shading(scene, nearest_shape, &color, light);
+			light = light->next;
+		}
 		get_radiance_to_color(&color, 0.0, 1.0);
 		int_color = ((int)color.red << 16) | ((int)color.green << 8) | (int)color.blue;
 		my_mlx_pixel_put(&scene->mlx.img, x, y, int_color);

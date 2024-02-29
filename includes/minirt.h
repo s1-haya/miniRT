@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 09:28:02 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:39:24 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #define LOOKATPOINT new_vector(0, -1, 1)
 // #define LOOKATPOINT new_vector(5, 0, -25)
 #define SIZE 5
-#define LIGHT_SIZE 3
+#define LIGHT_SIZE 2
 
 // #define CYLINDER_AXIS new_vector(0, 1, 0) //fileから読み込む
 
