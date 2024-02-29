@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/28 19:56:22 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 08:36:38 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 parameter of upeer character must be set, please."
 
 t_minirt_list	*read_rt_file(const char *file_name, bool *result);
-bool			validate(t_minirt_list *list,
+bool			validate(t_scene *scene, t_minirt_list *list,
 					t_param_count *count, bool *result);
 t_param_count	init_parameter_count();
 bool			check_parameter_count(t_param_count parameter_count);
@@ -32,7 +32,6 @@ void	parser(t_scene *scene, const char *file_name, bool *result)
 	t_param_count	count_parameter;
 	t_minirt_list	*free_list;
 
-	(void)scene;
 	list = read_rt_file(file_name, result);
 	free_list = list;
 	if (result == false)
@@ -43,7 +42,7 @@ void	parser(t_scene *scene, const char *file_name, bool *result)
 	count_parameter = init_parameter_count();
 	while (list != NULL)
 	{
-		validate(list, &count_parameter, result);
+		validate(scene, list, &count_parameter, result);
 		if (check_parameter_count(count_parameter)
 			|| *result == false)
 		{

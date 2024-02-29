@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 16:32:34 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 08:32:19 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 #define MIN_LIGHT (0.0)
 #define MAX_LIGHT (1.0)
 
-void	validate_light(char **value,
+void	validate_light(t_scene *scene, char **value,
 				t_param_count *count, bool *result)
 {
 	size_t	size;
 
+	(void)scene;
 	size = get_string_array_size(value);
 	if (size != 3)
 	{

@@ -20,20 +20,16 @@
 typedef struct s_light
 {
 	double		distance;
-	t_ray		light_ray;
-	t_color		intensity;
+	t_vector	point;
+	double		intensity;
 }	t_light;
 
-typedef struct s_point_light
+typedef struct s_ambient_light
 {
-	t_light	light;
-}	t_point_light;
+	double	intensity;
+	t_rgb	rgb;
+}	t_ambient_light;
 
-typedef struct s_direction_light
-{
-	t_light	light;
-}	t_direction_light;
-
-t_light	new_light(t_vector point, t_color intensity);
+t_light	new_light(t_vector point, double intensity);
 
 #endif

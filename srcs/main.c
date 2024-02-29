@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/28 20:28:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 08:28:03 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ int main(int argc, char *argv[])
 	if (!verify_single_argument(argc))
 		return (FAILURE);
 	result = true;
-	// parser(&scene, argv[1], &result);
 	shape = (t_shape **)malloc(sizeof(t_shape *) * SIZE);
 	if (shape == NULL)
 		return (FAILURE);
@@ -152,10 +151,11 @@ int main(int argc, char *argv[])
 	// shape[0] = new_shape(new_cylinder(new_vector(0, 0, 5), 1, 2), new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.00,0.69), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), CYLINDER, 2);
 	// shape[1] = new_shape(new_plane(new_vector(0, 1, 0), new_vector(0, -1, 0)),new_material(AMBIENT_LIGNT_REFLECTION_COEFFICIENT, new_color(0.69,0.69,1), SPECULAR_REFLECTION_COEFFICIENT, GLOSS_FACTOR), PLANE, 5);
 	light = (t_light *)malloc(sizeof(t_light) * LIGHT_SIZE);
-	light[0] = new_light(new_vector(2, 2, 0), new_color(1,1,1));
-	light[1] = new_light(new_vector(0, 5, 0), new_color(0.5,0.5,0.5));
+	light[0] = new_light(new_vector(2, 2, 0), 1);
+	light[1] = new_light(new_vector(0, 5, 0), 0.5);
 	// light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
 	scene = new_scene(shape, light, new_camera(VIEWPOINT, LOOKATPOINT, 80.0), new_mlx_data());
+	parser(&scene, argv[1], &result);
 	if (!result)
 	{
 		//sceneをfreeする。
