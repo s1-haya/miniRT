@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 10:51:54 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:14:03 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ t_rgb	new_rgb(uint8_t red, uint8_t green, uint8_t blue)
 int main(int argc, char *argv[])
 {
 	t_shape			**shape;
-	t_light			*light;
+	// t_light			*light;
 	t_scene			scene;
 	bool			result;
 	// 1 is_valid
@@ -165,10 +165,10 @@ int main(int argc, char *argv[])
 	// light[1] = new_light(new_vector(0, 5, 0), 0.5, new_rgb(255, 255, 255));
 	// light[2] = new_light(new_vector(5, 20, -5), new_color(0.5,0.5,0.5));
 
-	light = new_light(new_vector(2, 2, 0), 1, new_rgb(255, 255, 255));
-	light->next =  new_light(new_vector(0, 5, 0), 0.5, new_rgb(255, 255, 255));
+	// light = new_light(new_vector(2, 2, 0), 1, new_rgb(255, 255, 255));
+	// light->next =  new_light(new_vector(0, 5, 0), 0.5, new_rgb(255, 255, 255));
 	// light->next->next = new_light(new_vector(5, 20, -5), 0.5, new_rgb(255, 255, 255));
-	scene = new_scene(shape, light, new_camera(VIEWPOINT, LOOKATPOINT, 80.0), new_mlx_data());
+	scene = new_scene(shape, NULL, new_camera(VIEWPOINT, LOOKATPOINT, 80.0), new_mlx_data());
 	parser(&scene, argv[1], &result);
 	if (!result)
 	{
