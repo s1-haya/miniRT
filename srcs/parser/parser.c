@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 08:36:38 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:00:01 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,8 @@ void	parser(t_scene *scene, const char *file_name, bool *result)
 
 	list = read_rt_file(file_name, result);
 	free_list = list;
-	if (result == false)
-	{
-		*result = false;
+	if (*result == false)
 		return ;
-	}
 	count_parameter = init_parameter_count();
 	while (list != NULL)
 	{
