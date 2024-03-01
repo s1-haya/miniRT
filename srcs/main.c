@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 18:00:52 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:49:22 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,26 @@ double scaling(double value, double t_min, double t_max)
 	return (t_min + (t_max - t_min) * value);
 }
 
-double map(double x, double max, double assign, double sign)
+double map(double x, double max, double orig, double sign)
 {
-	return (sign * (2 * x) / (max - 1) + assign);
+	return (sign * (2 * x) / (max - 1) + orig);
+}
+
+bool	comp_vector(t_vector a, t_vector b)
+{
+	return (a.x == b.x && a.y == b.y && a.z == b.z);
 }
 
 t_ray set_viewpoint(t_camera *camera, double lx, double ly)
 {
-	const t_vector up = new_vector(0, 1, 0);
+	t_vector up;
 	t_vector d_x;
 	t_vector d_y;
 	t_vector pw;
 
+	up = new_vector(0, 1, 0);
+	if (vector_length(cross_product(up, camera->look_at_point)) == 0)
+		up = new_vector(1, 0, 0);
 	d_x = cross_product(up, camera->look_at_point);
 	normalize_vector(&d_x);
 	d_y = cross_product(camera->look_at_point, d_x);
@@ -157,7 +165,7 @@ int main(int argc, char *argv[])
 
 	if (!verify_single_argument(argc))
 		return (FAILURE);
-	result = true;
+	ft_bzero(&scene, sizeof(t_scene));
 	scene.mlx = new_mlx_data();
 	parser(&scene, argv[1], &result);
 	if (!result)

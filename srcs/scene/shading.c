@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shading.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 17:12:58 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:12:51 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,23 +97,15 @@ void	add_specular_reflection(t_color *color, t_scene *scene, t_shape *nearest_sh
 	add_color(color, specular_reflection);
 }
 
-t_vector	get_incident_vector(t_light *light, t_shape *nearest_shape)
-{
-	t_vector	incident_vector;
-
-	incident_vector = subtract_vectors(light->point, \
-				nearest_shape->intersection->point);
-	light->distance = vector_length(incident_vector);
-	normalize_vector(&incident_vector);
-	return (incident_vector);
-}
-
 void	draw_shadow_shading(t_scene *scene, t_shape *nearest_shape, t_color *color, t_light *light)
 {
 	t_vector	incident_vector;
 	t_ray		shadow_ray;
 
-	incident_vector = get_incident_vector(light, nearest_shape);
+	incident_vector = subtract_vectors(light->point, \
+				nearest_shape->intersection->point);
+	light->distance = vector_length(incident_vector);
+	normalize_vector(&incident_vector);
 	shadow_ray = new_ray(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), incident_vector);
 	if (determine_intersection_ray_and_object(scene->shape, shadow_ray, (*light).distance - C_EPSILON) != NULL)
 		return ;
