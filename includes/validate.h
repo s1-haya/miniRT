@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:36:35 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:44:59 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:46:33 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ t_vector	convert_value_to_vector_in_range(const char *value,
 												double max,
 												bool *result);
 size_t		get_string_array_size(char **array);
+t_vector	convert_value_to_normal_vector(const char *value, bool *result);
 
 #endif

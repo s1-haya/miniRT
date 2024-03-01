@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_value_to_vector_in_range.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/27 14:47:19 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:46:04 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,34 @@ t_vector	convert_value_to_vector_in_range(const char *value,
 	vector.z = convert_string_to_double_in_range(value_vector[2],
 			min, max, result);
 	delete_value(value_vector);
+	return (vector);
+}
+
+t_vector	convert_value_to_normal_vector(const char *value, bool *result)
+{
+	char		**value_vector;
+	t_vector	vector;
+
+	value_vector = ft_split(value, DELMITER_CHAR);
+	if (*result == false || value_vector == NULL
+		|| get_string_array_size(value_vector) != 3)
+	{
+		if (value_vector == NULL)
+			write(STDERR_FILENO, ERROR_NOT_MEMORY_ALLOCATED,
+				sizeof(ERROR_NOT_MEMORY_ALLOCATED) - 1);
+		vector.x = 0;
+		delete_value(value_vector);
+		*result = false;
+		return (vector);
+	}
+	vector.x = convert_string_to_double_in_range(value_vector[0],
+			-1.0, 1.0, result);
+	vector.y = convert_string_to_double_in_range(value_vector[1],
+			-1.0, 1.0, result);
+	vector.z = convert_string_to_double_in_range(value_vector[2],
+			-1.0, 1.0, result);
+	delete_value(value_vector);
+	if (vector_length(vector) != 1.0)
+		*result = false;
 	return (vector);
 }
