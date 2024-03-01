@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:56:05 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 15:18:39 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:54:53 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	get_file_descriptor(const char *file_name, bool *result)
 		perror("open");
 		*result = false;
 	}
-	return (ERROR);
+	return (fd);
 }
 
 t_minirt_list	*read_rt_file(const char *file_name, bool *result)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: erin <erin@student.42.fr>                  +#+  +:+       +#+         #
+#    By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/29 11:59:59 by erin             ###   ########.fr        #
+#    Updated: 2024/03/01 15:40:41 by hsawamur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_sphere.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_cylinder.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/check_parameter_count.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/check_direction_vector.c\
 
 CONVERT_DIR := convert
 SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_string_to_double_in_range.c\

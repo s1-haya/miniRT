@@ -6,22 +6,14 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:53:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:03:09 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "validate.h"
 #include "minirt.h"
 
-t_rgb new_rgb(uint8_t red, uint8_t green, uint8_t blue)
-{
-	t_rgb rgb;
-
-	rgb.red = red;
-	rgb.green = green;
-	rgb.blue = blue;
-	return (rgb);
-}
+void	check_direction_vector(t_vector vector, bool *result);
 
 void	validate_cylinder(t_scene *scene, char **value, bool *result)
 {
@@ -39,6 +31,7 @@ void	validate_cylinder(t_scene *scene, char **value, bool *result)
 							convert_string_to_double_in_range(value[2], INT_MIN, INT_MAX, result),
 							convert_string_to_double_in_range(value[3], INT_MIN, INT_MAX, result),
 							convert_value_to_rgb(value[4], result));
+	check_direction_vector(cylinder->axis, result);
 	if (*result == false)
 		return ;
 	ft_lstadd_back(&scene->shape, ft_lstnew(new_shape(cylinder, CYLINDER)));
