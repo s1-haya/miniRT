@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 20:03:27 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:16:08 by hsawamur         ###   ########.fr       */
+/*   Created: 2023/09/21 11:10:37 by erin              #+#    #+#             */
+/*   Updated: 2023/09/29 16:43:07 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "scene.h"
+#include "libft.h"
 
-// t_scene	new_scene(t_shape *shape,
-// 				t_light *light, 
-// 				t_mlx_data data)
-// {
-// 	t_scene	scene;
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new_node;
 
-// 	scene.shape = shape;
-// 	scene.light = light;
-// 	scene.mlx = data;
-// 	return (scene);
-// }
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (!new_node)
+		return (NULL);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
+}

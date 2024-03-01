@@ -6,31 +6,20 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:49:12 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/06 09:01:13 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:52:53 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// シャドウレイ　視点と物体の交点から光源までの半直線
-
-//影　物体の位置を読み取ることができる
-
-//影の付け方
-//光源と視点と物体の交点との間に別の物体があるかどうか
-// - その方向に別の物体が存在するかどうか
-// - 光源と交点の距離　>= 別の物体と交点の距離
-
-// 光源と交点の距離の求め方
-// - 点光源の場合　光源の位置ベクトル - 交点の位置ベクトル
-// - 平行光源の場合　光源位置という概念がないため、無限遠方
 
 #include "shape.h"
 #include "light.h"
 #include "camera.h"
 #include "minirt.h"
+#include "libft.h"
 
 typedef struct s_scene {
-	t_shape		 **shape;
-	t_light		*light;
-	t_camera	camera;
-	t_mlx_data	mlx;
+	t_list			*shape;
+	t_light			*light;
+	t_camera		camera;
+	t_mlx_data		mlx;
+	t_ambient_light	ambient;
 }	t_scene;

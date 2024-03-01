@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 20:03:27 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:16:08 by hsawamur         ###   ########.fr       */
+/*   Created: 2023/09/21 11:15:17 by erin              #+#    #+#             */
+/*   Updated: 2023/09/29 16:42:50 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "scene.h"
+#include "libft.h"
 
-// t_scene	new_scene(t_shape *shape,
-// 				t_light *light, 
-// 				t_mlx_data data)
-// {
-// 	t_scene	scene;
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	t_list	*temp;
 
-// 	scene.shape = shape;
-// 	scene.light = light;
-// 	scene.mlx = data;
-// 	return (scene);
-// }
+	temp = lst;
+	while (temp && f)
+	{
+		f(temp->content);
+		temp = temp->next;
+	}
+}

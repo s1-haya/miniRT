@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 20:03:27 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:16:08 by hsawamur         ###   ########.fr       */
+/*   Created: 2023/09/21 11:13:12 by erin              #+#    #+#             */
+/*   Updated: 2023/09/29 16:42:08 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "scene.h"
+#include "libft.h"
 
-// t_scene	new_scene(t_shape *shape,
-// 				t_light *light, 
-// 				t_mlx_data data)
-// {
-// 	t_scene	scene;
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
 
-// 	scene.shape = shape;
-// 	scene.light = light;
-// 	scene.mlx = data;
-// 	return (scene);
-// }
+	if (!lst)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	last = ft_lstlast(*lst);
+	if (last)
+		last->next = new;
+}

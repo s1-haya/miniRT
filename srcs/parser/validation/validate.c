@@ -6,11 +6,12 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:33:48 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 13:15:00 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:29:08 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "scene.h"
 #include "libft.h"
 
 #define AMBIENT_LIGHTING "A"
@@ -20,27 +21,27 @@
 #define SPHERE "sp"
 #define CYLINDER "cy"
 
-void	validate_ambient_lighting(char **value, t_param_count *count, bool *result);
-void	validate_camera(char **value, t_param_count *count, bool *result);
-void	validate_light(char **value, t_param_count *count, bool *result);
-void	validate_plane(char **value, bool *result);
-void	validate_sphere(char **value, bool *result);
-void	validate_cylinder(char **value, bool *result);
+void	validate_ambient_lighting(t_scene *scene, char **value, t_param_count *count, bool *result);
+void	validate_camera(t_scene *scene, char **value, t_param_count *count, bool *result);
+void	validate_light(t_scene *scene, char **value, t_param_count *count, bool *result);
+void	validate_plane(t_scene *scene, char **value, bool *result);
+void	validate_sphere(t_scene *scene, char **value, bool *result);
+void	validate_cylinder(t_scene *scene, char **value, bool *result);
 
-void	validate(t_minirt_list *list, t_param_count *count, bool *result)
+void	validate(t_scene *scene, t_minirt_list *list, t_param_count *count, bool *result)
 {
 	if (!ft_strcmp(AMBIENT_LIGHTING, list->identifier))
-		validate_ambient_lighting(list->value, count, result);
+		validate_ambient_lighting(scene, list->value, count, result);
 	else if (!ft_strcmp(CAMERA, list->identifier))
-		validate_camera(list->value, count, result);
+		validate_camera(scene, list->value, count, result);
 	else if (!ft_strcmp(LIGHT, list->identifier))
-		validate_light(list->value, count, result);
+		validate_light(scene, list->value, count, result);
 	else if (!ft_strcmp(PLANE, list->identifier))
-		validate_plane(list->value, result);
+		validate_plane(scene, list->value, result);
 	else if (!ft_strcmp(SPHERE, list->identifier))
-		validate_sphere(list->value, result);
+		validate_sphere(scene, list->value, result);
 	else if (!ft_strcmp(CYLINDER, list->identifier))
-		validate_cylinder(list->value, result);
+		validate_cylinder(scene, list->value, result);
 	else
 		*result = false;
 }

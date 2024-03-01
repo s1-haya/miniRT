@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 20:03:27 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:16:08 by hsawamur         ###   ########.fr       */
+/*   Created: 2023/09/21 11:11:47 by erin              #+#    #+#             */
+/*   Updated: 2023/09/29 16:43:12 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "scene.h"
+#include "libft.h"
 
-// t_scene	new_scene(t_shape *shape,
-// 				t_light *light, 
-// 				t_mlx_data data)
-// {
-// 	t_scene	scene;
+int	ft_lstsize(t_list *lst)
+{
+	int	count;
 
-// 	scene.shape = shape;
-// 	scene.light = light;
-// 	scene.mlx = data;
-// 	return (scene);
-// }
+	count = 0;
+	while (lst)
+	{
+		count ++;
+		lst = lst->next;
+	}
+	return (count);
+}

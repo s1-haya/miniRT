@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 07:58:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/25 13:33:53 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/29 11:42:53 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_camera	new_camera(t_vector view_point, t_vector look_at_point, double horizont
 	camera.look_at_point = look_at_point;
 	normalize_vector(&camera.look_at_point); //引数の段階でチェックする
 	horizontal_value *= M_PI / 180.0;
-	camera.distance = (3.5 / 2) / tan(horizontal_value / 2.0); // 3.5はスクリーンの幅(defineする)
+	camera.distance = (3.5 / 2.0) / tan(horizontal_value / 2.0); // 3.5はスクリーンの幅(defineする)
 	camera.horizontal_viewing_angle = horizontal_value;
 	return (camera);
 }

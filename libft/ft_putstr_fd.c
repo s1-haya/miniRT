@@ -3,33 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/19 18:25:24 by hsawamur          #+#    #+#             */
-/*   Updated: 2023/01/25 00:18:13 by hsawamur         ###   ########.fr       */
+/*   Created: 2023/09/21 10:59:32 by erin              #+#    #+#             */
+/*   Updated: 2024/02/29 11:59:08 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *c, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	len;
 	size_t	i;
 
-	len = ft_strlen(c);
-	if (c == NULL)
+	if (!s)
 		return ;
-	while (len > SIZE_MAX)
+	i = 0;
+	while (s[i])
 	{
-		write(fd, c, SIZE_MAX);
-		len -= SIZE_MAX;
-	}	
-	write(fd, c, len);
-}
-
-int main(void)
-{
-	ft_putstr_fd("jdaljfdjfidjlajzljoiflkajdflkjaofjlajfdioa;fdjajdf:kjdlk;fjiafjkajfiaol;fjiaoflkajfoi:jaojfla;jfijajdfijadfjkljfajo:f;k;akf;lakflka;fk;akf;akfj;fjalfjad", 1);
-	return (0);
+		write(fd, &s[i], 1);
+		i++;
+	}
 }
