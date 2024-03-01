@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 17:31:32 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/01 18:02:30 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,16 @@ void	printPlane(t_plane *plane)
 	printRGB(plane->rgb);
 }
 
+void	printCylinder(t_cylinder *cylinder)
+{
+	printf("cylinder:\n");
+	printVector(cylinder->origin, "cylinder center");
+	printVector(cylinder->axis, "cylinder axis");
+	printf("diameter %f\n", cylinder->radius * 2);
+	printf("height %f\n", cylinder->height);
+	printRGB(cylinder->rgb);
+}
+
 void	printShape(t_list *list)
 {
 	while (list != NULL)
@@ -149,7 +159,7 @@ void	printShape(t_list *list)
 		else if (((t_shape *)list->content)->object == SPHERE)
 			printSphere((t_sphere *)(((t_shape *)list->content)->substance));
 		else if (((t_shape *)list->content)->object == CYLINDER)
-			printf("cylinder:\n");
+			printCylinder((t_cylinder *)(((t_shape *)list->content)->substance));
 		else
 			printf("none;\n");
 		list = list->next;
@@ -173,11 +183,7 @@ int main(int argc, char *argv[])
 		return (FAILURE);
 	}
 	if (scene.shape != NULL)
-	{
-		printf("ok\n");
 		printShape(scene.shape);
-		printf("end\n");
-	}
 	render_scene(&scene);
 	return (SUCCESS);
 }
