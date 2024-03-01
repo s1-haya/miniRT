@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 15:49:22 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/01 17:31:32 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int close_window(t_mlx_data *mlx) // sceneにしてこの中でfree
 }
 
 ///////////////////////////////////////////////////////////////////////////
-
 #include <stdio.h>
 void render_scene(t_scene *scene)
 {
@@ -99,14 +98,14 @@ void render_scene(t_scene *scene)
 	t_ray ray;
 	t_shape *nearest_shape;
 
-	x = WINDOW_ORIGIN_X;
-	while (x < WINDOW_MAX_X)
+	x = IMG_ORIGIN_X;
+	while (x < IMG_MAX_X)
 	{
-		lx = map((double)x, WINDOW_MAX_X, -1.0, 1.0);
-		y = WINDOW_ORIGIN_Y;
-		while (y < WINDOW_MAX_Y)
+		lx = map((double)x, IMG_MAX_X, -1.0, 1.0);
+		y = IMG_ORIGIN_Y;
+		while (y < IMG_MAX_Y)
 		{
-			ly = map((double)y, WINDOW_MAX_Y, 1.0, -1.0);
+			ly = map((double)y, IMG_MAX_Y, 1.0, -1.0);
 			ray = set_viewpoint(&scene->camera, lx, ly);
 			nearest_shape = determine_intersection_ray_and_object(scene->shape, ray, LONG_MAX);
 			shading(scene, nearest_shape, x, y);
@@ -114,7 +113,7 @@ void render_scene(t_scene *scene)
 		}
 		x++;
 	}
-	mlx_put_image_to_window(scene->mlx.data, scene->mlx.window, scene->mlx.img.data, WINDOW_ORIGIN_X, WINDOW_ORIGIN_Y);
+	mlx_put_image_to_window(scene->mlx.data, scene->mlx.window, scene->mlx.img.data, IMG_ORIGIN_X, IMG_ORIGIN_Y);
 	mlx_hook(scene->mlx.window, 2, 1L << 0, esc_key, &scene->mlx);
 	mlx_hook(scene->mlx.window, 17, 1L << 17, close_window, &scene->mlx);
 	mlx_loop(scene->mlx.data);

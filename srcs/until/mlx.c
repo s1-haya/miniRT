@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:29:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 16:47:01 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/01 17:30:22 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ t_mlx_data	new_mlx_data()
 		perror(FAILED_TO_ALLOCATE_MEMORY);
 		exit(FAILURE);
 	}
-	mlx.window = mlx_new_window(mlx.data, WINDOW_MAX_X, WINDOW_MAX_Y, MLX_TITLE);
+	mlx.window = mlx_new_window(mlx.data, WINDOW_WIDTH, WINDOW_HEIGHT, MLX_TITLE);
 	if (mlx.window == NULL)
 	{
 		free(mlx.data);
 		perror(FAILED_TO_ALLOCATE_MEMORY);
 		exit(FAILURE);
 	}
-	mlx.img.data = mlx_new_image(mlx.data, WINDOW_MAX_X, WINDOW_MAX_Y);
+	mlx.img.data = mlx_new_image(mlx.data, IMG_MAX_X, IMG_MAX_Y);
 	if (mlx.img.data == NULL)
 	{
 		free(mlx.data);
