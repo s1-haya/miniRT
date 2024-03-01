@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 18:02:30 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/01 19:18:04 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,15 @@ t_ray set_viewpoint(t_camera *camera, double lx, double ly)
 	up = new_vector(0, 1, 0);
 	if (vector_length(cross_product(up, camera->look_at_point)) == 0)
 		up = new_vector(1, 0, 0);
+	// printVector(camera->look_at_point, "lookat");
+	// printVector(up, "up");
 	d_x = cross_product(up, camera->look_at_point);
 	normalize_vector(&d_x);
 	d_y = cross_product(camera->look_at_point, d_x);
 	normalize_vector(&d_y);
+	// printVector(d_x, "dx");
+	// printVector(d_y, "dy");
+	// exit(EXIT_SUCCESS);
 	pw = camera->view_point;
 	pw = add_vectors(pw, scalar_multiply(camera->look_at_point, camera->distance));
 	pw = add_vectors(pw, scalar_multiply(d_x, lx));
@@ -67,27 +72,36 @@ t_ray set_viewpoint(t_camera *camera, double lx, double ly)
 	return (new_ray(camera->view_point, subtract_vectors(pw, camera->view_point)));
 }
 
-/////////////////////////////////////////////////////////////////////////// keyconf
-int esc_key(int keycode, t_mlx_data *mlx) // sceneにしてこの中でfree
+void	free_scene(t_scene *scene) //怪しい
+{
+	ft_lstclear(&scene->shape, free);
+	while (scene->light)
+	{
+		free(scene->light);
+		scene->light = scene->light->next;
+	}
+}
+
+int esc_key(int keycode, t_scene *scene)
 {
 	if (keycode == 53)
 	{
-		mlx_destroy_window(mlx->data, mlx->window);
-		// ft_free_exit(data->map, EXIT_SUCCESS, -1);
+		mlx_destroy_window(scene->mlx.data, scene->mlx.window);
+		free_scene(scene);
 		exit(EXIT_SUCCESS);
 	}
 	return (0);
 }
 
-int close_window(t_mlx_data *mlx) // sceneにしてこの中でfree
+// int close_window(t_scene *scene) __attribute__((noreturn));
+
+int close_window(t_scene *scene)
 {
-	mlx_destroy_window(mlx->data, mlx->window);
-	// ft_free_exit(data->map, EXIT_SUCCESS, -1);
+	mlx_destroy_window(scene->mlx.data, scene->mlx.window);
+	free_scene(scene);
 	exit(EXIT_SUCCESS);
-	return (0);
 }
 
-///////////////////////////////////////////////////////////////////////////
 #include <stdio.h>
 void render_scene(t_scene *scene)
 {
@@ -114,8 +128,8 @@ void render_scene(t_scene *scene)
 		x++;
 	}
 	mlx_put_image_to_window(scene->mlx.data, scene->mlx.window, scene->mlx.img.data, IMG_ORIGIN_X, IMG_ORIGIN_Y);
-	mlx_hook(scene->mlx.window, 2, 1L << 0, esc_key, &scene->mlx);
-	mlx_hook(scene->mlx.window, 17, 1L << 17, close_window, &scene->mlx);
+	mlx_hook(scene->mlx.window, 2, 1L << 0, esc_key, scene);
+	mlx_hook(scene->mlx.window, 17, 1L << 17, close_window, scene);
 	mlx_loop(scene->mlx.data);
 }
 
@@ -127,7 +141,7 @@ void	printRGB(t_rgb rgb)
 void	printSphere(t_sphere *sphere)
 {
 	printf("sphere:\n");
-	printVector(sphere->origin, "sphere origin");
+	printVector(sphere->origin, "origin");
 	printf("radius %f\n", sphere->radius);
 	printRGB(sphere->rgb);
 }
@@ -135,16 +149,16 @@ void	printSphere(t_sphere *sphere)
 void	printPlane(t_plane *plane)
 {
 	printf("plane:\n");
-	printVector(plane->point, "plane point");
-	printVector(plane->normal, "plane normal");
+	printVector(plane->point, "point");
+	printVector(plane->normal, "normal");
 	printRGB(plane->rgb);
 }
 
 void	printCylinder(t_cylinder *cylinder)
 {
 	printf("cylinder:\n");
-	printVector(cylinder->origin, "cylinder center");
-	printVector(cylinder->axis, "cylinder axis");
+	printVector(cylinder->origin, "center");
+	printVector(cylinder->axis, "axis");
 	printf("diameter %f\n", cylinder->radius * 2);
 	printf("height %f\n", cylinder->height);
 	printRGB(cylinder->rgb);
@@ -179,11 +193,12 @@ int main(int argc, char *argv[])
 	parser(&scene, argv[1], &result);
 	if (!result)
 	{
-		// sceneをfreeする。
+		free_scene(&scene);
 		return (FAILURE);
 	}
 	if (scene.shape != NULL)
 		printShape(scene.shape);
 	render_scene(&scene);
+	// system("leaks -q miniRT");
 	return (SUCCESS);
 }

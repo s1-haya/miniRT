@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 15:12:51 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/01 20:09:29 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	add_ambient_light(t_color *color, t_ambient_light ambient)
 	ambient_right.red = ambient.rgb.red / 255.0 * ambient.intensity;
 	ambient_right.green = ambient.rgb.green / 255.0 * ambient.intensity;
 	ambient_right.blue = ambient.rgb.blue / 255.0 * ambient.intensity;
+	// printf("%f, %f, %f", ambient_right.red, ambient_right.green, ambient_right.blue);
+	// exit(EXIT_SUCCESS);
 	add_color(color, ambient_right);
 }
 
@@ -84,16 +86,17 @@ void	add_specular_reflection(t_color *color, t_scene *scene, t_shape *nearest_sh
 		return ;
 	a = subtract_vectors(scalar_multiply(nearest_shape->intersection->normal, \
 		2 * dot_product(nearest_shape->intersection->normal, incident_vector)), \
-			get_inverse_vector(incident_vector));
+			incident_vector);
+	normalize_vector(&a);
 	b = get_inverse_vector(scene->camera.view_point);
 	normalize_vector(&b);
 	rgb = get_rgb_in_shape(nearest_shape);
-	specular_reflection.red = rgb.red / 255.0 * light.intensity  * light.rgb.red / 255.0
-					* pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
-	specular_reflection.green = rgb.green / 255.0 * light.intensity  * light.rgb.green / 255.0
-					* pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
-	specular_reflection.blue = rgb.blue / 255.0 * light.intensity  * light.rgb.blue / 255.0
-					* pow(clamp(dot_product(a, b), 0.0, 1.0), GLOSS_FACTOR);
+	specular_reflection.red = rgb.red / 255.0 * light.intensity * light.rgb.red / 255.0
+					* pow(dot_product(a, b), GLOSS_FACTOR);
+	specular_reflection.green = rgb.green / 255.0 * light.intensity * light.rgb.green / 255.0
+					* pow(dot_product(a, b), GLOSS_FACTOR);
+	specular_reflection.blue = rgb.blue / 255.0 * light.intensity * light.rgb.blue / 255.0
+					* pow(dot_product(a, b), GLOSS_FACTOR);
 	add_color(color, specular_reflection);
 }
 

@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 17:46:04 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/01 19:56:47 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ t_vector	convert_value_to_normal_vector(const char *value, bool *result)
 	vector.z = convert_string_to_double_in_range(value_vector[2],
 			-1.0, 1.0, result);
 	delete_value(value_vector);
-	if (vector_length(vector) != 1.0)
-		*result = false;
+	// if (vector_length(vector) != 1.0) //テスト用に一旦消す
+	// 	*result = false;
+	normalize_vector(&vector);
 	return (vector);
 }
