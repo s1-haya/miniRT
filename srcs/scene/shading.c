@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 20:09:29 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/01 20:20:13 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ t_rgb	get_rgb_in_shape(t_shape *shape)
 	return (((t_cylinder *)shape->substance)->rgb);
 }
 
-void	add_ambient_light(t_color *color, t_ambient_light ambient)
+void	add_ambient_light(t_color *color, t_ambient_light ambient, t_shape *nearest_shape)
 {
-	t_color				ambient_right;
+	t_color	ambient_right;
+	t_rgb	rgb;
 
-	ambient_right.red = ambient.rgb.red / 255.0 * ambient.intensity;
-	ambient_right.green = ambient.rgb.green / 255.0 * ambient.intensity;
-	ambient_right.blue = ambient.rgb.blue / 255.0 * ambient.intensity;
+	rgb = get_rgb_in_shape(nearest_shape);
+	ambient_right.red = rgb.red / 255.0 * ambient.rgb.red / 255.0 * ambient.intensity;
+	ambient_right.green = rgb.green / 255.0 * ambient.rgb.green / 255.0 * ambient.intensity;
+	ambient_right.blue = rgb.blue / 255.0 * ambient.rgb.blue / 255.0 * ambient.intensity;
 	// printf("%f, %f, %f", ambient_right.red, ambient_right.green, ambient_right.blue);
 	// exit(EXIT_SUCCESS);
 	add_color(color, ambient_right);
@@ -112,7 +114,6 @@ void	draw_shadow_shading(t_scene *scene, t_shape *nearest_shape, t_color *color,
 	shadow_ray = new_ray(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), incident_vector);
 	if (determine_intersection_ray_and_object(scene->shape, shadow_ray, (*light).distance - C_EPSILON) != NULL)
 		return ;
-	add_ambient_light(color, scene->ambient);
 	add_diffuse_reflection(color, nearest_shape, incident_vector, *light);
 	add_specular_reflection(color, scene, nearest_shape, *light);
 	return ;
@@ -128,6 +129,7 @@ void	shading(t_scene *scene, t_shape *nearest_shape, int x, int y)
 	light = scene->light;
 	if (nearest_shape != NULL)
 	{
+		add_ambient_light(&color, scene->ambient, nearest_shape);
 		while (light != NULL)
 		{
 			draw_shadow_shading(scene, nearest_shape, &color, light);
