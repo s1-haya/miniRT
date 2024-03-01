@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 20:20:13 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/01 21:10:05 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	add_ambient_light(t_color *color, t_ambient_light ambient, t_shape *nearest
 	ambient_right.red = rgb.red / 255.0 * ambient.rgb.red / 255.0 * ambient.intensity;
 	ambient_right.green = rgb.green / 255.0 * ambient.rgb.green / 255.0 * ambient.intensity;
 	ambient_right.blue = rgb.blue / 255.0 * ambient.rgb.blue / 255.0 * ambient.intensity;
-	// printf("%f, %f, %f", ambient_right.red, ambient_right.green, ambient_right.blue);
-	// exit(EXIT_SUCCESS);
 	add_color(color, ambient_right);
 }
 

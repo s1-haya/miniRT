@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 19:49:56 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/01 21:09:54 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ double	max(double n1, double n2);
 #define SPECULAR_REFLECTION_COEFFICIENT new_color(0.30,0.30,0.30)
 // 光沢度
 // Gloss factor
-#define GLOSS_FACTOR 10
+#define GLOSS_FACTOR 50
 // 環境光の強度
 // ambient light intensity
 #define AMBIENT_LIGHT_INTENSITY 0.1
