@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:08:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/18 18:13:58 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/02 10:41:24 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,6 @@ t_vector scalar_multiply(t_vector v, double scalar)
 	return (vector);
 }
 
-void printVector(t_vector vec, char *name)
-{
-    printf("%s: (%lf, %lf, %lf)\n",name, vec.x, vec.y, vec.z);
-}
 
 
 // #include <stdio.h>

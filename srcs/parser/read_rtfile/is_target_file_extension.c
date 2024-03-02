@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 08:28:45 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 15:17:20 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/02 10:31:25 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # define FAILURE (1)
 # define ERROR_NOT_TARGET_FILE_EXTENSION "Error: Incorrect filename \
 Please check the file you have entered. The file extension must be .ft.\n"
-
-#include <stdio.h>
 
 bool	is_target_file_extension(const char *filename, const char *extension)
 {

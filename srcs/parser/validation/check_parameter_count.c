@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:39:37 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 16:00:24 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/02 08:50:33 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,15 @@ void	printf_param_count(t_param_count parameter_count)
 	printf("light:   %zu\n", parameter_count.light);
 }
 
-bool	check_parameter_count(t_param_count parameter_count)
+void	check_parameter_count(t_param_count parameter_count, bool *result)
 {
-	if (parameter_count.ambient > MAX_PRAMTER_COUNT
+	if (*result && (parameter_count.ambient > MAX_PRAMTER_COUNT
 		|| parameter_count.camera > MAX_PRAMTER_COUNT
-		|| parameter_count.light > MAX_PRAMTER_COUNT)
+		|| parameter_count.light > MAX_PRAMTER_COUNT))
 	{
 		write(STDERR_FILENO, ERROR_EXCEEDS_MAX_LIMIT, sizeof(ERROR_EXCEEDS_MAX_LIMIT) - 1);
-		return (true);
+		*result = false;
 	}
-	return (false);
 }
 
 void	check_set_parameter(t_param_count parameter_count, bool *result)

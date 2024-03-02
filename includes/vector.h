@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:18:06 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/01/18 18:13:35 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/02 10:50:58 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,4 @@ double vector_length(t_vector v);
 void normalize_vector(t_vector *v);
 t_vector scalar_multiply(t_vector v, double scalar);
 t_vector get_inverse_vector(t_vector v);
-void printVector(t_vector vec, char *name);
 #endif

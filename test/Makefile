@@ -19,6 +19,7 @@ TEST_SRCS += $(PARSER_DIR)/test_is_target_file_extension.c\
 			$(PARSER_DIR)/test_read_rt_file.c\
 			$(PARSER_DIR)/test_validate.c\
 			$(PARSER_DIR)/test_parser.c\
+			$(PARSER_DIR)/test_exec.c\
 
 TEST_OBJS_DIR := ./objs
 TEST_OBJS := $(patsubst %.c, $(TEST_OBJS_DIR)/%.o, $(TEST_SRCS))
@@ -27,7 +28,7 @@ UNITY_DIR := $(MINIRT_DIR)/Unity
 UNITY_SRCS := $(UNITY_DIR)/src/unity.c
 UNITY_OBJS := $(patsubst $(UNITY_DIR)/src/%.c, $(TEST_OBJS_DIR)/%.o, $(UNITY_SRCS))
 
-INC_DIR := ./ $(UNITY_DIR)/src $(MINIRT_DIR)/includes $(UNITY_DIR)/fixture/src
+INC_DIR := ./ $(UNITY_DIR)/src $(MINIRT_DIR)/includes $(LIBFT_DIR)
 INCLUDES := $(addprefix -I, $(INC_DIR))
 
 DEPS := $(TEST_OBJS_DIR:.d=.o)

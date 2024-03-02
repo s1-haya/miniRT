@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 18:00:52 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/02 09:07:34 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,43 +112,6 @@ void render_scene(t_scene *scene)
 	mlx_loop(scene->mlx.data);
 }
 
-void	printRGB(t_rgb rgb)
-{
-	printf("red %d, green %d, blue %d\n", rgb.red, rgb.green, rgb.blue);
-}
-
-void	printSphere(t_sphere *sphere)
-{
-	printf("sphere:\n");
-	printVector(sphere->origin, "sphere origin");
-	printf("radius %f\n", sphere->radius);
-	printRGB(sphere->rgb);
-}
-
-void	printPlane(t_plane *plane)
-{
-	printf("plane:\n");
-	printVector(plane->point, "plane point");
-	printVector(plane->normal, "plane normal");
-	printRGB(plane->rgb);
-}
-
-void	printShape(t_list *list)
-{
-	while (list != NULL)
-	{
-		if (((t_shape *)list->content)->object == PLANE)
-			printPlane((t_plane *)(((t_shape *)list->content)->substance));
-		else if (((t_shape *)list->content)->object == SPHERE)
-			printSphere((t_sphere *)(((t_shape *)list->content)->substance));
-		else if (((t_shape *)list->content)->object == CYLINDER)
-			printf("cylinder:\n");
-		else
-			printf("none;\n");
-		list = list->next;
-	}
-}
-
 #include <libc.h>
 int main(int argc, char *argv[])
 {
@@ -165,12 +128,7 @@ int main(int argc, char *argv[])
 		// sceneをfreeする。
 		return (FAILURE);
 	}
-	if (scene.shape != NULL)
-	{
-		printf("ok\n");
-		printShape(scene.shape);
-		printf("end\n");
-	}
 	render_scene(&scene);
+	system("leaks -q miniRT");
 	return (SUCCESS);
 }

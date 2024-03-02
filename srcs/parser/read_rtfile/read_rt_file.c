@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:56:05 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 15:54:53 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/02 10:36:58 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 #define ERROR (-1)
 
-void load_file_into_minirt_list(t_minirt_list **head, const int fd, bool *result);
+void	load_file_into_minirt_list(t_minirt_list **head, const int fd, bool *result);
+char	*ft_strrchr(const char *s, int c);
 
 static int	get_file_descriptor(const char *file_name, bool *result)
 {
@@ -41,7 +42,7 @@ t_minirt_list	*read_rt_file(const char *file_name, bool *result)
 	int				fd;
 
 	head = NULL;
-	*result = is_target_file_extension(file_name, ".rt");
+	*result = is_target_file_extension(ft_strrchr(file_name, '/'), ".rt");
 	fd = get_file_descriptor(file_name, result);
 	if (*result)
 		load_file_into_minirt_list(&head, fd, result);
