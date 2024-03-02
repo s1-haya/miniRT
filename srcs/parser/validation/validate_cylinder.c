@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_cylinder.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:53:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:03:05 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ void	validate_cylinder(t_scene *scene, char **value, bool *result)
 		return ;
 	}
 	cylinder = new_cylinder(convert_value_to_vector_in_range(value[0], INT_MIN, INT_MAX, result),
-							convert_value_to_vector_in_range(value[1], MIN_DIRECTION, MAX_DIRECTION, result),
-							convert_string_to_double_in_range(value[2], INT_MIN, INT_MAX, result),
+							convert_value_to_normal_vector(value[1], result),
+							convert_string_to_double_in_range(value[2], INT_MIN, INT_MAX, result) / 2,
 							convert_string_to_double_in_range(value[3], INT_MIN, INT_MAX, result),
 							convert_value_to_rgb(value[4], result));
+	if (cylinder->radius <= 0 || cylinder->height <= 0)
+		*result = false;
 	if (*result == false)
 		return ;
 	ft_lstadd_back(&scene->shape, ft_lstnew(new_shape(cylinder, CYLINDER)));

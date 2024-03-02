@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 18:00:52 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/01 19:18:04 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,35 @@ double scaling(double value, double t_min, double t_max)
 	return (t_min + (t_max - t_min) * value);
 }
 
-double map(double x, double max, double assign, double sign)
+double map(double x, double max, double orig, double sign)
 {
-	return (sign * (2 * x) / (max - 1) + assign);
+	return (sign * (2 * x) / (max - 1) + orig);
+}
+
+bool	comp_vector(t_vector a, t_vector b)
+{
+	return (a.x == b.x && a.y == b.y && a.z == b.z);
 }
 
 t_ray set_viewpoint(t_camera *camera, double lx, double ly)
 {
-	const t_vector up = new_vector(0, 1, 0);
+	t_vector up;
 	t_vector d_x;
 	t_vector d_y;
 	t_vector pw;
 
+	up = new_vector(0, 1, 0);
+	if (vector_length(cross_product(up, camera->look_at_point)) == 0)
+		up = new_vector(1, 0, 0);
+	// printVector(camera->look_at_point, "lookat");
+	// printVector(up, "up");
 	d_x = cross_product(up, camera->look_at_point);
 	normalize_vector(&d_x);
 	d_y = cross_product(camera->look_at_point, d_x);
 	normalize_vector(&d_y);
+	// printVector(d_x, "dx");
+	// printVector(d_y, "dy");
+	// exit(EXIT_SUCCESS);
 	pw = camera->view_point;
 	pw = add_vectors(pw, scalar_multiply(camera->look_at_point, camera->distance));
 	pw = add_vectors(pw, scalar_multiply(d_x, lx));
@@ -59,27 +72,35 @@ t_ray set_viewpoint(t_camera *camera, double lx, double ly)
 	return (new_ray(camera->view_point, subtract_vectors(pw, camera->view_point)));
 }
 
-/////////////////////////////////////////////////////////////////////////// keyconf
-int esc_key(int keycode, t_mlx_data *mlx) // sceneにしてこの中でfree
+void	free_scene(t_scene *scene) //怪しい
+{
+	ft_lstclear(&scene->shape, free);
+	while (scene->light)
+	{
+		free(scene->light);
+		scene->light = scene->light->next;
+	}
+}
+
+int esc_key(int keycode, t_scene *scene)
 {
 	if (keycode == 53)
 	{
-		mlx_destroy_window(mlx->data, mlx->window);
-		// ft_free_exit(data->map, EXIT_SUCCESS, -1);
+		mlx_destroy_window(scene->mlx.data, scene->mlx.window);
+		free_scene(scene);
 		exit(EXIT_SUCCESS);
 	}
 	return (0);
 }
 
-int close_window(t_mlx_data *mlx) // sceneにしてこの中でfree
-{
-	mlx_destroy_window(mlx->data, mlx->window);
-	// ft_free_exit(data->map, EXIT_SUCCESS, -1);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
+// int close_window(t_scene *scene) __attribute__((noreturn));
 
-///////////////////////////////////////////////////////////////////////////
+int close_window(t_scene *scene)
+{
+	mlx_destroy_window(scene->mlx.data, scene->mlx.window);
+	free_scene(scene);
+	exit(EXIT_SUCCESS);
+}
 
 #include <stdio.h>
 void render_scene(t_scene *scene)
@@ -91,14 +112,14 @@ void render_scene(t_scene *scene)
 	t_ray ray;
 	t_shape *nearest_shape;
 
-	x = WINDOW_ORIGIN_X;
-	while (x < WINDOW_MAX_X)
+	x = IMG_ORIGIN_X;
+	while (x < IMG_MAX_X)
 	{
-		lx = map((double)x, WINDOW_MAX_X, -1.0, 1.0);
-		y = WINDOW_ORIGIN_Y;
-		while (y < WINDOW_MAX_Y)
+		lx = map((double)x, IMG_MAX_X, -1.0, 1.0);
+		y = IMG_ORIGIN_Y;
+		while (y < IMG_MAX_Y)
 		{
-			ly = map((double)y, WINDOW_MAX_Y, 1.0, -1.0);
+			ly = map((double)y, IMG_MAX_Y, 1.0, -1.0);
 			ray = set_viewpoint(&scene->camera, lx, ly);
 			nearest_shape = determine_intersection_ray_and_object(scene->shape, ray, LONG_MAX);
 			shading(scene, nearest_shape, x, y);
@@ -106,9 +127,9 @@ void render_scene(t_scene *scene)
 		}
 		x++;
 	}
-	mlx_put_image_to_window(scene->mlx.data, scene->mlx.window, scene->mlx.img.data, WINDOW_ORIGIN_X, WINDOW_ORIGIN_Y);
-	mlx_hook(scene->mlx.window, 2, 1L << 0, esc_key, &scene->mlx);
-	mlx_hook(scene->mlx.window, 17, 1L << 17, close_window, &scene->mlx);
+	mlx_put_image_to_window(scene->mlx.data, scene->mlx.window, scene->mlx.img.data, IMG_ORIGIN_X, IMG_ORIGIN_Y);
+	mlx_hook(scene->mlx.window, 2, 1L << 0, esc_key, scene);
+	mlx_hook(scene->mlx.window, 17, 1L << 17, close_window, scene);
 	mlx_loop(scene->mlx.data);
 }
 
@@ -120,7 +141,7 @@ void	printRGB(t_rgb rgb)
 void	printSphere(t_sphere *sphere)
 {
 	printf("sphere:\n");
-	printVector(sphere->origin, "sphere origin");
+	printVector(sphere->origin, "origin");
 	printf("radius %f\n", sphere->radius);
 	printRGB(sphere->rgb);
 }
@@ -128,9 +149,19 @@ void	printSphere(t_sphere *sphere)
 void	printPlane(t_plane *plane)
 {
 	printf("plane:\n");
-	printVector(plane->point, "plane point");
-	printVector(plane->normal, "plane normal");
+	printVector(plane->point, "point");
+	printVector(plane->normal, "normal");
 	printRGB(plane->rgb);
+}
+
+void	printCylinder(t_cylinder *cylinder)
+{
+	printf("cylinder:\n");
+	printVector(cylinder->origin, "center");
+	printVector(cylinder->axis, "axis");
+	printf("diameter %f\n", cylinder->radius * 2);
+	printf("height %f\n", cylinder->height);
+	printRGB(cylinder->rgb);
 }
 
 void	printShape(t_list *list)
@@ -142,7 +173,7 @@ void	printShape(t_list *list)
 		else if (((t_shape *)list->content)->object == SPHERE)
 			printSphere((t_sphere *)(((t_shape *)list->content)->substance));
 		else if (((t_shape *)list->content)->object == CYLINDER)
-			printf("cylinder:\n");
+			printCylinder((t_cylinder *)(((t_shape *)list->content)->substance));
 		else
 			printf("none;\n");
 		list = list->next;
@@ -157,20 +188,17 @@ int main(int argc, char *argv[])
 
 	if (!verify_single_argument(argc))
 		return (FAILURE);
-	result = true;
+	ft_bzero(&scene, sizeof(t_scene));
 	scene.mlx = new_mlx_data();
 	parser(&scene, argv[1], &result);
 	if (!result)
 	{
-		// sceneをfreeする。
+		free_scene(&scene);
 		return (FAILURE);
 	}
 	if (scene.shape != NULL)
-	{
-		printf("ok\n");
 		printShape(scene.shape);
-		printf("end\n");
-	}
 	render_scene(&scene);
+	// system("leaks -q miniRT");
 	return (SUCCESS);
 }

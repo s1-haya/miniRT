@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: erin <erin@student.42.fr>                  +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/29 13:55:33 by hsawamur          #+#    #+#              #
-#    Updated: 2024/02/29 11:59:59 by erin             ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME := miniRT
 NAME_AR := miniRT.a
 TEST_NAME := test_miniRT
@@ -94,11 +82,11 @@ LIBFT_LIB_NAME := ft
 LIBFT_INC_DIR := ./libft
 
 # minilibx
-MINILIBX_DIR := ./minilibx-linux
-MINILIBX_AR := ./minilibx-linux/libmlx.a
-MINILIBX_LIB_DIR := ./minilibx-linux
-MINILIBX := mlx
-MINILIBX_INC_DIR := ./minilibx-linux
+# MINILIBX_DIR := ./minilibx-linux
+# MINILIBX_AR := ./minilibx-linux/libmlx.a
+# MINILIBX_LIB_DIR := ./minilibx-linux
+# MINILIBX := mlx
+# MINILIBX_INC_DIR := ./minilibx-linux
 
 # test
 TEST_DIR := ./test
@@ -131,8 +119,8 @@ INCLUDES := $(addprefix -I, $(INC_DIR))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(MINILIBX_AR) $(LIBFT_AR)
-	$(CC) $(CFLAGS) $(OBJS) $(MINILIBX_AR) $(LIBFT_AR) $(LDFLAGS) -o $@
+$(NAME): $(OBJS) $(LIBFT_AR)
+	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
 
 $(NAME_AR): $(OBJS)
 	$(AR) -r $(NAME_AR) $^

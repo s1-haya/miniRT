@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 10:39:24 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/01 21:09:54 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@
 #include "vector.h"
 #include "light.h"
 
+double	max(double n1, double n2);
+
 #define MLX_TITLE "MINIRT"
-#define WINDOW_ORIGIN_X 0
-#define WINDOW_ORIGIN_Y 0
-#define WINDOW_MAX_X 512
-#define WINDOW_MAX_Y 512
+#define WINDOW_WIDTH 1200
+#define WINDOW_HEIGHT 1000
+#define IMG_ORIGIN_X 0
+#define IMG_ORIGIN_Y 0
+#define IMG_MAX_X max(WINDOW_HEIGHT, WINDOW_WIDTH)
+#define IMG_MAX_Y max(WINDOW_HEIGHT, WINDOW_WIDTH)
 #define VIEWPOINT new_vector(0, 7, -6)
 #define LOOKATPOINT new_vector(0, -1, 1)
 // #define LOOKATPOINT new_vector(5, 0, -25)
@@ -40,7 +44,7 @@
 #define SPECULAR_REFLECTION_COEFFICIENT new_color(0.30,0.30,0.30)
 // 光沢度
 // Gloss factor
-#define GLOSS_FACTOR 8
+#define GLOSS_FACTOR 50
 // 環境光の強度
 // ambient light intensity
 #define AMBIENT_LIGHT_INTENSITY 0.1
