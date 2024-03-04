@@ -82,11 +82,11 @@ LIBFT_LIB_NAME := ft
 LIBFT_INC_DIR := ./libft
 
 # minilibx
-# MINILIBX_DIR := ./minilibx-linux
-# MINILIBX_AR := ./minilibx-linux/libmlx.a
-# MINILIBX_LIB_DIR := ./minilibx-linux
-# MINILIBX := mlx
-# MINILIBX_INC_DIR := ./minilibx-linux
+MINILIBX_DIR := ./minilibx-linux
+MINILIBX_AR := ./minilibx-linux/libmlx.a
+MINILIBX_LIB_DIR := ./minilibx-linux
+MINILIBX := mlx
+MINILIBX_INC_DIR := ./minilibx-linux
 
 # test
 TEST_DIR := ./test
@@ -120,7 +120,7 @@ INCLUDES := $(addprefix -I, $(INC_DIR))
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT_AR)
-	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
 
 $(NAME_AR): $(OBJS)
 	$(AR) -r $(NAME_AR) $^

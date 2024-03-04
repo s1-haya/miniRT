@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:57:47 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:37:38 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_shape
 {
 	enum e_object	object;
 	void			*substance;
-	t_intersection	*intersection;
+	t_intersection	intersection;
 }	t_shape;
 
 t_shape			*new_shape(void *shape, enum e_object object);
@@ -60,6 +60,6 @@ t_sphere		*new_sphere(t_vector origin, double radius, t_rgb rgb);
 t_cylinder		*new_cylinder(t_vector origin, t_vector axis, double radius, double height, t_rgb rgb);
 t_plane			*new_plane(t_vector normal, t_vector point, t_rgb rgb);
 t_ray			new_ray(t_vector point, t_vector direction);
-t_intersection	*new_intersection(t_ray ray, double t);
+t_intersection	new_intersection(t_ray ray, double t);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:59:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 11:25:53 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:00:41 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,12 @@ void print_minirt_list(t_minirt_list *list);
 t_minirt_list *init_minirt_list();
 t_minirt_list *convert_one_line_to_minirt_list(char *line, bool *result);
 char *get_next_line(int fd);
-// char	*ft_strndup(const char *s1, size_t n);
-// size_t	ft_strlen(const char *str);
 
-static bool	check_only_new_line(char *line)
+static bool	check_empty_string(char *line)
 {
-	//改行をチェックしているというより、空文字列を確認してる気がする。けど値がない場合もあるからその場合の対応もしないとダメだよね。
-	size_t i;
-
-	i = 0;
-	while (line[i] != '\0')
-	{
-		if (line[i] != '\n')
-			return (false);
-		i++;
-	}
-	return (true);
+	if (*line == '\0')
+		return (true);
+	return (false);
 }
 
 static char	*get_next_line_except_for_last_new_line(int fd)
@@ -70,7 +60,7 @@ void load_file_into_minirt_list(t_minirt_list **head, const int fd, bool *result
 		line = get_next_line_except_for_last_new_line(fd);
 		if (line == NULL)
 			break;
-		if (!check_only_new_line(line))
+		if (!check_empty_string(line))
 			add_back_minirt_list(head, convert_one_line_to_minirt_list(line, result));
 		free(line);
 	}
