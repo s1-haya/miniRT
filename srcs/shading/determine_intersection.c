@@ -1,36 +1,17 @@
-#include <mlx.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <math.h>
-#include "minirt.h"
-#include "vector.h"
-#include "shape.h"
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   determine_intersection.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/04 18:37:43 by erin              #+#    #+#             */
+/*   Updated: 2024/03/04 19:06:36 by erin             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_vector new_vector(double x, double y, double z);
-t_vector add_vectors(t_vector v1, t_vector v2);
-t_vector subtract_vectors(t_vector v1, t_vector v2);
-double dot_product(t_vector v1, t_vector v2);
-t_vector cross_product(t_vector v1, t_vector v2);
-double vector_length(t_vector v);
-void normalize_vector(t_vector *v);
-t_vector scalar_multiply(t_vector vector, double scalar);
-void my_mlx_pixel_put(t_img *img_data, int x, int y, int color);
-double clamp(double v, double v_min, double v_max);
-
-double	min(double n1, double n2)
-{
-	if (n1 < n2)
-		return (n1);
-	return (n2);
-}
-
-double	max(double n1, double n2)
-{
-	if (n1 < n2)
-		return (n2);
-	return (n1);
-}
+#include "shading.h"
+#include "utils.h"
 
 t_intersection	determine_intersection_ray_and_plane(t_plane *plane, t_ray ray)
 {
@@ -42,31 +23,6 @@ t_intersection	determine_intersection_ray_and_plane(t_plane *plane, t_ray ray)
 	if (intersection.is_success)
 		intersection.normal = plane->normal;
 	return (intersection);
-}
-
-static double	discriminant(double a, double b, double c)
-{
-	return (pow(b, 2.0) - 4 * a * c);
-}
-
-static double	min_solution(double a, double b, double c)
-{
-	double	d;
-	double	t1;
-	double	t2;
-
-	d = discriminant(a, b, c);
-	if (d < 0)
-		return (-1);
-	t1 = (-b + sqrt(d)) / (2 * a);
-	t2 = (-b - sqrt(d)) / (2 * a);
-	if (t1 >= 0 && t2 >= 0)
-		return (min(t1, t2));
-	else if (t2 >= 0)
-		return (t2);
-	else if (t1 >= 0)
-		return (t1);
-	return (-1);
 }
 
 t_intersection	determine_intersection_ray_and_sphere(t_sphere *sphere, t_ray ray)

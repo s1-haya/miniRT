@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 21:09:54 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/04 16:58:57 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,13 @@
 
 double	max(double n1, double n2);
 
-#define MLX_TITLE "MINIRT"
-#define WINDOW_WIDTH 1200
-#define WINDOW_HEIGHT 1000
-#define IMG_ORIGIN_X 0
-#define IMG_ORIGIN_Y 0
-#define IMG_MAX_X max(WINDOW_HEIGHT, WINDOW_WIDTH)
-#define IMG_MAX_Y max(WINDOW_HEIGHT, WINDOW_WIDTH)
-#define VIEWPOINT new_vector(0, 7, -6)
-#define LOOKATPOINT new_vector(0, -1, 1)
-// #define LOOKATPOINT new_vector(5, 0, -25)
-#define SIZE 5
-#define LIGHT_SIZE 2
-
-// #define CYLINDER_AXIS new_vector(0, 1, 0) //fileから読み込む
+# define MLX_TITLE "MINIRT"
+# define WINDOW_WIDTH 1200
+# define WINDOW_HEIGHT 1000
+# define IMG_ORIGIN_X 0
+# define IMG_ORIGIN_Y 0
+# define IMG_MAX_X max(WINDOW_HEIGHT, WINDOW_WIDTH)
+# define IMG_MAX_Y max(WINDOW_HEIGHT, WINDOW_WIDTH)
 
 // 環境光反射係数
 #define AMBIENT_LIGNT_REFLECTION_COEFFICIENT new_color(0.01,0.01,0.01)
@@ -66,21 +59,21 @@ typedef struct s_three_d_map
 	t_range	z;
 }	t_three_d_map;
 
-typedef	struct s_img
+typedef struct s_img
 {
-	void		*data;
-	char		*address;
-	int			bits_per_pixel;
-	int 		size_line;
-	int			endian;
+	void	*data;
+	char	*address;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
 }	t_img;
 
 typedef struct s_mlx_data
 {
-	void			*data;
-	void			*window;
-	void			*mlx;
-	t_img			img;
-} t_mlx_data;
+	void	*data;
+	void	*window;
+	void	*mlx;
+	t_img	img;
+}	t_mlx_data;
 
 #endif

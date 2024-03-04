@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:49:12 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:52:53 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:00:03 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include "light.h"
-#include "camera.h"
-#include "minirt.h"
-#include "libft.h"
+#ifndef SCENE_H
+# define SCENE_H
+
+# include "shape.h"
+# include "light.h"
+# include "camera.h"
+# include "minirt.h"
+# include "libft.h"
 
 typedef struct s_scene {
 	t_list			*shape;
@@ -23,3 +26,5 @@ typedef struct s_scene {
 	t_mlx_data		mlx;
 	t_ambient_light	ambient;
 }	t_scene;
+
+#endif

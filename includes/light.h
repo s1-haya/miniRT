@@ -32,7 +32,6 @@ typedef struct s_ambient_light
 	t_rgb	rgb;
 }	t_ambient_light;
 
-// t_light	new_light(t_vector point, double intensity, t_rgb rgb);
 t_light	*new_light(t_vector point, double intensity, t_rgb rgb);
 
 #endif

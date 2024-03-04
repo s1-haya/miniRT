@@ -3,44 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   shading.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 14:16:59 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:05:52 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "minirt.h"
-#include "scene.h"
-#include "shape.h"
-#include "vector.h"
-#include "color.h"
-#include "libft.h"
-
-#define C_EPSILON (1.0 / 512)
+#include "shading.h"
 
 double clamp(double v, double v_min, double v_max);
 void my_mlx_pixel_put(t_img *img_data, int x, int y, int color);
 t_shape	*determine_intersection_ray_and_object(t_list *shape, t_ray ray, double light_source_distance);
-
-void print_vector(t_vector vector)
-{
-	printf("x: %lf\n", vector.x);
-	printf("y: %lf\n", vector.y);
-	printf("z: %lf\n", vector.z);
-}
-
-t_rgb	get_rgb_in_shape(t_shape *shape)
-{
-	if (shape->object == PLANE)
-		return (((t_plane *)shape->substance)->rgb);
-	else if (shape->object == SPHERE)
-		return (((t_sphere *)shape->substance)->rgb);
-	return (((t_cylinder *)shape->substance)->rgb);
-}
+t_rgb	get_rgb_in_shape(t_shape *shape);
 
 void	add_ambient_light(t_color *color, t_ambient_light ambient, t_shape *nearest_shape)
 {
