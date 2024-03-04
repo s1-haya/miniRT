@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 16:30:36 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:16:34 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	parser(t_scene *scene, const char *file_name, bool *result)
 	if (result == false)
 	{
 		delete_minirt_list(free_list);
-		*result = false;
 		return ;
 	}
 	count_parameter = init_parameter_count();
@@ -44,7 +43,6 @@ void	parser(t_scene *scene, const char *file_name, bool *result)
 		if (*result == false)
 		{
 			delete_minirt_list(free_list);
-			*result = false;
 			return ;
 		}
 		list = list->next;

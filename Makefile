@@ -53,6 +53,7 @@ SRCS += $(SRCS_DIR)/$(COLOR_DIR)/color.c\
 
 SHADING_DIR = shading
 SRCS += $(SRCS_DIR)/$(SHADING_DIR)/determine_intersection.c\
+		$(SRCS_DIR)/$(SHADING_DIR)/get_intersection.c\
 		$(SRCS_DIR)/$(SHADING_DIR)/ray.c\
 		$(SRCS_DIR)/$(SHADING_DIR)/shading.c\
 

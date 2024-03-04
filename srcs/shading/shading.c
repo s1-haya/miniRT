@@ -6,26 +6,30 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 19:05:52 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/04 19:22:08 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shading.h"
+#include "utils.h"
+#include "color.h"
 
-double clamp(double v, double v_min, double v_max);
-void my_mlx_pixel_put(t_img *img_data, int x, int y, int color);
-t_shape	*determine_intersection_ray_and_object(t_list *shape, t_ray ray, double light_source_distance);
 t_rgb	get_rgb_in_shape(t_shape *shape);
+void my_mlx_pixel_put(t_img *img_data, int x, int y, int color);
 
-void	add_ambient_light(t_color *color, t_ambient_light ambient, t_shape *nearest_shape)
+void	add_ambient_light\
+	(t_color *color, t_ambient_light ambient, t_shape *nearest_shape)
 {
 	t_color	ambient_right;
 	t_rgb	rgb;
 
 	rgb = get_rgb_in_shape(nearest_shape);
-	ambient_right.red = rgb.red / 255.0 * ambient.rgb.red / 255.0 * ambient.intensity;
-	ambient_right.green = rgb.green / 255.0 * ambient.rgb.green / 255.0 * ambient.intensity;
-	ambient_right.blue = rgb.blue / 255.0 * ambient.rgb.blue / 255.0 * ambient.intensity;
+	ambient_right.red = rgb.red / 255.0 * \
+			ambient.rgb.red / 255.0 * ambient.intensity;
+	ambient_right.green = rgb.green / 255.0 * \
+			ambient.rgb.green / 255.0 * ambient.intensity;
+	ambient_right.blue = rgb.blue / 255.0 * \
+			ambient.rgb.blue / 255.0 * ambient.intensity;
 	add_color(color, ambient_right);
 }
 
