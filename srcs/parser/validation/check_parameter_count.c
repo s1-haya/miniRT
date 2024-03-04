@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:39:37 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/02 12:42:03 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:12:06 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #define MAX_PRAMTER_COUNT (1)
 #define ERROR_EXCEEDS_MAX_LIMIT "Error: \
-parameter exceeds the maximum limit of 1.\
+parameter exceeds the maximum limit of 1. \
 Please do so in just one line, \
 If you are setting an identifier with uppercase characters\n"
 #define ERROR_NOT_SET_UPEER_CHARACTER "Error: Prameter don't set. \

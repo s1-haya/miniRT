@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:55:57 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:37:33 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_shape	*new_shape(void *shape, enum e_object object)
 		return (NULL);
 	new_shape->object = object;
 	new_shape->substance = shape;
-	new_shape->intersection = NULL;
+	new_shape->intersection.is_success = false;
 	return (new_shape);
 }
 

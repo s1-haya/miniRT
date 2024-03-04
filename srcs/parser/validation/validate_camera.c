@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:02 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/02 12:48:07 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/03 23:19:01 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void validate_camera(t_scene *scene, char **value,
 					 t_param_count *count, bool *result)
 {
 	size_t size;
-	double horizontal_value;
 
 	size = get_string_array_size(value);
 	if (size != 3)

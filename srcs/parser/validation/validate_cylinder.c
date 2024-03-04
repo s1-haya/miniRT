@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_cylinder.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 18:03:05 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/04 16:24:15 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,13 @@ void	validate_cylinder(t_scene *scene, char **value, bool *result)
 							convert_string_to_double_in_range(value[2], INT_MIN, INT_MAX, result) / 2,
 							convert_string_to_double_in_range(value[3], INT_MIN, INT_MAX, result),
 							convert_value_to_rgb(value[4], result));
-	if (cylinder->radius <= 0 || cylinder->height <= 0)
+	if (cylinder == NULL || cylinder->radius <= 0 || cylinder->height <= 0)
 		*result = false;
 	if (*result == false)
+	{
+		free(cylinder);
 		return ;
+	}
 	ft_lstadd_back(&scene->shape, ft_lstnew(new_shape(cylinder, CYLINDER)));
 }
 

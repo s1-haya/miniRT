@@ -120,7 +120,7 @@ INCLUDES := $(addprefix -I, $(INC_DIR))
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT_AR)
-	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
 
 $(NAME_AR): $(OBJS)
 	$(AR) -r $(NAME_AR) $^

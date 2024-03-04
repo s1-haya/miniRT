@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:29:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 17:30:22 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/04 14:47:08 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,7 @@
 #define FAILURE 1
 #define FAILED_TO_ALLOCATE_MEMORY "Error: Failed to allocate memory"
 
-void	delete_mlx_data(t_mlx_data mlx)
-{
-	free(mlx.data);
-	free(mlx.window);
-	free(mlx.img.data);
-}
-
-t_mlx_data	new_mlx_data()
+t_mlx_data	new_mlx_data(bool *result)
 {
 	t_mlx_data	mlx;
 
@@ -32,22 +25,26 @@ t_mlx_data	new_mlx_data()
 	if (mlx.data == NULL)
 	{
 		perror(FAILED_TO_ALLOCATE_MEMORY);
-		exit(FAILURE);
+		*result = false;
 	}
 	mlx.window = mlx_new_window(mlx.data, WINDOW_WIDTH, WINDOW_HEIGHT, MLX_TITLE);
-	if (mlx.window == NULL)
+	if (*result && mlx.window == NULL)
 	{
-		free(mlx.data);
+		mlx_destroy_display(mlx.data);
+		mlx.data = NULL;
 		perror(FAILED_TO_ALLOCATE_MEMORY);
-		exit(FAILURE);
+		*result = false;
 	}
 	mlx.img.data = mlx_new_image(mlx.data, IMG_MAX_X, IMG_MAX_Y);
-	if (mlx.img.data == NULL)
+	if (*result && mlx.img.data == NULL)
 	{
-		free(mlx.data);
-		free(mlx.window);
+		mlx_destroy_window(mlx.data, mlx.window);
+		mlx.window = NULL;
+		mlx_destroy_display(mlx.data);
+		mlx.data = NULL;
 		perror(FAILED_TO_ALLOCATE_MEMORY);
 		exit(FAILURE);
+		*result = false;
 	}
 	mlx.img.address = mlx_get_data_addr(mlx.img.data, &mlx.img.bits_per_pixel, &mlx.img.size_line,
 											   &mlx.img.endian);

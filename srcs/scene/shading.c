@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shading.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 21:10:05 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/04 14:16:59 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	add_diffuse_reflection(t_color *color, t_shape *nearest_shape, t_vector inc
 {
 	t_color			diffuse_reflection;
 	t_rgb			rgb;
-	const t_vector	normal = nearest_shape->intersection->normal;
+	const t_vector	normal = nearest_shape->intersection.normal;
 
 	rgb = get_rgb_in_shape(nearest_shape);
 	diffuse_reflection.red = rgb.red / 255.0 * light.intensity * light.rgb.red / 255.0
@@ -79,13 +79,13 @@ void	add_specular_reflection(t_color *color, t_scene *scene, t_shape *nearest_sh
 	t_rgb			rgb;
 
 	incident_vector = subtract_vectors(light.point, \
-					nearest_shape->intersection->point);
+					nearest_shape->intersection.point);
 	normalize_vector(&incident_vector);
 	specular_reflection = new_color(0, 0, 0);
-	if (dot_product(nearest_shape->intersection->normal, incident_vector) <= 0)
+	if (dot_product(nearest_shape->intersection.normal, incident_vector) <= 0)
 		return ;
-	a = subtract_vectors(scalar_multiply(nearest_shape->intersection->normal, \
-		2 * dot_product(nearest_shape->intersection->normal, incident_vector)), \
+	a = subtract_vectors(scalar_multiply(nearest_shape->intersection.normal, \
+		2 * dot_product(nearest_shape->intersection.normal, incident_vector)), \
 			incident_vector);
 	normalize_vector(&a);
 	b = get_inverse_vector(scene->camera.view_point);
@@ -106,10 +106,10 @@ void	draw_shadow_shading(t_scene *scene, t_shape *nearest_shape, t_color *color,
 	t_ray		shadow_ray;
 
 	incident_vector = subtract_vectors(light->point, \
-				nearest_shape->intersection->point);
+				nearest_shape->intersection.point);
 	light->distance = vector_length(incident_vector);
 	normalize_vector(&incident_vector);
-	shadow_ray = new_ray(add_vectors(nearest_shape->intersection->point, scalar_multiply(incident_vector, C_EPSILON)), incident_vector);
+	shadow_ray = new_ray(add_vectors(nearest_shape->intersection.point, scalar_multiply(incident_vector, C_EPSILON)), incident_vector);
 	if (determine_intersection_ray_and_object(scene->shape, shadow_ray, (*light).distance - C_EPSILON) != NULL)
 		return ;
 	add_diffuse_reflection(color, nearest_shape, incident_vector, *light);

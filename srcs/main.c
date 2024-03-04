@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/02 12:34:05 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:30:44 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ bool verify_single_argument(int argc);
 void parser(t_scene *scene, const char *file_name, bool *result);
 t_shape *determine_intersection_ray_and_object(t_list *shape, t_ray ray, double light_distance);
 void shading(t_scene *scene, t_shape *nearest_shape, int x, int y);
-t_mlx_data new_mlx_data();
+t_mlx_data	new_mlx_data(bool *result);
+void	delete_mlx_data(t_mlx_data mlx);
 t_camera new_camera(t_vector view_point, t_vector look_at_point, double horizontal_value);
 double clamp(double v, double v_min, double v_max);
 
@@ -72,21 +73,38 @@ t_ray set_viewpoint(t_camera *camera, double lx, double ly)
 	return (new_ray(camera->view_point, subtract_vectors(pw, camera->view_point)));
 }
 
-void	free_scene(t_scene *scene) //怪しい
+void	delete_shape(t_list **list)
 {
-	ft_lstclear(&scene->shape, free);
-	while (scene->light)
+	t_list	*current;
+	t_list	*next;
+
+	if (list == NULL || *list == NULL)
+		return ;
+	current = *list;
+	while (current)
 	{
-		free(scene->light);
-		scene->light = scene->light->next;
+		next = current->next;
+		free(((t_shape *)(current->content))->substance);
+		free((t_shape *)(current->content));
+		free(current);
+		current = next;
 	}
+	*list = NULL;
+}
+
+void	free_scene(t_scene *scene)
+{
+	mlx_destroy_window(scene->mlx.data, scene->mlx.window);
+	mlx_destroy_image(scene->mlx.data, scene->mlx.img.data);
+	mlx_destroy_display(scene->mlx.data);
+	delete_shape(&(scene->shape));
+	free(scene->light);
 }
 
 int esc_key(int keycode, t_scene *scene)
 {
 	if (keycode == 53)
 	{
-		mlx_destroy_window(scene->mlx.data, scene->mlx.window);
 		free_scene(scene);
 		exit(EXIT_SUCCESS);
 	}
@@ -97,7 +115,6 @@ int esc_key(int keycode, t_scene *scene)
 
 int close_window(t_scene *scene)
 {
-	mlx_destroy_window(scene->mlx.data, scene->mlx.window);
 	free_scene(scene);
 	exit(EXIT_SUCCESS);
 }
@@ -189,16 +206,21 @@ int main(int argc, char *argv[])
 	if (!verify_single_argument(argc))
 		return (FAILURE);
 	ft_bzero(&scene, sizeof(t_scene));
-	scene.mlx = new_mlx_data();
+	result = true;
+	scene.mlx = new_mlx_data(&result);
 	parser(&scene, argv[1], &result);
 	if (!result)
 	{
 		free_scene(&scene);
 		return (FAILURE);
 	}
-	if (scene.shape != NULL)
-		printShape(scene.shape);
 	render_scene(&scene);
-	// system("leaks -q miniRT");
 	return (SUCCESS);
+}
+
+#include <libc.h>
+
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q miniRT");
 }
