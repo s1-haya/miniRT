@@ -6,12 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:37:43 by erin              #+#    #+#             */
-/*   Updated: 2024/03/05 17:52:39 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:43:45 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_scene.h"
-#include "utils.h"
+#include "minirt.h"
 
 t_intersection	determine_intersection_ray_and_plane(t_plane *plane, t_ray ray)
 {

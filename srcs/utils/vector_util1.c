@@ -6,11 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:08:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 19:00:24 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:44:43 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "minirt.h"
 
 t_vector	new_vector(double x, double y, double z)
 {

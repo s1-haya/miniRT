@@ -6,11 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:14:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 17:53:02 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 20:01:22 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_scene.h"
+#include "minirt.h"
 
 t_ray	new_ray(t_vector point, t_vector direction)
 {
@@ -38,4 +38,3 @@ t_intersection	new_intersection(t_ray ray, double t)
 	}
 	return (intersection);
 }
-

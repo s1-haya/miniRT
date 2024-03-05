@@ -6,21 +6,15 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:36:35 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 18:34:05 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:51:02 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONVERT_H
 # define CONVERT_H
 
-# include "scene.h"
-# include "parser.h"
-# include "color.h"
-# include "vector.h"
-# include "libft.h"
+# include "define.h"
 # include <stdbool.h>
-# include <stdlib.h>
-# include <limits.h>
 
 # define MIN_DIRECTION (-1.0)
 # define MAX_DIRECTION (1.0)

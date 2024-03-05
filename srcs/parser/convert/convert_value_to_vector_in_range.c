@@ -6,13 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 16:57:23 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:42:06 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
-#include <stdbool.h>
-#include <unistd.h>
+#include "minirt.h"
 
 #define DELMITER_CHAR ','
 #define MIN_NORMAL (-1.0)

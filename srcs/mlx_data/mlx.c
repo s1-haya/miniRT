@@ -6,12 +6,10 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:29:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 17:42:22 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:55:04 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "mlx.h"
 #include "minirt.h"
 
 #define FAILURE 1

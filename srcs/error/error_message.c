@@ -6,14 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:40:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 17:41:56 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:55:19 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include <unistd.h>
-
-size_t	ft_strlen(const char *str);
+#include "minirt.h"
 
 void	error_message(char *error_message, bool *result)
 {

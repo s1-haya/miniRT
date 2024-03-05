@@ -6,12 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 17:45:05 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:44:17 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "shape.h"
+#include "minirt.h"
 
 t_plane	*new_plane(t_vector point, t_vector normal, t_rgb rgb)
 {

@@ -6,54 +6,14 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 17:00:11 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:20:39 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPE_H
 # define SHAPE_H
 
-# include "vector.h"
-# include "ray.h"
-# include "color.h"
-
-typedef enum e_object
-{
-	PLANE,
-	SPHERE, 
-	CYLINDER
-}	t_object;
-
-typedef struct s_plane
-{
-	t_vector	point;
-	t_vector	normal;
-	t_rgb		rgb;
-}	t_plane;
-
-typedef struct s_sphere
-{
-	t_vector	origin;
-	double		radius;
-	t_rgb		rgb;
-}	t_sphere;
-
-
-typedef struct s_cylinder
-{
-	t_vector	origin;
-	t_vector	axis;
-	double		radius;
-	double		height;
-	t_rgb		rgb;
-}	t_cylinder;
-
-typedef struct s_shape
-{
-	enum e_object	object;
-	void			*substance;
-	t_intersection	intersection;
-}	t_shape;
+# include "define.h"
 
 t_shape			*new_shape(void *shape, enum e_object object);
 t_sphere		*new_sphere(t_vector origin, double radius, t_rgb rgb);

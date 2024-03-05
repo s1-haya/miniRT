@@ -6,13 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:27:32 by erin              #+#    #+#             */
-/*   Updated: 2024/03/05 18:30:46 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:54:24 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_scene.h"
-
-t_rgb	get_rgb_in_shape(t_shape *shape);
+#include "minirt.h"
 
 t_color	add_reflection_util(t_rgb rgb, t_light light, double i)
 {

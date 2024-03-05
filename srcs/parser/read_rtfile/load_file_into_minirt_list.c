@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_file_into_minirt_list.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:59:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:27:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:42:26 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 // 入力 ftファイル
 // 出力 t_hashmap *
 
-#include "parser.h"
-#include "get_next_line.h"
-#include <fcntl.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <string.h>
+#include "minirt.h"
 
 void			add_back_minirt_list(t_minirt_list **head,
 					t_minirt_list *new_list);

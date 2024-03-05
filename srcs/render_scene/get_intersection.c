@@ -6,12 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 19:11:39 by erin              #+#    #+#             */
-/*   Updated: 2024/03/05 18:26:05 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:43:52 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_scene.h"
-#include "utils.h"
+#include "minirt.h"
 
 t_intersection	determine_intersection_ray_and_cylinder(t_cylinder \
 														*cylinder, t_ray ray)

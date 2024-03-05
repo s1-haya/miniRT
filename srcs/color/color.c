@@ -6,18 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:00:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 18:10:21 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:39:36 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color.h"
-#include "vector.h"
-#include "shape.h"
-
-t_color	new_color(double red, double green, double blue);
-void	add_color(t_color *color1, t_color color2);
-void	get_radiance_to_color(t_color *color, double min, double max);
-double	clamp(double v, double v_min, double v_max);
+#include "minirt.h"
 
 t_color	new_color(double red, double green, double blue)
 {

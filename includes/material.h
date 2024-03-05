@@ -3,24 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   material.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:55:12 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:38:06 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:19:33 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATERIAL_H
 # define MATERIAL_H
 
-#include "color.h"
-
-typedef struct s_material
-{
-	t_color	ambient;
-	t_color	diffuse;
-	t_color	specular;
-	t_color	gloss_factor;
-}	t_material;
+# include "define.h"
 
 #endif

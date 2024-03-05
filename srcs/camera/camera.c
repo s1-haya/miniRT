@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 07:58:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/03 23:19:50 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:01:04 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
 #include "minirt.h"
 
-#include <math.h>
-
-t_camera	new_camera(t_vector view_point, t_vector look_at_point, double horizontal_value)
+t_camera	new_camera(t_vector view_point, \
+			t_vector look_at_point, double horizontal_value)
 {
 	t_camera	camera;
 

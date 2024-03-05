@@ -6,16 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 18:29:15 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:53:46 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_scene.h"
-#include "utils.h"
-#include "color.h"
-
-t_rgb	get_rgb_in_shape(t_shape *shape);
-void	my_mlx_pixel_put(t_img *img_data, int x, int y, int color);
+#include "minirt.h"
 
 void	draw_shadow_shading(t_scene *scene, \
 					t_shape *nearest_shape, t_color *color, t_light *light)

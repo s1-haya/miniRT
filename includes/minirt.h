@@ -6,16 +6,34 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 18:41:53 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:46:57 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#include <stdio.h>
-#include "vector.h"
-#include "light.h"
+# include "libft.h"
+# include "camera.h"
+# include "color.h"
+# include "light.h"
+# include "material.h"
+# include "mlx_data.h"
+# include "parser.h"
+# include "ray.h"
+# include "render_scene.h"
+# include "scene.h"
+# include "shape.h"
+# include "utils.h"
+# include "validate.h"
+# include "vector.h"
+# include <math.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <limits.h>
+# include <stdio.h>
+# include <math.h>
+# include <mlx.h>
 
 double	max(double n1, double n2);
 
@@ -46,36 +64,5 @@ double	max(double n1, double n2);
 // 光源の光の強度
 // light intensity of light source
 #define  LIGHT_INTENSITY_OF_LIGHT_SOURCE 1.0
-
-typedef struct s_range
-{
-	int	value;
-	int	min;
-	int	max;
-}	t_range;
-
-typedef struct s_three_d_map
-{
-	t_range	x;
-	t_range	y;
-	t_range	z;
-}	t_three_d_map;
-
-typedef struct s_img
-{
-	void	*data;
-	char	*address;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}	t_img;
-
-typedef struct s_mlx_data
-{
-	void	*data;
-	void	*window;
-	void	*mlx;
-	t_img	img;
-}	t_mlx_data;
 
 #endif

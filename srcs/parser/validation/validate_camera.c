@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_camera.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:02 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:18:56 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:42:45 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "validate.h"
-#include <math.h>
+#include "minirt.h"
 
 #define MIN_HORIZONTAL_ANGLE (0)
 #define MAX_HORIZONTAL_ANGLE (180)

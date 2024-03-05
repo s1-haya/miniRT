@@ -6,13 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:46:12 by erin              #+#    #+#             */
-/*   Updated: 2024/03/05 17:42:16 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 19:55:10 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_data.h"
-
-void	free_scene(t_scene *scene);
+#include "minirt.h"
 
 int	esc_key(int keycode, t_scene *scene)
 {

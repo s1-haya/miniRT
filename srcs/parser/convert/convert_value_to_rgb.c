@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   convert_value_to_rgb.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:27:15 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:03:35 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:51:38 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color.h"
-#include <stdbool.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "minirt.h"
 
 #define DELMITER_CHAR ','
-#define ERROR_NOT_MEMORY_ALLOCATED "Error: Memory allocation failed.\
- Please close other applications and try again.\n"
-#define ERROR_NOT_CORRECT_SIZE "Error: parameter size do not correct\n"
 #define UINT8_MIN (0)
 
 void	error_message(char *error_message, bool *result);
