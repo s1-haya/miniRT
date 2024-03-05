@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:01:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/22 23:18:57 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:30:43 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 void			*set_error_and_return_null(bool *result);
-t_minirt_list	*init_minirt_list();
+t_minirt_list	*init_minirt_list(void);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 char			*ft_strdup(const char *src);
 char			**ft_split(char const *str, char c);

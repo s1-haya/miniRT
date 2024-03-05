@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_value_to_vector_in_range.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/01 19:56:47 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:06:34 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,71 @@
 #include <unistd.h>
 
 #define DELMITER_CHAR ','
+#define MIN_NORMAL (-1.0)
+#define MAX_NORMAL (1.0)
 #define ERROR_NOT_MEMORY_ALLOCATED "Error: Memory allocation failed.\
 Please close other applications and try again.\n"
+#define ERROR_NOT_CORRECT_SIZE "Error: Incorrect number of parameters.\n"
+#define ERROR_NOT_UNIT_VECTOR "Error: The vector is not a unit vector.\n"
 
+void	error_message(char *error_message, bool *result);
 char	**ft_split(char const *str, char c);
 void	delete_value(char **value);
 double	convert_string_to_double_in_range(const char *string,
 			double min, double max, bool *result);
 size_t	get_string_array_size(char **array);
 
-t_vector	convert_value_to_vector_in_range(const char *value,
-			double min, double max, bool *result)
+t_vector	convert_value_to_vector_in_range_until(char **value_vector,
+												double min,
+												double max,
+												bool *result)
 {
-	char		**value_vector;
 	t_vector	vector;
 
-	value_vector = ft_split(value, DELMITER_CHAR);
-	if (*result == false || value_vector == NULL
-		|| get_string_array_size(value_vector) != 3)
-	{
-		if (value_vector == NULL)
-			write(STDERR_FILENO, ERROR_NOT_MEMORY_ALLOCATED,
-				sizeof(ERROR_NOT_MEMORY_ALLOCATED) - 1);
-		vector.x = 0;
-		delete_value(value_vector);
-		*result = false;
-		return (vector);
-	}
 	vector.x = convert_string_to_double_in_range(value_vector[0],
 			min, max, result);
 	vector.y = convert_string_to_double_in_range(value_vector[1],
 			min, max, result);
 	vector.z = convert_string_to_double_in_range(value_vector[2],
 			min, max, result);
+	return (vector);
+}
+
+t_vector	convert_value_to_vector_in_range(const char *value,
+				double min, double max, bool *result)
+{
+	char		**value_vector;
+	t_vector	vector;
+
+	vector.x = 0;
+	if (*result == false)
+		return (vector);
+	value_vector = ft_split(value, DELMITER_CHAR);
+	if (value_vector == NULL)
+	{
+		error_message(ERROR_NOT_MEMORY_ALLOCATED, result);
+		return (vector);
+	}
+	if (get_string_array_size(value_vector) != 3)
+	{
+		error_message(ERROR_NOT_CORRECT_SIZE, result);
+		delete_value(value_vector);
+		return (vector);
+	}
+	vector = convert_value_to_vector_in_range_until(value_vector,
+			min, max, result);
 	delete_value(value_vector);
 	return (vector);
+}
+
+static void	convert_value_to_normal_vector_until(t_vector *vector, bool *result)
+{
+	if (vector_length(*vector) != 1.0)
+	{
+		error_message(ERROR_NOT_UNIT_VECTOR, result);
+		*result = false;
+	}
+	normalize_vector(vector);
 }
 
 t_vector	convert_value_to_normal_vector(const char *value, bool *result)
@@ -57,27 +87,24 @@ t_vector	convert_value_to_normal_vector(const char *value, bool *result)
 	char		**value_vector;
 	t_vector	vector;
 
+	vector.x = 0;
+	if (*result == false)
+		return (vector);
 	value_vector = ft_split(value, DELMITER_CHAR);
-	if (*result == false || value_vector == NULL
-		|| get_string_array_size(value_vector) != 3)
+	if (value_vector == NULL)
 	{
-		if (value_vector == NULL)
-			write(STDERR_FILENO, ERROR_NOT_MEMORY_ALLOCATED,
-				sizeof(ERROR_NOT_MEMORY_ALLOCATED) - 1);
-		vector.x = 0;
-		delete_value(value_vector);
-		*result = false;
+		error_message(ERROR_NOT_MEMORY_ALLOCATED, result);
 		return (vector);
 	}
-	vector.x = convert_string_to_double_in_range(value_vector[0],
-			-1.0, 1.0, result);
-	vector.y = convert_string_to_double_in_range(value_vector[1],
-			-1.0, 1.0, result);
-	vector.z = convert_string_to_double_in_range(value_vector[2],
-			-1.0, 1.0, result);
+	if (get_string_array_size(value_vector) != 3)
+	{
+		error_message(ERROR_NOT_CORRECT_SIZE, result);
+		delete_value(value_vector);
+		return (vector);
+	}
+	vector = convert_value_to_vector_in_range_until(value_vector,
+			MIN_NORMAL, MAX_NORMAL, result);
 	delete_value(value_vector);
-	// if (vector_length(vector) != 1.0) //テスト用に一旦消す
-	// 	*result = false;
-	normalize_vector(&vector);
+	convert_value_to_normal_vector_until(&vector, result);
 	return (vector);
 }

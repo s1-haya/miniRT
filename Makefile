@@ -14,6 +14,7 @@ SRCS += $(SRCS_DIR)/$(CAMERA_DIR)/camera.c\
 ERROR_DIR = error
 SRCS += $(SRCS_DIR)/$(ERROR_DIR)/error.c\
 		$(SRCS_DIR)/$(ERROR_DIR)/set_error_and_return_null.c\
+		$(SRCS_DIR)/$(ERROR_DIR)/error_message.c\
 
 LIGHT_DIR := light
 SRCS += $(SRCS_DIR)/$(LIGHT_DIR)/light.c\
@@ -121,12 +122,16 @@ LDFLAGS := $(LIB_DIR) $(LIBS)
 INC_DIR := ./includes $(MINILIBX_INC_DIR) $(X_WINDOW_INC_DIR) $(LIBFT_INC_DIR) $(GNL_DIR)
 INCLUDES := $(addprefix -I, $(INC_DIR))
 
+ifeq ($(UNAME), Darwin)
+	LDFLAGS += -framework OpenGL -framework AppKit
+endif
+
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT_AR)
-	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
 
 $(NAME_AR): $(OBJS)
 	$(AR) -r $(NAME_AR) $^

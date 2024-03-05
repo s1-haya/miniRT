@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:33:48 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 10:56:11 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:23:55 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,19 @@
 #define SPHERE "sp"
 #define CYLINDER "cy"
 
-void	validate_ambient_lighting(t_scene *scene, char **value, t_param_count *count, bool *result);
-void	validate_camera(t_scene *scene, char **value, t_param_count *count, bool *result);
-void	validate_light(t_scene *scene, char **value, t_param_count *count, bool *result);
+void	validate_ambient_lighting(t_scene *scene, char **value,
+			t_param_count *count, bool *result);
+void	validate_camera(t_scene *scene, char **value,
+			t_param_count *count, bool *result);
+void	validate_light(t_scene *scene, char **value,
+			t_param_count *count, bool *result);
 void	validate_plane(t_scene *scene, char **value, bool *result);
 void	validate_sphere(t_scene *scene, char **value, bool *result);
 void	validate_cylinder(t_scene *scene, char **value, bool *result);
 void	check_parameter_count(t_param_count parameter_count, bool *result);
 
-void	validate(t_scene *scene, t_minirt_list *list, t_param_count *count, bool *result)
+void	validate(t_scene *scene, t_minirt_list *list,
+				t_param_count *count, bool *result)
 {
 	if (!ft_strcmp(AMBIENT_LIGHTING, list->identifier))
 		validate_ambient_lighting(scene, list->value, count, result);

@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 16:27:50 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:21:59 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,15 @@ void	validate_light(t_scene *scene, char **value,
 
 	size = get_string_array_size(value);
 	if (size != 3)
-	{
-		*result = false;
-		return ;
-	}
+		return (error_message(ERROR_NOT_CORRECT_SIZE, result));
 	count->light ++;
 	scene->light = new_light(convert_value_to_vector_in_range(value[0], INT_MIN,
-										INT_MAX, result),
-							convert_string_to_double_in_range(value[1], MIN_LIGHT,
-										MAX_LIGHT, result),
-							convert_value_to_rgb(value[2], result));
-	if (*result == false || scene->light == NULL)
-	{
+				INT_MAX, result),
+			convert_string_to_double_in_range(value[1], MIN_LIGHT,
+				MAX_LIGHT, result),
+			convert_value_to_rgb(value[2], result));
+	if (*result && scene->light == NULL)
+		error_message(ERROR_NOT_MEMORY_ALLOCATED, result);
+	if (*result == false)
 		free(scene->light);
-		*result = false;
-	}
 }
