@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:29:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 14:47:08 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:13:49 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_mlx_data	new_mlx_data(bool *result)
 	mlx.window = mlx_new_window(mlx.data, WINDOW_WIDTH, WINDOW_HEIGHT, MLX_TITLE);
 	if (*result && mlx.window == NULL)
 	{
-		mlx_destroy_display(mlx.data);
 		mlx.data = NULL;
 		perror(FAILED_TO_ALLOCATE_MEMORY);
 		*result = false;
@@ -40,7 +39,6 @@ t_mlx_data	new_mlx_data(bool *result)
 	{
 		mlx_destroy_window(mlx.data, mlx.window);
 		mlx.window = NULL;
-		mlx_destroy_display(mlx.data);
 		mlx.data = NULL;
 		perror(FAILED_TO_ALLOCATE_MEMORY);
 		exit(FAILURE);

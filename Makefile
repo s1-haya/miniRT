@@ -13,6 +13,7 @@ SRCS += $(SRCS_DIR)/$(CAMERA_DIR)/camera.c\
 
 ERROR_DIR = error
 SRCS += $(SRCS_DIR)/$(ERROR_DIR)/error.c\
+		$(SRCS_DIR)/$(ERROR_DIR)/set_error_and_return_null.c\
 
 LIGHT_DIR := light
 SRCS += $(SRCS_DIR)/$(LIGHT_DIR)/light.c\
@@ -43,10 +44,6 @@ SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_string_to_double_in_ran
 		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_value_to_vector_in_range.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_value_to_rgb.c\
 
-SCENE_DIR = scene
-SRCS += $(SRCS_DIR)/$(SCENE_DIR)/scene.c\
-		$(SRCS_DIR)/$(SCENE_DIR)/shading.c\
-
 SHAPE_DIR = shape
 SRCS += $(SRCS_DIR)/$(SHAPE_DIR)/shape.c\
 
@@ -54,15 +51,24 @@ COLOR_DIR = color
 SRCS += $(SRCS_DIR)/$(COLOR_DIR)/color.c\
 		$(SRCS_DIR)/$(COLOR_DIR)/pixel_put.c
 
-UNTIL_DIR = until
-SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/determine_intersection_of_ray_and_object.c\
-		$(SRCS_DIR)/$(UNTIL_DIR)/ray.c\
-		$(SRCS_DIR)/$(UNTIL_DIR)/vector.c\
+SHADING_DIR = shading
+SRCS += $(SRCS_DIR)/$(SHADING_DIR)/determine_intersection.c\
+		$(SRCS_DIR)/$(SHADING_DIR)/get_intersection.c\
+		$(SRCS_DIR)/$(SHADING_DIR)/ray.c\
+		$(SRCS_DIR)/$(SHADING_DIR)/shading.c\
+
+MLX_DIR = mlx_data
+SRCS += $(SRCS_DIR)/$(MLX_DIR)/mlx.c \
+		$(SRCS_DIR)/$(MLX_DIR)/key_conf.c \
+
+UNTIL_DIR = utils
+SRCS += $(SRCS_DIR)/$(UNTIL_DIR)/vector_util1.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/vector_util2.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/verify_single_argument.c\
 		$(SRCS_DIR)/$(UNTIL_DIR)/get_string_array_size.c\
-		$(SRCS_DIR)/$(UNTIL_DIR)/set_error_and_return_null.c\
-		$(SRCS_DIR)/$(UNTIL_DIR)/mlx.c \
-		$(SRCS_DIR)/$(UNTIL_DIR)/clamp.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/math_utils.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/print_shape.c\
+		$(SRCS_DIR)/$(UNTIL_DIR)/destructor.c\
 
 GNL_DIR := $(SRCS_DIR)/$(PARSER_DIR)/get_next_line
 SRCS += $(GNL_DIR)/get_next_line.c\
@@ -120,7 +126,7 @@ INCLUDES := $(addprefix -I, $(INC_DIR))
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT_AR)
-	$(CC) $(CFLAGS) -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
+	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
 
 $(NAME_AR): $(OBJS)
 	$(AR) -r $(NAME_AR) $^

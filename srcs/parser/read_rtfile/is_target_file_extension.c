@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_target_file_extension.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 08:28:45 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/02 12:36:50 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:51:11 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define FAILURE (1)
 # define ERROR_NOT_TARGET_FILE_EXTENSION "Error: Incorrect filename \
 Please check the file you have entered. The file extension must be .ft.\n"
+#include <libc.h>
 
 bool is_target_file_extension(const char *filename, const char *extension)
 {

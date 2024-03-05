@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:14:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 14:17:26 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:06:42 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shape.h"
-#include <stdlib.h>
+#include "shading.h"
 
 t_ray	new_ray(t_vector point, t_vector direction)
 {

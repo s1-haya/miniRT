@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   mlx_data.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 20:03:27 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 16:16:08 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/03/04 18:47:23 by erin              #+#    #+#             */
+/*   Updated: 2024/03/04 18:52:28 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "scene.h"
+#ifndef MLX_DATA_H
+# define MLX_DATA_H
 
-// t_scene	new_scene(t_shape *shape,
-// 				t_light *light, 
-// 				t_mlx_data data)
-// {
-// 	t_scene	scene;
+# include "scene.h"
+# include <mlx.h>
 
-// 	scene.shape = shape;
-// 	scene.light = light;
-// 	scene.mlx = data;
-// 	return (scene);
-// }
+int esc_key(int keycode, t_scene *scene);
+int close_window(t_scene *scene);
+void	mlx_conf(t_scene *scene);
+
+#endif

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:43:37 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/26 16:36:05 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:59:11 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-#include <stdlib.h>
-#include <stdbool.h>
+# include <stdlib.h>
+# include <stdbool.h>
 
 typedef struct s_minirt_list {
 	char					*identifier;
