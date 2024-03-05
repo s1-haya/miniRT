@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 16:25:16 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:07:19 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ void	validate_plane(t_scene *scene, char **value, bool *result)
 	size = get_string_array_size(value);
 	if (size != 3)
 	{
-		*result = false;
+		error_message(ERROR_NOT_CORRECT_SIZE, result);
 		return ;
 	}
-	plane = new_plane(convert_value_to_vector_in_range(value[0], INT_MIN, INT_MAX, result),
-						convert_value_to_normal_vector(value[1], result),
-						convert_value_to_rgb(value[2], result));
-	if (*result == false || plane == NULL)
+	plane = new_plane(convert_value_to_vector_in_range(value[0],
+				INT_MIN, INT_MAX, result),
+			convert_value_to_normal_vector(value[1], result),
+			convert_value_to_rgb(value[2], result));
+	if (*result && plane == NULL)
+		error_message(ERROR_NOT_MEMORY_ALLOCATED, result);
+	if (*result == false)
 	{
 		free(plane);
 		return ;

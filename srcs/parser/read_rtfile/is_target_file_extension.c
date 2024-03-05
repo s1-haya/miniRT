@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_target_file_extension.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 08:28:45 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 19:51:11 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:34:19 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 #include <unistd.h>
 #include "libft.h"
 
-# define SUCCESS (0)
-# define FAILURE (1)
-# define ERROR_NOT_TARGET_FILE_EXTENSION "Error: Incorrect filename \
+#define SUCCESS (0)
+#define FAILURE (1)
+#define ERROR_NOT_TARGET_FILE_EXTENSION "Error: Incorrect filename \
 Please check the file you have entered. The file extension must be .ft.\n"
-#include <libc.h>
 
-bool is_target_file_extension(const char *filename, const char *extension)
+bool	is_target_file_extension(const char *filename, const char *extension)
 {
-	const char *dot;
+	const char	*dot;
 	bool		result;
 
 	result = false;
@@ -33,12 +32,12 @@ bool is_target_file_extension(const char *filename, const char *extension)
 	if (dot == NULL || dot == filename)
 	{
 		write(STDERR_FILENO, ERROR_NOT_TARGET_FILE_EXTENSION,
-				sizeof(ERROR_NOT_TARGET_FILE_EXTENSION) - 1);
+			sizeof(ERROR_NOT_TARGET_FILE_EXTENSION) - 1);
 		return (result);
 	}
 	result = ft_strncmp(dot, extension, ft_strlen(extension) + 1) == 0;
-	if (!result)
+	if (result == false)
 		write(STDERR_FILENO, ERROR_NOT_TARGET_FILE_EXTENSION,
-				sizeof(ERROR_NOT_TARGET_FILE_EXTENSION) - 1);
+			sizeof(ERROR_NOT_TARGET_FILE_EXTENSION) - 1);
 	return (result);
 }

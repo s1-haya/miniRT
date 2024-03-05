@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:01:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 16:04:39 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:45:10 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #define ERROR_NOT_RANGE "Error: The value is not within the allowed range.\n"
 #define ERROR_NULL_STRING "Error: The string is NULL.\n"
 
+void	error_message(char *error_message, bool *result);
 double	ft_strtod(const char *str, char **endptr);
 
 double	convert_string_to_double_in_range(const char *string,
@@ -32,8 +33,7 @@ double	convert_string_to_double_in_range(const char *string,
 		return (ERROR);
 	if (string == NULL)
 	{
-		write(STDERR_FILENO, ERROR_NULL_STRING, sizeof(ERROR_NULL_STRING) - 1);
-		*result = false;
+		error_message(ERROR_NULL_STRING, result);
 		return (ERROR);
 	}
 	value = ft_strtod(string, &endptr);
@@ -45,8 +45,7 @@ double	convert_string_to_double_in_range(const char *string,
 	}
 	if ((*endptr != '\0' && *endptr != '\n') || value < min || max < value)
 	{
-		write(STDERR_FILENO, ERROR_NOT_RANGE, sizeof(ERROR_NOT_RANGE) - 1);
-		*result = false;
+		error_message(ERROR_NOT_RANGE, result);
 		return (ERROR);
 	}
 	return (value);
