@@ -6,14 +6,15 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 19:11:39 by erin              #+#    #+#             */
-/*   Updated: 2024/03/04 19:19:56 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 18:26:05 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shading.h"
+#include "render_scene.h"
 #include "utils.h"
 
-t_intersection	determine_intersection_ray_and_cylinder(t_cylinder *cylinder, t_ray ray)
+t_intersection	determine_intersection_ray_and_cylinder(t_cylinder \
+														*cylinder, t_ray ray)
 {
 	t_intersection	intersection;
 	double			a;
@@ -55,7 +56,8 @@ t_intersection	get_intersection_ray_and_object(t_shape *shape, t_ray ray)
 	return (intersection);
 }
 
-t_shape	*determine_intersection_ray_and_object(t_list *shape_list, t_ray ray, double light_source_distance)
+t_shape	*determine_intersection_ray_and_object(t_list *shape_list, \
+								t_ray ray, double light_source_distance)
 {
 	t_list			*iterator;
 	t_shape			*nearest_shape;

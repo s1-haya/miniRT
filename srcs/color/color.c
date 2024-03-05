@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:00:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 18:39:50 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 18:10:21 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,12 @@ t_rgb	get_rgb_in_shape(t_shape *shape)
 	else if (shape->object == SPHERE)
 		return (((t_sphere *)shape->substance)->rgb);
 	return (((t_cylinder *)shape->substance)->rgb);
+}
+
+t_color	multiply_color(t_color color, double scalar)
+{
+	color.red *= scalar;
+	color.green *= scalar;
+	color.blue *= scalar;
+	return (color);
 }

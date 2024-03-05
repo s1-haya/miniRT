@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 20:03:23 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 18:41:53 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ double	max(double n1, double n2);
 # define IMG_ORIGIN_Y 0
 # define IMG_MAX_X max(WINDOW_HEIGHT, WINDOW_WIDTH)
 # define IMG_MAX_Y max(WINDOW_HEIGHT, WINDOW_WIDTH)
+# define SUCCESS 0
+# define FAILURE 1
 
 // 環境光反射係数
 #define AMBIENT_LIGNT_REFLECTION_COEFFICIENT new_color(0.01,0.01,0.01)

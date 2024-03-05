@@ -6,14 +6,14 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:18:06 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 18:35:37 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 18:34:47 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
-#define VECTOR_H
+# define VECTOR_H
 
-#include <stdio.h>
+# include <stdio.h>
 # include <math.h>
 
 typedef struct s_vector

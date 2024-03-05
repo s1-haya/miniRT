@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:40:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 11:41:14 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:41:56 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *str);
 
 void	error_message(char *error_message, bool *result)
 {
-	write(STDERR_FILENO, error_message,
+	write(STDERR_FILENO, error_message, \
 			ft_strlen(error_message) - 1);
 	*result = false;
 }

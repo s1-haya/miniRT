@@ -52,11 +52,13 @@ COLOR_DIR = color
 SRCS += $(SRCS_DIR)/$(COLOR_DIR)/color.c\
 		$(SRCS_DIR)/$(COLOR_DIR)/pixel_put.c
 
-SHADING_DIR = shading
-SRCS += $(SRCS_DIR)/$(SHADING_DIR)/determine_intersection.c\
-		$(SRCS_DIR)/$(SHADING_DIR)/get_intersection.c\
-		$(SRCS_DIR)/$(SHADING_DIR)/ray.c\
-		$(SRCS_DIR)/$(SHADING_DIR)/shading.c\
+RENDER_DIR = render_scene
+SRCS += $(SRCS_DIR)/$(RENDER_DIR)/determine_intersection.c\
+		$(SRCS_DIR)/$(RENDER_DIR)/get_intersection.c\
+		$(SRCS_DIR)/$(RENDER_DIR)/ray.c\
+		$(SRCS_DIR)/$(RENDER_DIR)/shading.c\
+		$(SRCS_DIR)/$(RENDER_DIR)/add_reflection.c\
+		$(SRCS_DIR)/$(RENDER_DIR)/render_scene.c\
 
 MLX_DIR = mlx_data
 SRCS += $(SRCS_DIR)/$(MLX_DIR)/mlx.c \
@@ -89,11 +91,11 @@ LIBFT_LIB_NAME := ft
 LIBFT_INC_DIR := ./libft
 
 # minilibx
-MINILIBX_DIR := ./minilibx-linux
-MINILIBX_AR := ./minilibx-linux/libmlx.a
-MINILIBX_LIB_DIR := ./minilibx-linux
-MINILIBX := mlx
-MINILIBX_INC_DIR := ./minilibx-linux
+# MINILIBX_DIR := ./minilibx-linux
+# MINILIBX_AR := ./minilibx-linux/libmlx.a
+# MINILIBX_LIB_DIR := ./minilibx-linux
+# MINILIBX := mlx
+# MINILIBX_INC_DIR := ./minilibx-linux
 
 # test
 TEST_DIR := ./test
@@ -123,7 +125,7 @@ INC_DIR := ./includes $(MINILIBX_INC_DIR) $(X_WINDOW_INC_DIR) $(LIBFT_INC_DIR) $
 INCLUDES := $(addprefix -I, $(INC_DIR))
 
 ifeq ($(UNAME), Darwin)
-	LDFLAGS += -framework OpenGL -framework AppKit
+	LDFLAGS += -framework OpenGL -framework AppKit -lmlx
 endif
 
 .PHONY: all clean fclean re

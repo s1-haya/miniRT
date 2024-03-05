@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:56:36 by erin              #+#    #+#             */
-/*   Updated: 2024/03/04 17:09:16 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 17:46:05 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	print_shape(t_list *list)
 		else if (((t_shape *)list->content)->object == SPHERE)
 			print_sphere((t_sphere *)(((t_shape *)list->content)->substance));
 		else if (((t_shape *)list->content)->object == CYLINDER)
-			print_cylinder((t_cylinder *)(((t_shape *)list->content)->substance));
+			print_cylinder((t_cylinder *) \
+						(((t_shape *)list->content)->substance));
 		else
 			printf("none;\n");
 		list = list->next;

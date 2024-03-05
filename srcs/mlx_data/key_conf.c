@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:46:12 by erin              #+#    #+#             */
-/*   Updated: 2024/03/04 18:52:03 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 17:42:16 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_scene(t_scene *scene);
 
-int esc_key(int keycode, t_scene *scene)
+int	esc_key(int keycode, t_scene *scene)
 {
 	if (keycode == 53)
 	{
@@ -24,7 +24,7 @@ int esc_key(int keycode, t_scene *scene)
 	return (0);
 }
 
-int close_window(t_scene *scene)
+int	close_window(t_scene *scene)
 {
 	free_scene(scene);
 	exit(EXIT_SUCCESS);

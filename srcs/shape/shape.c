@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 18:39:33 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 17:45:05 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ t_sphere	*new_sphere(t_vector origin, double radius, t_rgb rgb)
 	return (sphere);
 }
 
-t_cylinder	*new_cylinder(t_vector origin, t_vector axis, double radius, double height, t_rgb rgb)
+t_cylinder	*new_cylinder(t_vector origin, t_vector axis, \
+							double radius, double height, t_rgb rgb)
 {
 	t_cylinder	*cylinder;
 
 	cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
 	if (cylinder == NULL)
 		return (NULL);
-	cylinder->origin = subtract_vectors(origin, scalar_multiply(axis, height / 2));
+	cylinder->origin = \
+		subtract_vectors(origin, scalar_multiply(axis, height / 2));
 	cylinder->axis = axis;
 	cylinder->radius = radius;
 	cylinder->height = height;

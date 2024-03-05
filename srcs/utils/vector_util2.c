@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:33:17 by erin              #+#    #+#             */
-/*   Updated: 2024/03/04 19:00:36 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 17:46:23 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ t_vector	scalar_multiply(t_vector v, double scalar)
 
 void	print_vector(t_vector vec, char *name)
 {
-	printf("%s: (%lf, %lf, %lf)\n",name, vec.x, vec.y, vec.z);
+	printf("%s: (%lf, %lf, %lf)\n", name, vec.x, vec.y, vec.z);
 }
