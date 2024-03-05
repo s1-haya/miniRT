@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:06:34 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:36:41 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ double	convert_string_to_double_in_range(const char *string,
 			double min, double max, bool *result);
 size_t	get_string_array_size(char **array);
 
-t_vector	convert_value_to_vector_in_range_until(char **value_vector,
+static t_vector	convert_value_to_vector_in_range_until(char **value_vector,
 												double min,
 												double max,
 												bool *result)
