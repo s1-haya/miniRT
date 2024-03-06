@@ -6,14 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:11 by hsawamur          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/05 19:42:50 by erin             ###   ########.fr       */
-=======
 /*   Updated: 2024/03/06 14:15:56 by erin             ###   ########.fr       */
->>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "validate.h"
 #include "minirt.h"
 
 #define ERROR_INVALID_CYLINDER_VALUE "Error: Invalid cylinder value."

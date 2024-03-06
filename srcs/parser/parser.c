@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:43:35 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:31:43 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include <stdbool.h>
+#include <unistd.h>
+#include "scene.h"
+#include "parser.h"
 
 t_minirt_list	*read_rt_file(const char *file_name, bool *result);
 bool			validate(t_scene *scene, t_minirt_list *list,

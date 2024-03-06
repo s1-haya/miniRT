@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   set_error_and_return_null.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:05:16 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:41:32 by erin             ###   ########.fr       */
+/*   Updated: 2024/02/20 19:32:23 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include <stdbool.h>
+#include <stdlib.h>
 
 void	*set_error_and_return_null(bool *result)
 {

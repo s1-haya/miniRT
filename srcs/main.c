@@ -6,25 +6,27 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/05 20:00:29 by erin             ###   ########.fr       */
-=======
 /*   Updated: 2024/03/06 14:05:18 by erin             ###   ########.fr       */
->>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <stdbool.h>
+#include <limits.h>
+#include <mlx.h>
 #include "minirt.h"
+#include "shape.h"
+#include "color.h"
+#include "scene.h"
+#include "libft.h"
+#include "mlx_data.h"
 
 bool		verify_single_argument(int argc);
 void		parser(t_scene *scene, const char *file_name, bool *result);
 t_mlx_data	new_mlx_data(bool *result);
-<<<<<<< HEAD
-=======
 void		free_scene(t_scene *scene);
 void		render_scene(t_scene *scene);
 void		print_shape(t_list *list);
->>>>>>> 84d2404
 
 int	main(int argc, char *argv[])
 {

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_parameter_count.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:39:37 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:51:15 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:15:45 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
+#include <unistd.h>
+#include <stdio.h>
 
 #define MAX_PRAMTER_COUNT (1)
 #define ERROR_EXCEEDS_MAX_LIMIT "Error: \

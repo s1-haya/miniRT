@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_ambient_lighting.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:38:29 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:51:08 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:25:42 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "validate.h"
 
 #define MIN_AMBIENT_LIGHT (0.0)
 #define MAX_AMBIENT_LIGHT (1.0)

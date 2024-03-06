@@ -6,18 +6,23 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:36:37 by erin              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/05 19:20:30 by erin             ###   ########.fr       */
-=======
 /*   Updated: 2024/03/06 14:33:43 by erin             ###   ########.fr       */
->>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_SCENE_H
 # define RENDER_SCENE_H
 
-# include "define.h"
+# include <math.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include "minirt.h"
+# include "scene.h"
+# include "shape.h"
+# include "vector.h"
+# include "color.h"
+# include "libft.h"
+# include "utils.h"
 
 # define C_EPSILON 0.001953125
 

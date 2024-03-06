@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_light.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:43:11 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:21:59 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "validate.h"
 
 #define MIN_LIGHT (0.0)
 #define MAX_LIGHT (1.0)

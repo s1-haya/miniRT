@@ -6,11 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:33:17 by erin              #+#    #+#             */
-/*   Updated: 2024/03/05 19:44:47 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 17:46:23 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "utils.h"
 
 t_vector	subtract_vectors(t_vector v1, t_vector v2)
 {

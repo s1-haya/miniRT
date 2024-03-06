@@ -6,25 +6,17 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 07:58:00 by hsawamur          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/05 20:01:04 by erin             ###   ########.fr       */
-=======
 /*   Updated: 2024/03/06 14:03:08 by erin             ###   ########.fr       */
->>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "camera.h"
 #include "minirt.h"
 
-<<<<<<< HEAD
-t_camera	new_camera(t_vector view_point, \
-			t_vector look_at_point, double horizontal_value)
-=======
 #include <math.h>
 
 t_camera	new_camera(t_vector view_point, \
 				t_vector look_at_point, double horizontal_value)
->>>>>>> 84d2404
 {
 	t_camera	camera;
 

@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   convert_string_to_double_in_range.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:01:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:41:54 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 11:45:10 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include <unistd.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 #define ERROR (0.0)
 #define ERROR_NOT_RANGE "Error: The value is not within the allowed range.\n"

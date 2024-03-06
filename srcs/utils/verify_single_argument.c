@@ -6,11 +6,13 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:14:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:44:51 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 18:40:05 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "utils.h"
+#include <stdbool.h>
+#include <unistd.h>
 
 bool	verify_single_argument(int argc)
 {

@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   read_rt_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:56:05 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:58:50 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:28:22 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include "parser.h"
+#include "libft.h"
 
 #define ERROR (-1)
 
@@ -45,3 +50,22 @@ t_minirt_list	*read_rt_file(const char *file_name, bool *result)
 	close(fd);
 	return (head);
 }
+
+// #include <libc.h>
+// int main(void)
+// {
+// 	bool result = true;
+// 	read_rt_file(list, "./get_next_line/test.rt", &result);
+// 	if (result)
+// 	{
+// 		print_minirt_list(list);
+// 		delete_minirt_list(list);
+// 		system("leaks -q a.out");
+// 		return (0);
+// 	}
+// 	printf("ERROR: \n");
+// 	print_minirt_list(list);
+// 	delete_minirt_list(list);
+// 	system("leaks -q a.out");
+// 	return (1);
+// }

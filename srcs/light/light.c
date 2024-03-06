@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "light.h"
+#include "color.h"
+#include <stdlib.h>
 
 t_light	*new_light(t_vector point, double intensity, t_rgb rgb)
 {

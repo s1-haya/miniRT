@@ -6,15 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:47:43 by erin              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/05 19:44:03 by erin             ###   ########.fr       */
-=======
 /*   Updated: 2024/03/06 14:22:05 by erin             ###   ########.fr       */
->>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "render_scene.h"
 
 static double	map(double x, double max, double orig, double sign)
 {

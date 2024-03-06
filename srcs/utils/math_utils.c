@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "utils.h"
 
 double	clamp(double v, double v_min, double v_max)
 {

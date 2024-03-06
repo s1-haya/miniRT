@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_plane.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:43:15 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:07:19 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "validate.h"
 
 void	validate_plane(t_scene *scene, char **value, bool *result)
 {

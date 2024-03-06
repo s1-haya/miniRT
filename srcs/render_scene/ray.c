@@ -6,15 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:14:11 by hsawamur          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/05 20:01:22 by erin             ###   ########.fr       */
-=======
 /*   Updated: 2024/03/06 14:02:21 by erin             ###   ########.fr       */
->>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "render_scene.h"
 
 t_ray	new_ray(t_vector point, t_vector direction)
 {

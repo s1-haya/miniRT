@@ -6,11 +6,13 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:56:36 by erin              #+#    #+#             */
-/*   Updated: 2024/03/05 19:55:59 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 17:46:05 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "color.h"
+#include "shape.h"
+#include "libft.h"
 
 void	print_rgb(t_rgb rgb)
 {

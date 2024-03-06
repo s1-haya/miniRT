@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:42:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:43:30 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:32:23 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 void	delete_value(char **value)
 {

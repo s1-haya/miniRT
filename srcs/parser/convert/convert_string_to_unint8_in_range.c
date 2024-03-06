@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   convert_string_to_unint8_in_range.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:16:54 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:41:58 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 11:45:53 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include <stdint.h>
+#include <unistd.h>
+#include <stdbool.h>
 
 #define ERROR (0xFF)
 #define ERROR_VALUE_RANGE "Error: The value is not within the allowed range.\n"

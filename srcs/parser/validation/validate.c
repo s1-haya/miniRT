@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:33:48 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:43:21 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:23:55 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
+#include "scene.h"
+#include "libft.h"
 
 #define AMBIENT_LIGHTING "A"
 #define CAMERA "C"

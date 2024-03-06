@@ -6,20 +6,13 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/05 19:20:39 by erin             ###   ########.fr       */
-=======
 /*   Updated: 2024/03/06 14:19:04 by erin             ###   ########.fr       */
->>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPE_H
 # define SHAPE_H
 
-<<<<<<< HEAD
-# include "define.h"
-=======
 # include "vector.h"
 # include "ray.h"
 # include "color.h"
@@ -60,7 +53,6 @@ typedef struct s_shape
 	void			*substance;
 	t_intersection	intersection;
 }	t_shape;
->>>>>>> 84d2404
 
 t_shape			*new_shape(void *shape, enum e_object object);
 t_sphere		*new_sphere(t_vector origin, double radius, t_rgb rgb);

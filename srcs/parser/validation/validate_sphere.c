@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_sphere.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 19:43:25 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/05 12:22:44 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "validate.h"
 
 #define ERROR_INVALID_SPHERE "Error: Invalid sphere value."
 
