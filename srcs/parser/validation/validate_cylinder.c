@@ -6,7 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:11 by hsawamur          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/05 19:42:50 by erin             ###   ########.fr       */
+=======
+/*   Updated: 2024/03/06 14:15:56 by erin             ###   ########.fr       */
+>>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +32,8 @@ void	validate_cylinder(t_scene *scene, char **value, bool *result)
 			convert_string_to_double_in_range(value[2],
 				INT_MIN, INT_MAX, result) / 2,
 			convert_string_to_double_in_range(value[3],
-				INT_MIN, INT_MAX, result),
-			convert_value_to_rgb(value[4], result));
+				INT_MIN, INT_MAX, result));
+	cylinder->rgb = convert_value_to_rgb(value[4], result);
 	if (cylinder == NULL)
 		error_message(ERROR_NOT_MEMORY_ALLOCATED, result);
 	else if (cylinder->radius <= 0 || cylinder->height <= 0)

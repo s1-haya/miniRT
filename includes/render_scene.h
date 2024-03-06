@@ -6,7 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:36:37 by erin              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/05 19:20:30 by erin             ###   ########.fr       */
+=======
+/*   Updated: 2024/03/06 14:33:43 by erin             ###   ########.fr       */
+>>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +19,7 @@
 
 # include "define.h"
 
-# define C_EPSILON (1.0 / 512)
+# define C_EPSILON 0.001953125
 
 t_intersection	determine_intersection_ray_and_plane(t_plane *plane, t_ray ray);
 t_intersection	determine_intersection_ray_and_sphere(t_sphere *sphere, \
@@ -40,6 +44,5 @@ void			draw_shadow_shading(t_scene *scene, t_shape *nearest_shape, \
 void			shading(t_scene *scene, t_shape *nearest_shape, int x, int y);
 t_ray			set_viewpoint(t_camera *camera, double lx, double ly);
 void			render_scene(t_scene *scene);
-
 
 #endif

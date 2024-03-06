@@ -6,7 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:23:42 by hsawamur          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/05 19:44:17 by erin             ###   ########.fr       */
+=======
+/*   Updated: 2024/03/06 14:16:13 by erin             ###   ########.fr       */
+>>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +43,7 @@ t_sphere	*new_sphere(t_vector origin, double radius, t_rgb rgb)
 }
 
 t_cylinder	*new_cylinder(t_vector origin, t_vector axis, \
-							double radius, double height, t_rgb rgb)
+							double radius, double height)
 {
 	t_cylinder	*cylinder;
 
@@ -51,7 +55,6 @@ t_cylinder	*new_cylinder(t_vector origin, t_vector axis, \
 	cylinder->axis = axis;
 	cylinder->radius = radius;
 	cylinder->height = height;
-	cylinder->rgb = rgb;
 	return (cylinder);
 }
 

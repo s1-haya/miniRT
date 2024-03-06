@@ -6,7 +6,11 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:47:43 by erin              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/05 19:44:03 by erin             ###   ########.fr       */
+=======
+/*   Updated: 2024/03/06 14:22:05 by erin             ###   ########.fr       */
+>>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +46,21 @@ t_ray	set_viewpoint(t_camera *camera, double lx, double ly)
 
 void	render_scene(t_scene *scene)
 {
-	int		x;
-	int		y;
-	t_ray	ray;
-	t_shape	*nearest_shape;
+	int			x;
+	int			y;
+	t_ray		ray;
+	t_shape		*nearest_shape;
+	const int	img_max = max(WINDOW_HEIGHT, WINDOW_WIDTH);
 
-	x = IMG_ORIGIN_X;
-	while (x < IMG_MAX_X)
+	x = WINDOW_ORIGIN_X;
+	while (x < img_max)
 	{
-		y = IMG_ORIGIN_Y;
-		while (y < IMG_MAX_Y)
+		y = WINDOW_ORIGIN_Y;
+		while (y < img_max)
 		{
 			ray = set_viewpoint(&scene->camera, \
-				map((double)x, IMG_MAX_X, -1.0, 1.0), \
-					map((double)y, IMG_MAX_Y, 1.0, -1.0));
+				map((double)x, img_max, -1.0, 1.0), \
+					map((double)y, img_max, 1.0, -1.0));
 			nearest_shape = \
 			determine_intersection_ray_and_object(scene->shape, ray, LONG_MAX);
 			shading(scene, nearest_shape, x, y);

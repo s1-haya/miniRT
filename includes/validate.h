@@ -6,12 +6,16 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:36:35 by hsawamur          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/05 19:51:02 by erin             ###   ########.fr       */
+=======
+/*   Updated: 2024/03/06 14:18:04 by erin             ###   ########.fr       */
+>>>>>>> 84d2404
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERT_H
-# define CONVERT_H
+#ifndef VALIDATE_H
+# define VALIDATE_H
 
 # include "define.h"
 # include <stdbool.h>
@@ -28,13 +32,13 @@ double		convert_string_to_double_in_range(const char *string, \
 											double max, \
 											bool *result);
 uint8_t		convert_string_to_unint8_in_range(const char *value, \
-												uint8_t min,
-												uint8_t max,
+												uint8_t min, \
+												uint8_t max, \
 												bool *result);
 t_rgb		convert_value_to_rgb(const char *value, bool *result);
-t_vector	convert_value_to_vector_in_range(const char *value,
-												double min,
-												double max,
+t_vector	convert_value_to_vector_in_range(const char *value, \
+												double min, \
+												double max, \
 												bool *result);
 size_t		get_string_array_size(char **array);
 t_vector	convert_value_to_normal_vector(const char *value, bool *result);
