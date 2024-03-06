@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_light.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:21:59 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:21:36 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,4 @@ void	validate_light(t_scene *scene, char **value,
 			convert_value_to_rgb(value[2], result));
 	if (*result && scene->light == NULL)
 		error_message(ERROR_NOT_MEMORY_ALLOCATED, result);
-	if (*result == false)
-		free(scene->light);
 }

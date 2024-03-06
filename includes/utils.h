@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:58:21 by erin              #+#    #+#             */
-/*   Updated: 2024/03/05 18:41:22 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/06 14:44:30 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "scene.h"
 
 # define ERROR_INCORRCT_NUMBER_OF_ARGUMENTS "Error: \
-Incorrect number of arguments.\n Usage: ./miniRT <filename>"
+Incorrect number of arguments.\nUsage: ./miniRT <filename>\n"
 
 double		clamp(double v, double v_min, double v_max);
 double		min(double n1, double n2);

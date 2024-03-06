@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   validate_sphere.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:22:44 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:01:26 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "validate.h"
 
-#define ERROR_INVALID_SPHERE "Error: Invalid sphere value."
+#define ERROR_INVALID_SPHERE "Error: Invalid sphere value.\n"
 
 void	validate_sphere(t_scene *scene, char **value, bool *result)
 {

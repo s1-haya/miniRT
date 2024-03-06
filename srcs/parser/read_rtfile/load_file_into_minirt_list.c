@@ -3,16 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   load_file_into_minirt_list.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:59:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:27:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:00:56 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// ft ファイルを一行ずつ読み取りt_hashmapに格納する関数作成
-// 入力 ftファイル
-// 出力 t_hashmap *
 
 #include "parser.h"
 #include "get_next_line.h"

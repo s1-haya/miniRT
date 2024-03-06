@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parameter_count.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:39:37 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:15:45 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:01:11 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ parameter exceeds the maximum limit of 1. \
 Please do so in just one line, \
 If you are setting an identifier with uppercase characters\n"
 #define ERROR_NOT_SET_UPEER_CHARACTER "Error: Prameter don't set. \
-parameter of upeer character must be set, please."
+parameter of upeer character must be set, please.\n"
 
 void	error_message(char *error_message, bool *result);
 
