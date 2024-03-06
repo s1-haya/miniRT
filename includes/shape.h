@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:42:30 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 17:00:11 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/06 14:19:04 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 typedef enum e_object
 {
 	PLANE,
-	SPHERE, 
+	SPHERE,
 	CYLINDER
 }	t_object;
 
@@ -37,7 +37,6 @@ typedef struct s_sphere
 	double		radius;
 	t_rgb		rgb;
 }	t_sphere;
-
 
 typedef struct s_cylinder
 {
@@ -57,7 +56,8 @@ typedef struct s_shape
 
 t_shape			*new_shape(void *shape, enum e_object object);
 t_sphere		*new_sphere(t_vector origin, double radius, t_rgb rgb);
-t_cylinder		*new_cylinder(t_vector origin, t_vector axis, double radius, double height, t_rgb rgb);
+t_cylinder		*new_cylinder(t_vector origin, t_vector axis, \
+									double radius, double height);
 t_plane			*new_plane(t_vector normal, t_vector point, t_rgb rgb);
 t_ray			new_ray(t_vector point, t_vector direction);
 t_intersection	new_intersection(t_ray ray, double t);

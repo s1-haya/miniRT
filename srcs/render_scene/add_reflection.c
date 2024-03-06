@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:27:32 by erin              #+#    #+#             */
-/*   Updated: 2024/03/05 18:30:46 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/06 14:33:20 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	add_diffuse_reflection(t_color *color, \
 
 	rgb = get_rgb_in_shape(nearest_shape);
 	diffuse_reflection = add_reflection_util(rgb, light, \
-					clamp(dot_product(normal, incident), 0.0, 1.0));
+					clamp(dot_product(normal, incident), 0.0, 1.0) * \
+						DIFFUSE_REFLECTION_COEFFICIENT);
 	add_color(color, diffuse_reflection);
 }
 
@@ -79,6 +80,7 @@ void	add_specular_reflection(t_color *color, t_scene *scene, \
 	normalize_vector(&b);
 	rgb = get_rgb_in_shape(nearest_shape);
 	specular_reflection = add_reflection_util(rgb, light, \
-					pow(dot_product(a, b), GLOSS_FACTOR));
+					pow(dot_product(a, b), GLOSS_FACTOR) * \
+						SPECULAR_REFLECTION_COEFFICIENT);
 	add_color(color, specular_reflection);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_string_array_size.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:13:16 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/23 17:15:08 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/06 14:02:36 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	get_string_array_size(char **array)
 {
-	size_t size;
+	size_t	size;
 
 	size = 0;
 	while (array[size] != NULL)

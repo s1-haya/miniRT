@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 07:58:40 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/02/29 11:54:17 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/06 14:11:08 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_camera
 	size_t		horizontal_viewing_angle;
 }	t_camera;
 
-t_camera	new_camera(t_vector view_point, t_vector look_at_point,
+t_camera	new_camera(t_vector view_point, t_vector look_at_point, \
 						double horizontal_value);
 
 #endif
