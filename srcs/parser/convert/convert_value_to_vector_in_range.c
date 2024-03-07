@@ -6,11 +6,12 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/06 17:11:49 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/07 10:18:29 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+#include "render_scene.h"
 #include <stdbool.h>
 #include <unistd.h>
 
@@ -74,7 +75,8 @@ t_vector	convert_value_to_vector_in_range(const char *value,
 
 static void	convert_value_to_normal_vector_until(t_vector *vector, bool *result)
 {
-	if (vector_length(*vector) != 1.0)
+	if (vector_length(*vector) < 1.0 - C_EPSILON || \
+		1.0 + C_EPSILON < vector_length(*vector))
 	{
 		error_message(ERROR_NOT_UNIT_VECTOR, result);
 		*result = false;
