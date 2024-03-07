@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destructor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:49:42 by erin              #+#    #+#             */
-/*   Updated: 2024/03/07 12:08:00 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:57:42 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	free_scene(t_scene *scene)
 		mlx_destroy_window(scene->mlx.data, scene->mlx.window);
 	if (scene->mlx.data && scene->mlx.img.data)
 		mlx_destroy_image(scene->mlx.data, scene->mlx.img.data);
-	free(scene->mlx.data);
 	delete_shape(&(scene->shape));
 	current = scene->light;
 	while (current)

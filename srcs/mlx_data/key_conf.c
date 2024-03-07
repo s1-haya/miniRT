@@ -6,13 +6,14 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:46:12 by erin              #+#    #+#             */
-/*   Updated: 2024/03/06 14:22:05 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/07 13:55:50 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_data.h"
 
-void	free_scene(t_scene *scene);
+void		free_scene(t_scene *scene);
+t_mlx_data	new_mlx_data(bool *result);
 
 int	esc_key(int keycode, t_scene *scene)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/07 11:50:29 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:46:00 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_mlx_data		new_mlx_data(bool *result);
 void			check_set_parameter(t_param_count parameter_count,
 					bool *result);
 void			delete_minirt_list(t_minirt_list *list);
-void			print_minirt_list(t_minirt_list *list);
 
 void	parser(t_scene *scene, const char *file_name, bool *result)
 {

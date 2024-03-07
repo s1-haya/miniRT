@@ -1,5 +1,5 @@
 .history
-.vscode/*
+.vscode
 miniRT
 a.out
 objs/*
@@ -7,4 +7,3 @@ test/objs/*
 *.txt
 miniRT.a
 *.o
-*.a

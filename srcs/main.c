@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/07 12:07:24 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:59:39 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char *argv[])
 	return (SUCCESS);
 }
 
-__attribute__((destructor))
-static void destructor() {
-    system("leaks -q miniRT");
-}
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q miniRT");
+// }
