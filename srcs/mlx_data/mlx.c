@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:29:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/06 14:19:53 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/07 12:11:31 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,34 @@
 
 void	new_mlx_window(t_mlx_data *mlx, bool *result)
 {
+	if (*result == false)
+		return ;
 	mlx->window = mlx_new_window(mlx->data, \
 				WINDOW_WIDTH, WINDOW_HEIGHT, MLX_TITLE);
-	if (*result && mlx->window == NULL)
+	if (mlx->window == NULL)
 	{
+		free(mlx->data);
 		mlx->data = NULL;
-		perror(FAILED_TO_ALLOCATE_MEMORY);
+		perror("Error: ");
 		*result = false;
 	}
 }
 
 void	new_mlx_img(t_mlx_data *mlx, bool *result)
 {
+	if (*result == false)
+		return ;
 	mlx->img.data = mlx_new_image(mlx->data, \
 		max(WINDOW_HEIGHT, WINDOW_WIDTH), max(WINDOW_HEIGHT, WINDOW_WIDTH));
-	if (*result && mlx->img.data == NULL)
+	if (mlx->img.data == NULL)
 	{
 		mlx_destroy_window(mlx->data, mlx->window);
 		mlx->window = NULL;
+		free(mlx->data);
 		mlx->data = NULL;
-		perror(FAILED_TO_ALLOCATE_MEMORY);
-		exit(FAILURE);
+		perror("Error: ");
 		*result = false;
+		return ;
 	}
 	mlx->img.address = mlx_get_data_addr(mlx->img.data, \
 			&mlx->img.bits_per_pixel, &mlx->img.size_line, &mlx->img.endian);
@@ -53,7 +59,7 @@ t_mlx_data	new_mlx_data(bool *result)
 	mlx.data = mlx_init();
 	if (mlx.data == NULL)
 	{
-		perror(FAILED_TO_ALLOCATE_MEMORY);
+		perror("Error: ");
 		*result = false;
 	}
 	new_mlx_window(&mlx, result);

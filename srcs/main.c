@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/06 17:11:14 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/07 12:07:24 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	main(int argc, char *argv[])
 		free_scene(&scene);
 		return (FAILURE);
 	}
-	scene.mlx = new_mlx_data(&result);
 	if (scene.shape != NULL)
 		print_shape(scene.shape);
 	render_scene(&scene);
