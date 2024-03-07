@@ -6,13 +6,14 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:01:42 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:30:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:15:12 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 void			*set_error_and_return_null(bool *result);
 t_minirt_list	*init_minirt_list(void);
