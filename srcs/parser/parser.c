@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:31:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:50:29 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_minirt_list	*read_rt_file(const char *file_name, bool *result);
 bool			validate(t_scene *scene, t_minirt_list *list,
 					t_param_count *count, bool *result);
 t_param_count	init_parameter_count(void);
+t_mlx_data		new_mlx_data(bool *result);
 void			check_set_parameter(t_param_count parameter_count,
 					bool *result);
 void			delete_minirt_list(t_minirt_list *list);
@@ -50,4 +51,5 @@ void	parser(t_scene *scene, const char *file_name, bool *result)
 	}
 	check_set_parameter(count_parameter, result);
 	delete_minirt_list(free_list);
+	scene->mlx = new_mlx_data(result);
 }

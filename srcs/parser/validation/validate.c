@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:33:48 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:23:55 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:20:54 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #define PLANE "pl"
 #define SPHERE "sp"
 #define CYLINDER "cy"
+#define ERROR_INVALID_CHARACTERS "Error: this file you enter contains \
+invalid characters."
 
 void	validate_ambient_lighting(t_scene *scene, char **value,
 			t_param_count *count, bool *result);
@@ -31,6 +33,7 @@ void	validate_plane(t_scene *scene, char **value, bool *result);
 void	validate_sphere(t_scene *scene, char **value, bool *result);
 void	validate_cylinder(t_scene *scene, char **value, bool *result);
 void	check_parameter_count(t_param_count parameter_count, bool *result);
+void	error_message(char *error_message, bool *result);
 
 void	validate(t_scene *scene, t_minirt_list *list,
 				t_param_count *count, bool *result)
@@ -48,6 +51,6 @@ void	validate(t_scene *scene, t_minirt_list *list,
 	else if (!ft_strcmp(CYLINDER, list->identifier))
 		validate_cylinder(scene, list->value, result);
 	else
-		*result = false;
+		error_message(ERROR_INVALID_CHARACTERS, result);
 	check_parameter_count(*count, result);
 }
