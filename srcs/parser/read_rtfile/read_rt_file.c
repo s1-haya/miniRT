@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:56:05 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/06 15:01:01 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/07 14:47:44 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	get_file_descriptor(const char *file_name, bool *result)
 	if (fd == ERROR)
 	{
 		perror("open");
-		*result = false;
+		exit (EXIT_FAILURE);
 	}
 	return (fd);
 }
@@ -42,7 +42,9 @@ t_minirt_list	*read_rt_file(const char *file_name, bool *result)
 	t_minirt_list	*head;
 	int				fd;
 
-	*result = is_target_file_extension(ft_strrchr(file_name, '/'), ".rt");
+	*result = is_target_file_extension(file_name, ".rt");
+	if (!(*result))
+		exit(EXIT_FAILURE);
 	fd = get_file_descriptor(file_name, result);
 	head = NULL;
 	if (*result)

@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/07 13:26:48 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/08 10:39:06 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double	max(double n1, double n2);
 # define FAILURE 1
 
 # define DIFFUSE_REFLECTION_COEFFICIENT 0.69
-# define SPECULAR_REFLECTION_COEFFICIENT 0.30
+# define SPECULAR_REFLECTION_COEFFICIENT 1.0
 # define GLOSS_FACTOR 50
 
 typedef struct s_range
@@ -58,6 +58,7 @@ typedef struct s_mlx_data
 {
 	void	*data;
 	void	*window;
+	void	*mlx;
 	t_img	img;
 }	t_mlx_data;
 
