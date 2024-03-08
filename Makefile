@@ -37,7 +37,6 @@ SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_plane.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_sphere.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/validate_cylinder.c\
-		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/check_parameter_count.c\
 
 CONVERT_DIR := convert
 SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_string_to_double_in_range.c\
@@ -56,7 +55,6 @@ RENDER_DIR = render_scene
 SRCS += $(SRCS_DIR)/$(RENDER_DIR)/determine_intersection.c\
 		$(SRCS_DIR)/$(RENDER_DIR)/get_intersection.c\
 		$(SRCS_DIR)/$(RENDER_DIR)/ray.c\
-		$(SRCS_DIR)/$(RENDER_DIR)/shading.c\
 		$(SRCS_DIR)/$(RENDER_DIR)/add_reflection.c\
 		$(SRCS_DIR)/$(RENDER_DIR)/render_scene.c\
 
@@ -79,6 +77,16 @@ SRCS += $(GNL_DIR)/get_next_line.c\
 
 OBJS_DIR := ./objs
 OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
+
+SRCS_ALL := $(SRCS_DIR)/$(RENDER_DIR)/shading.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/check_parameter_count.c\
+
+OBJS_ALL := $(OBJS)  $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS_ALL))
+
+SRCS_BONUS := $(SRCS_DIR)/$(RENDER_DIR)/shading_bonus.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/check_parameter_count_bonus.c\
+
+OBJS_BONUS := $(OBJS)  $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS_BONUS))
 
 DEPS =	$(OBJS:.o=.d)
 
@@ -132,10 +140,10 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_AR)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
+$(NAME): $(OBJS_ALL) $(LIBFT_AR)
+	$(CC) $(CFLAGS) $(OBJS_ALL) $(LIBFT_AR) $(LDFLAGS) -o $@
 
-$(NAME_AR): $(OBJS)
+$(NAME_AR): $(OBJS_ALL)
 	$(AR) -r $(NAME_AR) $^
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
@@ -155,6 +163,9 @@ re: fclean all
 
 test: fclean $(TEST_NAME)
 	$(TEST_DIR)/$(TEST_NAME)
+
+bonus: fclean $(OBJS_BONUS) $(LIBFT_AR)
+	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT_AR) $(LDFLAGS) -o $(NAME)
 
 $(OBJS_DIR)/%.o: $(UNITY_DIR)/$(SRCS_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@

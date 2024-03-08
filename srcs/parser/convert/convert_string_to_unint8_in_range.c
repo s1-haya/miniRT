@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:16:54 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 11:45:53 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:39:47 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ uint8_t	convert_string_to_unint8_in_range(const char *value,
 		return (ERROR);
 	}
 	value_double = ft_strtod(value, &end);
-	if (*end != '\0' || value_double < min || max < value_double
-		|| (uint8_t)value_double != value_double)
+	if (*result && (*end != '\0' || (uint8_t)value_double != value_double 
+		|| value_double < min || max < value_double))
 	{
 		error_message(ERROR_VALUE_RANGE, result);
 		return (ERROR);

@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:01:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 11:45:10 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:38:52 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ double	convert_string_to_double_in_range(const char *string,
 		*result = false;
 		return (ERROR);
 	}
-	if ((*endptr != '\0' && *endptr != '\n') || value < min || max < value)
+	if (*result && ((*endptr != '\0' && *endptr != '\n')
+		|| value < min || max < value))
 	{
 		error_message(ERROR_NOT_RANGE, result);
 		return (ERROR);

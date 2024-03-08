@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_rt_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:56:05 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/06 15:01:01 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/08 11:33:46 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	get_file_descriptor(const char *file_name, bool *result)
 	fd = open(file_name, O_RDONLY);
 	if (fd == ERROR)
 	{
-		perror("open");
+		perror("Error: ");
 		*result = false;
 	}
 	return (fd);
@@ -42,7 +42,7 @@ t_minirt_list	*read_rt_file(const char *file_name, bool *result)
 	t_minirt_list	*head;
 	int				fd;
 
-	*result = is_target_file_extension(ft_strrchr(file_name, '/'), ".rt");
+	*result = is_target_file_extension(file_name, ".rt");
 	fd = get_file_descriptor(file_name, result);
 	head = NULL;
 	if (*result)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_parameter_count.c                            :+:      :+:    :+:   */
+/*   check_parameter_count_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 12:39:37 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/08 11:57:53 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/03/08 11:57:04 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/03/08 11:57:13 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_param_count	init_parameter_count(void)
 void	check_parameter_count(t_param_count parameter_count, bool *result)
 {
 	if (*result && (parameter_count.ambient > MAX_PRAMTER_COUNT
-			|| parameter_count.light > MAX_PRAMTER_COUNT
 			|| parameter_count.camera > MAX_PRAMTER_COUNT))
 		error_message(ERROR_EXCEEDS_MAX_LIMIT, result);
 }
