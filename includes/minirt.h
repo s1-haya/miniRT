@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/07 18:40:14 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/09 16:45:31 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ double	max(double n1, double n2);
 # define WINDOW_ORIGIN_X 0
 # define WINDOW_ORIGIN_Y 0
 # define WINDOW_WIDTH 1000
-# define WINDOW_HEIGHT 500
+# define WINDOW_HEIGHT 1000
 # define SUCCESS 0
 # define FAILURE 1
 
 # define DIFFUSE_REFLECTION_COEFFICIENT 0.69
-# define SPECULAR_REFLECTION_COEFFICIENT 0.30
+# define SPECULAR_REFLECTION_COEFFICIENT 1.0
 # define GLOSS_FACTOR 50
 
 typedef struct s_range
