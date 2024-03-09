@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:45:34 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/08 11:47:26 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:00:43 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,4 @@ void	parser(t_scene *scene, const char *file_name, bool *result)
 	}
 	check_set_parameter(count_parameter, result);
 	delete_minirt_list(free_list);
-	if (*result)
-		scene->mlx = new_mlx_data(result);
 }

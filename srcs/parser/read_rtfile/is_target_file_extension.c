@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_target_file_extension.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 08:28:45 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/08 11:40:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:03:04 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,39 @@
 Please check the file you have entered. The file extension must be .ft.\n"
 #define ERROR_FILE_IS_EMPTY "Error: the file is empty. \n"
 
+size_t	ft_strlen_s(const char *str)
+{
+	size_t	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
 bool	is_target_file_extension(const char *filename, const char *extension)
 {
-	const char	*dot;
-	bool		result;
+	size_t		name_len;
+	size_t		ext_len;
+	const char	*file_ext;
 
-	result = false;
-	if (!filename || !extension)
+	name_len = ft_strlen_s(filename);
+	ext_len = ft_strlen_s(extension);
+	if (name_len <= ext_len)
 	{
-		write(STDERR_FILENO, ERROR_FILE_IS_EMPTY,
-			sizeof(ERROR_FILE_IS_EMPTY) - 1);
-		return (result);
+		write(STDERR_FILENO, ERROR_NOT_TARGET_FILE_EXTENSION, \
+			sizeof(ERROR_NOT_TARGET_FILE_EXTENSION) - 1);
+		return (false);
 	}
-	dot = ft_strchr(filename, '.');
-	if (dot == NULL || dot == filename)
+	file_ext = filename + (name_len - ext_len);
+	if (ft_strncmp(file_ext, extension, ext_len) == 0)
+		return (true);
+	else
 	{
-		write(STDERR_FILENO, ERROR_NOT_TARGET_FILE_EXTENSION,
+		write(STDERR_FILENO, ERROR_NOT_TARGET_FILE_EXTENSION, \
 			sizeof(ERROR_NOT_TARGET_FILE_EXTENSION) - 1);
-		return (result);
+		return (false);
 	}
-	result = ft_strncmp(dot, extension, ft_strlen(extension) + 1) == 0;
-	if (result == false)
-		write(STDERR_FILENO, ERROR_NOT_TARGET_FILE_EXTENSION,
-			sizeof(ERROR_NOT_TARGET_FILE_EXTENSION) - 1);
-	return (result);
 }

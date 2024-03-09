@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/07 17:34:12 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:01:13 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	main(int argc, char *argv[])
 	ft_bzero(&scene, sizeof(t_scene));
 	result = true;
 	parser(&scene, argv[1], &result);
+	if (result)
+		scene.mlx = new_mlx_data(&result);
 	if (!result)
 	{
 		free_scene(&scene);
@@ -50,7 +52,7 @@ int	main(int argc, char *argv[])
 	return (SUCCESS);
 }
 
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q miniRT");
-// }
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q miniRT");
+}
