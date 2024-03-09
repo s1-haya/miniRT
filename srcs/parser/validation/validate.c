@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:33:48 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/07 11:20:54 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:01:19 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #define SPHERE "sp"
 #define CYLINDER "cy"
 #define ERROR_INVALID_CHARACTERS "Error: this file you enter contains \
-invalid characters."
+invalid characters.\n"
 
 void	validate_ambient_lighting(t_scene *scene, char **value,
 			t_param_count *count, bool *result);

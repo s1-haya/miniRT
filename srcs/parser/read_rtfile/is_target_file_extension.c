@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 08:28:45 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:34:19 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:40:43 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 #define SUCCESS (0)
 #define FAILURE (1)
-#define ERROR_NOT_TARGET_FILE_EXTENSION "Error: Incorrect filename \
+#define ERROR_NOT_TARGET_FILE_EXTENSION "Error: Incorrect filename. \
 Please check the file you have entered. The file extension must be .ft.\n"
+#define ERROR_FILE_IS_EMPTY "Error: the file is empty. \n"
 
 bool	is_target_file_extension(const char *filename, const char *extension)
 {
@@ -27,7 +28,11 @@ bool	is_target_file_extension(const char *filename, const char *extension)
 
 	result = false;
 	if (!filename || !extension)
+	{
+		write(STDERR_FILENO, ERROR_FILE_IS_EMPTY,
+			sizeof(ERROR_FILE_IS_EMPTY) - 1);
 		return (result);
+	}
 	dot = ft_strchr(filename, '.');
 	if (dot == NULL || dot == filename)
 	{

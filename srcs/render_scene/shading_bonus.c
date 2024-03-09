@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shading.c                                          :+:      :+:    :+:   */
+/*   shading_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 23:32:00 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/08 12:01:11 by hsawamur         ###   ########.fr       */
+/*   Created: 2024/03/08 12:00:43 by hsawamur          #+#    #+#             */
+/*   Updated: 2024/03/08 12:00:45 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	draw_shadow_shading(t_scene *scene, \
 							(*light).distance - C_EPSILON) != NULL)
 		return ;
 	add_diffuse_reflection(color, nearest_shape, incident_vector, *light);
+	add_specular_reflection(color, scene, nearest_shape, *light);
 	return ;
 }
 
