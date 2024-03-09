@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/07 18:40:14 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/09 10:48:25 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ double	max(double n1, double n2);
 # define MLX_TITLE "MINIRT"
 # define WINDOW_ORIGIN_X 0
 # define WINDOW_ORIGIN_Y 0
-# define WINDOW_WIDTH 1000
+# define WINDOW_WIDTH 500 
 # define WINDOW_HEIGHT 500
 # define SUCCESS 0
 # define FAILURE 1

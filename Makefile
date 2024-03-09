@@ -1,4 +1,5 @@
 NAME := miniRT
+NAME_BONUS := miniRT_bonus
 NAME_AR := miniRT.a
 TEST_NAME := test_miniRT
 CC := cc
@@ -164,8 +165,8 @@ re: fclean all
 test: fclean $(TEST_NAME)
 	$(TEST_DIR)/$(TEST_NAME)
 
-bonus: fclean $(OBJS_BONUS) $(LIBFT_AR)
-	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT_AR) $(LDFLAGS) -o $(NAME)
+bonus: $(OBJS_BONUS) $(LIBFT_AR)
+	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT_AR) $(LDFLAGS) -o $(NAME_BONUS)
 
 $(OBJS_DIR)/%.o: $(UNITY_DIR)/$(SRCS_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
