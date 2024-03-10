@@ -8,3 +8,4 @@ test/objs/*
 miniRT.a
 *.o
 *.a
+libft.a

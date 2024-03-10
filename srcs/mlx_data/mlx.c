@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:29:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/07 13:16:24 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:59:48 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	new_mlx_window(t_mlx_data *mlx, bool *result)
 				WINDOW_WIDTH, WINDOW_HEIGHT, MLX_TITLE);
 	if (mlx->window == NULL)
 	{
-		free(mlx->data);
 		mlx->data = NULL;
 		perror("Error: ");
 		*result = false;
@@ -42,7 +41,6 @@ void	new_mlx_img(t_mlx_data *mlx, bool *result)
 	{
 		mlx_destroy_window(mlx->data, mlx->window);
 		mlx->window = NULL;
-		free(mlx->data);
 		mlx->data = NULL;
 		perror("Error: ");
 		*result = false;

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
 /*   Updated: 2024/03/09 10:48:25 by hsawamur         ###   ########.fr       */
@@ -28,7 +28,7 @@ double	max(double n1, double n2);
 # define FAILURE 1
 
 # define DIFFUSE_REFLECTION_COEFFICIENT 0.69
-# define SPECULAR_REFLECTION_COEFFICIENT 0.30
+# define SPECULAR_REFLECTION_COEFFICIENT 1.0
 # define GLOSS_FACTOR 50
 
 typedef struct s_range
