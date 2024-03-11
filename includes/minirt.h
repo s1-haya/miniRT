@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 22:34:21 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/09 10:48:25 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:02:51 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ double	max(double n1, double n2);
 # define MLX_TITLE "MINIRT"
 # define WINDOW_ORIGIN_X 0
 # define WINDOW_ORIGIN_Y 0
-# define WINDOW_WIDTH 500 
-# define WINDOW_HEIGHT 500
+# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGHT 1000
 # define SUCCESS 0
 # define FAILURE 1
 

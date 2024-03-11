@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:29:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/09 17:59:48 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/11 11:22:46 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	new_mlx_img(t_mlx_data *mlx, bool *result)
 	if (*result == false)
 		return ;
 	mlx->img.data = mlx_new_image(mlx->data, \
-		max(WINDOW_HEIGHT, WINDOW_WIDTH), max(WINDOW_HEIGHT, WINDOW_WIDTH));
+		WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (mlx->img.data == NULL)
 	{
 		mlx_destroy_window(mlx->data, mlx->window);

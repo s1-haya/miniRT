@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 07:58:40 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/06 14:11:08 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/11 11:56:30 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_camera
 	t_vector	look_at_point;
 	double		distance;
 	size_t		horizontal_viewing_angle;
+	double		screen_width;
+	double		screen_height;
 }	t_camera;
 
 t_camera	new_camera(t_vector view_point, t_vector look_at_point, \
