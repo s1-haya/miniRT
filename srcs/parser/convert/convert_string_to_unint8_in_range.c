@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:16:54 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/11 12:02:18 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <stdbool.h>
 
 #define ERROR (0xFF)
-#define ERROR_VALUE_RANGE "Error: The value is not within the allowed range.\n"
-#define ERROR_NULL_STRING "Error: The string is NULL.\n"
+#define ERROR_VALUE_RANGE "Error:\nThe value is not within the allowed range.\n"
+#define ERROR_NULL_STRING "Error:\nThe string is NULL.\n"
 
 void	error_message(char *error_message, bool *result);
 double	ft_strtod(const char *str, char **endptr);

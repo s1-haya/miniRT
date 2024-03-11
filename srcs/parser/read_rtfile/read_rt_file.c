@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_rt_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:56:05 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/08 11:33:46 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	get_file_descriptor(const char *file_name, bool *result)
 	fd = open(file_name, O_RDONLY);
 	if (fd == ERROR)
 	{
-		perror("Error: ");
+		perror("Error:\n");
 		*result = false;
 	}
 	return (fd);

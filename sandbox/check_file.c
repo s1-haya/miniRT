@@ -23,7 +23,7 @@ int main() {
         printf("Processing file: %s\n", filename);
         // ファイル処理のロジックをここに追加
     } else {
-        printf("Error: Only .rt files are supported.\n");
+        printf("Error:\nOnly .rt files are supported.\n");
     }
 
     return 0;

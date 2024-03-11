@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:29:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/11 11:22:46 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "minirt.h"
 
 #define FAILURE 1
-#define FAILED_TO_ALLOCATE_MEMORY "Error: Failed to allocate memory"
+#define FAILED_TO_ALLOCATE_MEMORY "Error:\nFailed to allocate memory"
 
 void	new_mlx_window(t_mlx_data *mlx, bool *result)
 {
@@ -26,7 +26,7 @@ void	new_mlx_window(t_mlx_data *mlx, bool *result)
 	if (mlx->window == NULL)
 	{
 		mlx->data = NULL;
-		perror("Error: ");
+		perror("Error:\n");
 		*result = false;
 	}
 }
@@ -42,7 +42,7 @@ void	new_mlx_img(t_mlx_data *mlx, bool *result)
 		mlx_destroy_window(mlx->data, mlx->window);
 		mlx->window = NULL;
 		mlx->data = NULL;
-		perror("Error: ");
+		perror("Error:\n");
 		*result = false;
 		return ;
 	}
@@ -57,7 +57,7 @@ t_mlx_data	new_mlx_data(bool *result)
 	mlx.data = mlx_init();
 	if (mlx.data == NULL)
 	{
-		perror("Error: ");
+		perror("Error:\n");
 		*result = false;
 	}
 	new_mlx_window(&mlx, result);

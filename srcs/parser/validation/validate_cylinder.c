@@ -6,14 +6,14 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/06 15:01:19 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "validate.h"
 #include "minirt.h"
 
-#define ERROR_INVALID_CYLINDER_VALUE "Error: Invalid cylinder value.\n"
+#define ERROR_INVALID_CYLINDER_VALUE "Error:\nInvalid cylinder value.\n"
 
 void	validate_cylinder(t_scene *scene, char **value, bool *result)
 {

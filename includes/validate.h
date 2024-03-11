@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:36:35 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/06 14:18:04 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define MIN_DIRECTION (-1.0)
 # define MAX_DIRECTION (1.0)
 
-# define ERROR_NOT_CORRECT_SIZE "Error: Incorrect number of parameters.\n"
-# define ERROR_NOT_MEMORY_ALLOCATED "Error: Memory allocation failed.\
+# define ERROR_NOT_CORRECT_SIZE "Error:\nIncorrect number of parameters.\n"
+# define ERROR_NOT_MEMORY_ALLOCATED "Error:\nMemory allocation failed.\
 Please close other applications and try again.\n"
 
 double		convert_string_to_double_in_range(const char *string, \
