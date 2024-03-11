@@ -169,7 +169,7 @@ re: fclean all
 test: fclean $(TEST_NAME)
 	$(TEST_DIR)/$(TEST_NAME)
 
-bonus: $(OBJS_BONUS) $(LIBFT_AR)
+bonus: $(OBJS) $(LIBFT_AR)
 	make WITH_BONUS=1
 
 $(OBJS_DIR)/%.o: $(UNITY_DIR)/$(SRCS_DIR)/%.c
