@@ -1,5 +1,5 @@
 #!/bin/bash
 
-for file in rt_file/success/*; do
+for file in rt_file/bonus/*; do
 	echo $file && ./miniRT $file;
 done
