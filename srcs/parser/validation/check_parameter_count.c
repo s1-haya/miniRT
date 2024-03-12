@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parameter_count.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:39:37 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/08 11:57:53 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include <stdio.h>
 
 #define MAX_PRAMTER_COUNT (1)
-#define ERROR_EXCEEDS_MAX_LIMIT "Error: \
+#define ERROR_EXCEEDS_MAX_LIMIT "Error:\n\
 parameter exceeds the maximum limit of 1. \
 Please do so in just one line, \
 If you are setting an identifier with uppercase characters\n"
-#define ERROR_NOT_SET_UPEER_CHARACTER "Error: Prameter don't set. \
+#define ERROR_NOT_SET_UPEER_CHARACTER "Error:\nPrameter don't set. \
 parameter of upeer character must be set, please.\n"
 
 void	error_message(char *error_message, bool *result);

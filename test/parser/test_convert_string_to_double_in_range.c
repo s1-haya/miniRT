@@ -24,6 +24,6 @@ void test_convert_string_to_double_in_range_out_of_range_with_false(void) {
 void	test_convert_string_to_double_in_range(void)
 {
 	RUN_TEST(test_double_value_with_true);
-	// Error: The value is not within the allowed range.が先出てくる
+	// Error:\nThe value is not within the allowed range.が先出てくる
 	RUN_TEST(test_convert_string_to_double_in_range_out_of_range_with_false);
 }

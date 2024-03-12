@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 08:28:45 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/09 18:03:04 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/11 13:49:45 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 #define SUCCESS (0)
 #define FAILURE (1)
-#define ERROR_NOT_TARGET_FILE_EXTENSION "Error: Incorrect filename. \
+#define ERROR_NOT_TARGET_FILE_EXTENSION "Error:\nIncorrect filename. \
 Please check the file you have entered. The file extension must be .ft.\n"
-#define ERROR_FILE_IS_EMPTY "Error: the file is empty. \n"
+#define ERROR_FILE_IS_EMPTY "Error:\nthe file is empty.\n"
 
 size_t	ft_strlen_s(const char *str)
 {

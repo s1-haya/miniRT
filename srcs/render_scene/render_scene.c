@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:47:43 by erin              #+#    #+#             */
-/*   Updated: 2024/03/09 10:45:08 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:00:29 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render_scene.h"
-
-static double	map(double x, double max, double orig, double sign)
-{
-	return (sign * (2 * x) / (max - 1) + orig);
-}
 
 t_ray	set_viewpoint(t_camera *camera, double lx, double ly)
 {
@@ -34,6 +29,8 @@ t_ray	set_viewpoint(t_camera *camera, double lx, double ly)
 	pw = camera->view_point;
 	pw = add_vectors(pw, \
 		scalar_multiply(camera->look_at_point, camera->distance));
+	pw = add_vectors(pw, scalar_multiply(d_x, camera->screen_width / 2.0));
+	pw = add_vectors(pw, scalar_multiply(d_y, camera->screen_height / 2.0));
 	pw = add_vectors(pw, scalar_multiply(d_x, lx));
 	pw = add_vectors(pw, scalar_multiply(d_y, ly));
 	return (new_ray(camera->view_point, \
@@ -42,21 +39,20 @@ t_ray	set_viewpoint(t_camera *camera, double lx, double ly)
 
 void	render_scene(t_scene *scene)
 {
-	int			x;
-	int			y;
-	t_ray		ray;
-	t_shape		*nearest_shape;
-	const int	img_max = max(WINDOW_HEIGHT, WINDOW_WIDTH);
+	int				x;
+	int				y;
+	t_ray			ray;
+	t_shape			*nearest_shape;
 
 	x = WINDOW_ORIGIN_X;
-	while (x < img_max)
+	while (x < WINDOW_WIDTH)
 	{
 		y = WINDOW_ORIGIN_Y;
-		while (y < img_max)
+		while (y < WINDOW_HEIGHT)
 		{
 			ray = set_viewpoint(&scene->camera, \
-				map((double)x, img_max, -1.0, 1.0), \
-					map((double)y, img_max, 1.0, -1.0));
+				-x * scene->camera.screen_width / WINDOW_WIDTH, \
+					-y * scene->camera.screen_height / WINDOW_HEIGHT);
 			nearest_shape = \
 			determine_intersection_ray_and_object(scene->shape, ray, LONG_MAX);
 			shading(scene, nearest_shape, x, y);

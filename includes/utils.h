@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:58:21 by erin              #+#    #+#             */
-/*   Updated: 2024/03/06 14:44:30 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "libft.h"
 # include "scene.h"
 
-# define ERROR_INCORRCT_NUMBER_OF_ARGUMENTS "Error: \
+# define ERROR_INCORRCT_NUMBER_OF_ARGUMENTS "Error:\n\
 Incorrect number of arguments.\nUsage: ./miniRT <filename>\n"
 
 double		clamp(double v, double v_min, double v_max);

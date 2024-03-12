@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 14:52:18 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/09 18:01:13 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/11 13:52:14 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char *argv[])
 	return (SUCCESS);
 }
 
-__attribute__((destructor))
-static void destructor() {
-    system("leaks -q miniRT");
-}
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q miniRT");
+// }

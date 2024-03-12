@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_string_to_unint8_in_range.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:16:54 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/08 11:39:47 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <stdbool.h>
 
 #define ERROR (0xFF)
-#define ERROR_VALUE_RANGE "Error: The value is not within the allowed range.\n"
-#define ERROR_NULL_STRING "Error: The string is NULL.\n"
+#define ERROR_VALUE_RANGE "Error:\nThe value is not within the allowed range.\n"
+#define ERROR_NULL_STRING "Error:\nThe string is NULL.\n"
 
 void	error_message(char *error_message, bool *result);
 double	ft_strtod(const char *str, char **endptr);
@@ -35,7 +35,7 @@ uint8_t	convert_string_to_unint8_in_range(const char *value,
 		return (ERROR);
 	}
 	value_double = ft_strtod(value, &end);
-	if (*result && (*end != '\0' || (uint8_t)value_double != value_double 
+	if (*result && (*end != '\0' || (uint8_t)value_double != value_double \
 		|| value_double < min || max < value_double))
 	{
 		error_message(ERROR_VALUE_RANGE, result);

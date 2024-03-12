@@ -79,15 +79,19 @@ SRCS += $(GNL_DIR)/get_next_line.c\
 OBJS_DIR := ./objs
 OBJS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS))
 
-SRCS_ALL := $(SRCS_DIR)/$(RENDER_DIR)/shading.c\
-		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/check_parameter_count.c\
+ifndef WITH_BONUS
+	SRCS_ALL := $(SRCS_DIR)/$(RENDER_DIR)/shading.c\
+			$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/check_parameter_count.c\
 
-OBJS_ALL := $(OBJS)  $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS_ALL))
+	OBJS_ALL := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS_ALL))
+	OBJS += $(OBJS_ALL)
+else
+	SRCS_BONUS := $(SRCS_DIR)/$(RENDER_DIR)/shading_bonus.c\
+			$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/check_parameter_count_bonus.c\
 
-SRCS_BONUS := $(SRCS_DIR)/$(RENDER_DIR)/shading_bonus.c\
-		$(SRCS_DIR)/$(PARSER_DIR)/$(VALIDATION_DIR)/check_parameter_count_bonus.c\
-
-OBJS_BONUS := $(OBJS)  $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS_BONUS))
+	OBJS_BONUS := $(patsubst $(SRCS_DIR)/%.c, $(OBJS_DIR)/%.o, $(SRCS_BONUS))
+	OBJS += $(OBJS_BONUS)
+endif
 
 DEPS =	$(OBJS:.o=.d)
 
@@ -141,10 +145,10 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(OBJS_ALL) $(LIBFT_AR)
-	$(CC) $(CFLAGS) $(OBJS_ALL) $(LIBFT_AR) $(LDFLAGS) -o $@
+$(NAME): $(OBJS) $(LIBFT_AR)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_AR) $(LDFLAGS) -o $@
 
-$(NAME_AR): $(OBJS_ALL)
+$(NAME_AR): $(OBJS)
 	$(AR) -r $(NAME_AR) $^
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
@@ -165,8 +169,8 @@ re: fclean all
 test: fclean $(TEST_NAME)
 	$(TEST_DIR)/$(TEST_NAME)
 
-bonus: $(OBJS_BONUS) $(LIBFT_AR)
-	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT_AR) $(LDFLAGS) -o $(NAME_BONUS)
+bonus: $(OBJS) $(LIBFT_AR)
+	make WITH_BONUS=1
 
 $(OBJS_DIR)/%.o: $(UNITY_DIR)/$(SRCS_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
