@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:37:43 by erin              #+#    #+#             */
-/*   Updated: 2024/03/09 16:45:12 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/12 12:03:22 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ t_intersection	determine_intersection_ray_and_plane(t_plane *plane, t_ray ray)
 			plane->normal) / dot_product(ray.direction, plane->normal);
 	}
 	intersection = new_intersection(ray, t);
-	if (intersection.is_success)
+	if (intersection.is_success && \
+				dot_product(ray.direction, plane->normal) > 0)
+		intersection.normal = get_inverse_vector(plane->normal);
+	else if (intersection.is_success)
 		intersection.normal = plane->normal;
 	return (intersection);
 }
