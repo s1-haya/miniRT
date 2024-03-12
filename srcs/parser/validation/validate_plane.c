@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   validate_plane.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:33 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/05 12:07:19 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:27:42 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "validate.h"
 
-void	validate_plane(t_scene *scene, char **value, bool *result)
+void	validate_plane(t_scene *scene, char **value, \
+							bool *result, t_param_count *count)
 {
 	t_plane	*plane;
 	size_t	size;
@@ -35,4 +36,5 @@ void	validate_plane(t_scene *scene, char **value, bool *result)
 		return ;
 	}
 	ft_lstadd_back(&scene->shape, ft_lstnew(new_shape(plane, PLANE)));
+	count->objs += 1;
 }

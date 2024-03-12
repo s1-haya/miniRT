@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/12 13:30:05 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #define ERROR_INVALID_CYLINDER_VALUE "Error:\nInvalid cylinder value.\n"
 
-void	validate_cylinder(t_scene *scene, char **value, bool *result)
+void	validate_cylinder(t_scene *scene, char **value, \
+							bool *result, t_param_count *count)
 {
 	t_cylinder	*cylinder;
 	size_t		size;
@@ -41,4 +42,5 @@ void	validate_cylinder(t_scene *scene, char **value, bool *result)
 		return ;
 	}
 	ft_lstadd_back(&scene->shape, ft_lstnew(new_shape(cylinder, CYLINDER)));
+	count->objs += 1;
 }
