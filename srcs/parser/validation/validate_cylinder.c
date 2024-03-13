@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_cylinder.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/13 11:34:43 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/13 13:52:30 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minirt.h"
 
 #define ERROR_INVALID_CYLINDER_VALUE "Error:\nInvalid cylinder value.\n"
-#define MIN (1)
+#define MIN (0.01)
 
 void	validate_cylinder(t_scene *scene, char **value, \
 							bool *result, t_param_count *count)

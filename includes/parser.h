@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:43:37 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/12 13:26:39 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/13 13:54:07 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 # include <stdbool.h>
+
+# define DELMITER_CHAR ','
 
 typedef struct s_minirt_list {
 	char					*identifier;

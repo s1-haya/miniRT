@@ -44,6 +44,7 @@ SRCS += $(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_string_to_double_in_ran
 		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_string_to_unint8_in_range.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_value_to_vector_in_range.c\
 		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/convert_value_to_rgb.c\
+		$(SRCS_DIR)/$(PARSER_DIR)/$(CONVERT_DIR)/check_delimiter_value.c\
 
 SHAPE_DIR = shape
 SRCS += $(SRCS_DIR)/$(SHAPE_DIR)/shape.c\
@@ -106,9 +107,9 @@ LIBFT_INC_DIR := ./libft
 # minilibx
 # MINILIBX_DIR := ./minilibx-linux
 # MINILIBX_AR := ./minilibx-linux/libmlx.a
-MINILIBX_LIB_DIR := ./minilibx-linux
+# MINILIBX_LIB_DIR := ./minilibx-linux
 # MINILIBX := mlx
-MINILIBX_INC_DIR := ./minilibx-linux
+# MINILIBX_INC_DIR := ./minilibx-linux
 
 # test
 TEST_DIR := ./test

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_value_to_rgb.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:27:15 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/13 13:41:34 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/13 13:54:42 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "parser.h"
 
 #define ERROR_NOT_MEMORY_ALLOCATED "Error:\nMemory allocation failed.\
  Please close other applications and try again.\n"

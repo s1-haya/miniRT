@@ -3,21 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   check_delimiter_value.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:54:32 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/13 13:44:49 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/13 13:58:15 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stdlib.h>
-
-#define DELMITER_CHAR ','
+#include "parser.h"
+#include "libft.h"
 #define ERROR_INVALID_DELIMITER "Error:\nInvalid delimiter value\n"
 #define ERROR_NOT_MEMORY_ALLOCATED "Error:\nMemory allocation failed.\
  Please close other applications and try again.\n"
 #define ERROR_NOT_CORRECT_SIZE "Error:\nIncorrect number of parameters.\n"
+
+void	*get_null_error_message(char *message, bool *result);
+size_t	get_string_array_size(char **array);
+void	delete_value(char **value);
 
 static bool	is_valid_delimiter_string(const char *value, char delimiter_char)
 {

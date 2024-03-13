@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_value_to_vector_in_range.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:20:31 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/13 13:41:26 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/13 13:53:21 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_vector	convert_value_to_normal_vector(const char *value, bool *result)
 	vector.x = 0;
 	if (*result == false)
 		return (vector);
-	value_vector = check_delimiter_value(value, DELMITER_CHAR);
+	value_vector = check_delimiter_value(value, DELMITER_CHAR, result);
 	if (value_vector == NULL)
 		return (vector);
 	vector = convert_value_to_vector_in_range_until(value_vector,
