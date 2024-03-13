@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_value_to_rgb.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:27:15 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/13 10:24:33 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #define DELMITER_CHAR ','
 #define ERROR_NOT_MEMORY_ALLOCATED "Error:\nMemory allocation failed.\
  Please close other applications and try again.\n"
-#define ERROR_NOT_CORRECT_SIZE "Error:\nparameter size do not correct\n"
+#define ERROR_NOT_CORRECT_SIZE "Error:\nIncorrect number of parameters.\n"
 #define UINT8_MIN (0)
 
 void	error_message(char *error_message, bool *result);
