@@ -14,7 +14,7 @@ SRCS += $(SRCS_DIR)/$(CAMERA_DIR)/camera.c\
 
 ERROR_DIR = error
 SRCS += $(SRCS_DIR)/$(ERROR_DIR)/error.c\
-		$(SRCS_DIR)/$(ERROR_DIR)/set_error_and_return_null.c\
+		$(SRCS_DIR)/$(ERROR_DIR)/get_null_error_message.c\
 		$(SRCS_DIR)/$(ERROR_DIR)/error_message.c\
 
 LIGHT_DIR := light
@@ -106,9 +106,9 @@ LIBFT_INC_DIR := ./libft
 # minilibx
 # MINILIBX_DIR := ./minilibx-linux
 # MINILIBX_AR := ./minilibx-linux/libmlx.a
-# MINILIBX_LIB_DIR := ./minilibx-linux
+MINILIBX_LIB_DIR := ./minilibx-linux
 # MINILIBX := mlx
-# MINILIBX_INC_DIR := ./minilibx-linux
+MINILIBX_INC_DIR := ./minilibx-linux
 
 # test
 TEST_DIR := ./test
@@ -170,7 +170,7 @@ test: fclean $(TEST_NAME)
 	$(TEST_DIR)/$(TEST_NAME)
 
 bonus: $(OBJS) $(LIBFT_AR)
-	make WITH_BONUS=1
+	@make WITH_BONUS=1
 
 $(OBJS_DIR)/%.o: $(UNITY_DIR)/$(SRCS_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@

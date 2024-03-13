@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_cylinder.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:39:11 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/12 13:30:05 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/13 11:34:43 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minirt.h"
 
 #define ERROR_INVALID_CYLINDER_VALUE "Error:\nInvalid cylinder value.\n"
+#define MIN (1)
 
 void	validate_cylinder(t_scene *scene, char **value, \
 							bool *result, t_param_count *count)
@@ -28,14 +29,12 @@ void	validate_cylinder(t_scene *scene, char **value, \
 				INT_MIN, INT_MAX, result),
 			convert_value_to_normal_vector(value[1], result),
 			convert_string_to_double_in_range(value[2],
-				INT_MIN, INT_MAX, result) / 2,
+				MIN, INT_MAX, result) / 2,
 			convert_string_to_double_in_range(value[3],
-				INT_MIN, INT_MAX, result));
+				MIN, INT_MAX, result));
 	cylinder->rgb = convert_value_to_rgb(value[4], result);
-	if (cylinder == NULL)
+	if (*result && cylinder == NULL)
 		error_message(ERROR_NOT_MEMORY_ALLOCATED, result);
-	else if (cylinder->radius <= 0 || cylinder->height <= 0)
-		error_message(ERROR_INVALID_CYLINDER_VALUE, result);
 	if (*result == false)
 	{
 		free(cylinder);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:33:48 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/12 13:29:27 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/13 11:44:45 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #define PLANE "pl"
 #define SPHERE "sp"
 #define CYLINDER "cy"
-#define ERROR_INVALID_CHARACTERS "Error:\nthis file you enter contains \
+#define ERROR_INVALID_CHARACTERS "Error:\nThis file you enter contains \
 invalid characters.\n"
 
 void	validate_ambient_lighting(t_scene *scene, char **value,
