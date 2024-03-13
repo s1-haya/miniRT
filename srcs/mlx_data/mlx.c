@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 18:29:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/11 13:48:06 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/13 11:58:44 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "mlx.h"
 #include "minirt.h"
-
-#define FAILURE 1
-#define FAILED_TO_ALLOCATE_MEMORY "Error:\nFailed to allocate memory"
 
 void	new_mlx_window(t_mlx_data *mlx, bool *result)
 {

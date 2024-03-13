@@ -6,7 +6,7 @@
 /*   By: hsawamur <hsawamur@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:59:23 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/13 11:01:16 by hsawamur         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:42:21 by hsawamur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 void			add_back_minirt_list(t_minirt_list **head,
 					t_minirt_list *new_list);
 void			delete_minirt_list(t_minirt_list *list);
-void			print_minirt_list(t_minirt_list *list);
 t_minirt_list	*init_minirt_list(void);
 t_minirt_list	*convert_one_line_to_minirt_list(char *line, bool *result);
 char			*get_next_line(int fd);
