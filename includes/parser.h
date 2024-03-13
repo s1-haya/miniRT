@@ -6,7 +6,7 @@
 /*   By: erin <erin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:43:37 by hsawamur          #+#    #+#             */
-/*   Updated: 2024/03/04 16:59:11 by erin             ###   ########.fr       */
+/*   Updated: 2024/03/12 13:26:39 by erin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_param_count {
 	size_t	ambient;
 	size_t	camera;
 	size_t	light;
+	size_t	objs;
 }	t_param_count;
 
 bool	is_target_file_extension(const char *filename, const char *extension);
